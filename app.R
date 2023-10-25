@@ -6,10 +6,11 @@
 library(shiny)
 
 
-# Official United Against Rabies Forum colours as of 25/20/2023:
+# Official United Against Rabies Forum colours and fonts as of 25/20/2023:
 UARF_DARKBLUE = "#1a3146"
 UARF_LIGHTBLUE = "#6e818f"
 UARF_PINK = "#ff6960"
+UARF_FONT = "Work Sans"
 
 # Add languages here to appear in the list for tool languages.
 PRELOADED_LANGUAGES <- c(
@@ -20,10 +21,38 @@ PRELOADED_LANGUAGES <- c(
 
 
 ui <- navbarPage(
-  title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:50px;"></a>', "SISOT-R"),
+  tags$style(
+    type = "text/css", "
+    body {
+      text-align: justify;
+      font-size: 16px;
+    }
+    
+    /* Change the headings to have UARF branding */
+    h1, h2, h3, h4 {
+      text-align: left;
+      color: #1a3146;
+    }
+    
+    /* Navbar Styling */
+    .navbar-default {
+      background-color: #1a3146 !important;
+      color: #fff !important;
+    }
+    .navbar-brand {
+      background-color: #1a3146 !important;
+      color: #fff !important;
+    }
+    .navbar-default a:hover {
+      background-color: #6e818f !important;
+      border-color: #ff6960;
+    }
+  "),
+  title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:60px;"></a>', "SISOT-R"),
   tabPanel(
     title = "Information",
     HTML('<center><a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:250px;"></a></center>'),
+    h1("About This App"),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
   tabPanel(
@@ -48,12 +77,12 @@ ui <- navbarPage(
       label = "Name of Tool:",
       placeholder = "Please insert the name of the tool."
     ),
-    selectInput(
+    selectizeInput(
       inputId = "tool_types",
       label = "Type(s) of tool:",
       choices = c("Prioritization", "Assessment", "Planning", "Implementation", "Evaluation"),
       multiple = TRUE,
-      selectize = TRUE
+      options = list("plugins" = list("remove_button"))
     ),
     selectInput(
       inputId = "tool_objectives",
