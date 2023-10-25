@@ -9,6 +9,14 @@
 
 library(shiny)
 
+# Add languages here to appear in the list for tool languages.
+preloaded_languages <- c(
+  "English", "Mandarin Chinese", "Hindi", "Spanish", "French",
+  "Modern Standard Arabic", "Bengali", "Portuguese", "Russian", "Urdu",
+  "Indonesian", "German", "Japenese"
+)
+
+
 ui <- fluidPage(
   textInput(
     inputId = "reviewer_names",
@@ -54,6 +62,36 @@ ui <- fluidPage(
     label = "Version Number of the Tool:",
     placeholder = "Please insert the version number of the tool."
   ),
+  textInput(
+    inputId = "tool_point_of_contact",
+    label = "Point of Contact:",
+    placeholder = "Please insert the tool's contact information."
+  ),
+  textInput(
+    inputId = "tool_availability",
+    label = "Version Number of the Tool:",
+    placeholder = "Please descrbe the availability of the tool."
+  ),
+  selectInput( # need to be able to input the number of countries if # countries, if known is selected
+    inputId = "tool_history_of_use",
+    label = "History of Use:",
+    choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used", "# countries, if known"),
+    multiple = FALSE,
+    selectize = TRUE
+  ),
+  selectizeInput( # Future task: be able to import all recognized languages
+    inputId = "tool_languages",
+    label = "Tool Language(s) - List all availiable now:",
+    choices = preloaded_languages,
+    selected = NULL,
+    multiple = TRUE,
+    options = list(
+      "plugins" = list("remove_button"),
+      "create" = TRUE,
+      "persist" = TRUE
+    )
+  ),
+  
 )
 
 server <- function(input, output, session) {
