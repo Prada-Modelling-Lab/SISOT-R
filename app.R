@@ -25,9 +25,10 @@ ui <- navbarPage(
   tags$style(
     type = "text/css", "
     body {
-      text-align: justify;
       font-size: 16px;
     }
+    
+    p {text-align: justify;}
     
     /* Change the headings to have UARF branding */
     h1, h2, h3, h4 {
@@ -155,8 +156,8 @@ ui <- navbarPage(
           inputId = "tool_platforms",
           label = "History of Use:",
           choices = c("Manual", "Electronic", "Manual and Electronic"),
-          multiple = FALSE,
           selected = NULL,
+          multiple = FALSE,
           options = list("plugins" = list("remove_button"))
         )
       ),
@@ -176,14 +177,14 @@ ui <- navbarPage(
           inputId = "tool_history_of_use",
           label = "History of Use:",
           choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used", "# countries, if known"),
-          multiple = FALSE,
           selected = NULL,
+          multiple = FALSE,
           options = list("plugins" = list("remove_button"))
         )
       ),
       column(
         width = 4,
-        textInput( # Future task: be able to import all recognized languages
+        textInput(
           inputId = "tool_publishing",
           label = "Publishing:",
           placeholder = "Please describe how the tool is published."
@@ -196,7 +197,7 @@ ui <- navbarPage(
           label = "Tool Language(s) - List all availiable:",
           choices = PRELOADED_LANGUAGES,
           selected = NULL,
-          multiple = TRUE,
+          multiple = FALSE,
           options = list(
             "plugins" = list("remove_button"),
             "create" = TRUE,
@@ -214,6 +215,65 @@ ui <- navbarPage(
     h2("3. Inclusion Criteria"),
     h3("Accessiblity"),
     fluidRow(
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Is the tool readily available?",
+          choices = list(
+            "1 - Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store)",
+            "2 - Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer)",
+            "3 - Paper based, free to download/access",
+            "4 - Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person)",
+            "5 - Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.)"
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "On what platforms can the tool run?",
+          choices = list(
+            "1 - ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.) ",
+            "2 - At least one digital platform (e.g. only mobile phones or only computers) ",
+            "3 - Only paper-based"
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Can the tool run on multiple computer and/or phone operating systems?",
+          choices = list(
+            "",
+            "",
+            ""
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
       
     ),
     h3("Data Collection and Needs"),
@@ -241,6 +301,10 @@ ui <- navbarPage(
       
     ),
     
+  ),
+  tabPanel(
+    title = "Results",
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
   tabPanel(
     title = "Authorship & Funding",
