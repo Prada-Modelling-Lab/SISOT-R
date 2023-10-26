@@ -9,38 +9,54 @@ library(shiny)
 # Official United Against Rabies Forum colours and fonts as of 25/10/2023:
 UARF_DARKBLUE <- "#1a3146"
 UARF_LIGHTBLUE <- "#6e818f"
+UARF_LIGHTGREY <- "#f6f6f6"
 UARF_PINK <- "#ff6960"
 UARF_FONT <- "Work Sans"
+UARF_FONT_COLOUR <- "#212529"
 
 
 ui <- navbarPage(
-  tags$style(
+  tags$head(tags$style(
     type = "text/css", "
     body {
-      font-size: 16px;
+      margin: 0;
+      font-family: sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #212529;
+      text-align: left;
+      background-color: #fff;
     }
     
     p {text-align: justify;}
     
     /* Change the headings to have UARF branding */
-    h1, h2, h3, h4 {
-      text-align: left;
-      color: #1a3146;
-    }
+    h1 {color: #1a3146;}
+    h2, h3, h4 {color: #ff6960}
     
     /* Navbar Styling */
-    .navbar, .navbar-brand, .navbar a:hover, .navbar a:focus {
+    .navbar, .navbar a, .navbar-brand {
       background-color: #1a3146 !important;
+      border-color: #1a3146 !important;
+      border: 1px solid;
       color: #fff !important;
     }
-    .navbar-default a:hover, .navbar-nav>li>a:focus {
+    .navbar a:hover{
       background-color: #6e818f !important;
+      border-color: #ff6960 !important;
+      border: 1px solid;
     }
-  "),
+    .navbar a:focus {
+      border-color: #ff6960 !important;
+      border: 1px solid;
+    }
+
+  ")),
   title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:60px;"></a>', "SISOT-R"),
   tabPanel(
     title = "Information",
-    HTML('<center><a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:250px;"></a></center>'),
+    HTML('<center><img src="uarf_logo_web.svg", style="width:250px;" href="https://www.unitedagainstrabies.org"/></center>'),
     h1("About This App"),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
