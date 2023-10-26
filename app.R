@@ -261,9 +261,11 @@ ui <- navbarPage(
           inputId = "TBC",
           label = "Can the tool run on multiple computer and/or phone operating systems?",
           choices = list(
-            "",
-            "",
-            ""
+            "1 - Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS)",
+            "2 - Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows)",
+            "3 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems",
+            "4 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned",
+            "5 - No, and it wont be possible"
           ),
           selected = NULL,
           multiple = FALSE,
