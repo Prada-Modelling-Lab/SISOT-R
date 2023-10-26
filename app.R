@@ -12,14 +12,6 @@ UARF_LIGHTBLUE <- "#6e818f"
 UARF_PINK <- "#ff6960"
 UARF_FONT <- "Work Sans"
 
-# Add languages here to appear in the list for tool languages. These are a list
-# of the most commonly spoken ones from Wikipedia.
-PRELOADED_LANGUAGES <- c(
-  "English", "Mandarin Chinese", "Hindi", "Spanish", "French",
-  "Modern Standard Arabic", "Bengali", "Portuguese", "Russian", "Urdu",
-  "Indonesian", "German", "Japenese"
-)
-
 
 ui <- navbarPage(
   tags$style(
@@ -195,9 +187,9 @@ ui <- navbarPage(
         selectizeInput( # Future task: be able to import all recognized languages
           inputId = "tool_languages",
           label = "Tool Language(s) - List all availiable:",
-          choices = PRELOADED_LANGUAGES,
+          choices = NULL,
           selected = NULL,
-          multiple = FALSE,
+          multiple = TRUE,
           options = list(
             "plugins" = list("remove_button"),
             "create" = TRUE,
@@ -221,11 +213,11 @@ ui <- navbarPage(
           inputId = "TBC",
           label = "Is the tool readily available?",
           choices = list(
-            "1 - Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store)",
-            "2 - Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer)",
-            "3 - Paper based, free to download/access",
-            "4 - Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person)",
-            "5 - Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.)"
+            "1 - Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store).",
+            "2 - Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer).",
+            "3 - Paper based, free to download/access.",
+            "4 - Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person).",
+            "5 - Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.)."
           ),
           selected = NULL,
           multiple = FALSE,
@@ -242,9 +234,9 @@ ui <- navbarPage(
           inputId = "TBC",
           label = "On what platforms can the tool run?",
           choices = list(
-            "1 - ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.) ",
-            "2 - At least one digital platform (e.g. only mobile phones or only computers) ",
-            "3 - Only paper-based"
+            "1 - ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.).",
+            "2 - At least one digital platform (e.g. only mobile phones or only computers).",
+            "3 - Only paper-based."
           ),
           selected = NULL,
           multiple = FALSE,
@@ -261,11 +253,12 @@ ui <- navbarPage(
           inputId = "TBC",
           label = "Can the tool run on multiple computer and/or phone operating systems?",
           choices = list(
-            "1 - Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS)",
-            "2 - Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows)",
-            "3 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems",
-            "4 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned",
-            "5 - No, and it wont be possible"
+            "1 - Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS).",
+            "2 - Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows).",
+            "3 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems.",
+            "4 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned.",
+            "5 - No, and it wont be possible.",
+            "NA - Not applicable."
           ),
           selected = NULL,
           multiple = FALSE,
@@ -276,13 +269,214 @@ ui <- navbarPage(
           )
         )
       ),
-      
+    ),
+    fluidRow(
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Does the tool need to be purchased (e.g. purchasing an app or tool-specific equipment)?",
+          choices = list(
+            "1 - No, it's free to access.",
+            "2 - Yes, the tool needs to be purchased at a once-off cost.",
+            "3 - Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription)."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Does the tool have EQUIPMENT costs for the USER with regards to keeping it in use? 
+E.g smartphone replacement due to breakage, theft etc.",
+          choices = list(
+            "1 - No noteworthy equipment running costs.",
+            "2 - Equipment might need to be replaced sporadically (less than once a year).",
+            "3 - The developer noted that equipment such as smartphones might need to be replaced often (more than once a year).",
+            "NA - Not applicable"
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Can the developer offer support?",
+          choices = list(
+            "1 - Free comprehensive support",
+            "2 - Comprehensive support at a cost, limited support for free.",
+            "3 - Free limited support, comprehensive support not available.",
+            "4 - Limited support at a cost.",
+            "5 - No support available.",
+            "NA - Not applicable"
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      )
     ),
     h3("Data Collection and Needs"),
     fluidRow(
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "What internet capacity is required to use the tool?",
+          choices = list(
+            "1 - No internet required.",
+            "2 - Intermittant internet access to standard WIFI/3g.",
+            "3 - Continuous access to standard WIFI/3g",
+            "4 - Continuous access to LTE/4g.",
+            "5 - Requires continuous stable high speed internet (5g/9Mbps or greater)."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "If this is a case detection tool: Can animal cases be detected?",
+          choices = list(
+            "1 - Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards.",
+            "2 - Yes, limited data is collected for animal cases.",
+            "3 - No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection.",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "If this is a case detection tool: Can human cases / bite cases be detected?",
+          choices = list(
+            "1 - Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards.",
+            "2 - Yes, limited data is collected for human cases.",
+            "3 - No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection.",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      )
+    ),
+    fluidRow(
+      column(
+        width = 4,
+        selectizeInput( # Future task: Make the label points on new lines
+          inputId = "TBC",
+          label = "If this is a case detection tool: does it have an IBCM component based on active rabies surveillance LINKING data together about the:\n1) Suspect animal,\n2) Exposed human\n3) Laboratory results,\n4) Quarantine data.",
+          choices = list(
+            "1 - Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, and data is EASILY LINKED within the tool.",
+            "2- Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, but data is NOT EASILY LINKABLE within the tool.",
+            "3 - Yes, but not all data elements are represented.",
+            "4 - IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible.",
+            "5 - No, this is currently not a feature of the tool.",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Does the tool send notifications to the user?",
+          choices = list(
+            "1 - Yes, various communication channels are available.",
+            "2 - Yes, one communication channel is available.",
+            "3 - No, this is currently not a feature of the tool.",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Does the tool allow for bi-directional, real-time communication between users and program managers?",
+          choices = list(
+            "1 - Yes, the tool allows for program managers to push out messages and allows users to reply.",
+            "2 - No, this is currently not a feature of the tool.",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+    ),
+    textInput(
+      inputId = "TBC",
+      label = "What type of data does the tool collect?",
+      placeholder = "Please describe the types of data the tool collects here.",
+      width = "100%"
+    ),
+    h3("Data Management and Utility"),
+    fluidRow(
       
     ),
-    h3("Data Manegement and Utility"),
+    fluidRow(
+      
+    ),
+    fluidRow(
+      
+    ),
     fluidRow(
       
     ),
@@ -290,7 +484,13 @@ ui <- navbarPage(
     fluidRow(
       
     ),
+    fluidRow(
+      
+    ),
     h3("Tool Flexiblity"),
+    fluidRow(
+      
+    ),
     fluidRow(
       
     ),
@@ -298,11 +498,16 @@ ui <- navbarPage(
     fluidRow(
       
     ),
+    fluidRow(
+      
+    ),
     h3("Sustainability"),
     fluidRow(
       
     ),
-    
+    fluidRow(
+      
+    )
   ),
   tabPanel(
     title = "Results",
@@ -313,7 +518,7 @@ ui <- navbarPage(
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
   tabPanel(
-    title = "Legal and Data Manegement",
+    title = "Legal and Data Management",
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
   tabPanel(
