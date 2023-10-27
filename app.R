@@ -726,14 +726,14 @@ server <- function(input, output, session) {
   UARF_FONT <- "Work Sans"
   UARF_FONT_COLOUR <- "#212529"
   
-  scores <- c(9, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
+  scores <- c(9.1, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
   
   output$overall_score <- renderText({paste0("Total Score: ", 10*round(mean(scores), 2), "%")})
   
   output$barPlot <- renderPlot({
     par(mar = c(5, 8, 1, 1), las = 1)
     barplot(
-      height = scores,
+      height = rev(scores),
       names.arg = rev(c(
         "Accessibility", "Data Collection", "Data Management", "Data Storage",
         "Flexibility", "Ease of Use", "Sustainability"
