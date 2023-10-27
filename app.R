@@ -16,8 +16,9 @@ UARF_FONT_COLOUR <- "#212529"
 
 
 ui <- navbarPage(
-  tags$head(tags$style(
+  tags$style(
     type = "text/css", "
+    
     body {
       margin: 0;
       font-family: sans-serif;
@@ -27,6 +28,7 @@ ui <- navbarPage(
       color: #212529;
       text-align: left;
       background-color: #fff;
+      max-width: 1212px;
     }
     
     p {text-align: justify;}
@@ -41,6 +43,8 @@ ui <- navbarPage(
       border-color: #1a3146 !important;
       border: 1px solid;
       color: #fff !important;
+      text-align: center;
+      padding: 5px 5px;
     }
     .navbar a:hover{
       background-color: #6e818f !important;
@@ -51,9 +55,62 @@ ui <- navbarPage(
       border-color: #ff6960 !important;
       border: 1px solid;
     }
-
-  ")),
-  title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:60px;"></a>', "SISOT-R"),
+    
+    /* Footer Styling */
+    .footer-wrapper {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 1000;
+      align: right;
+    }
+    .footer-top {
+      display: block !important;
+      width: 100%;
+      padding-right: 50px;
+      padding-left: 50px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      margin-right: auto;
+      margin-left: auto;
+      box-sizing: border-box;
+      background-color: #6e818f;
+      color: #fff;
+    }
+    .footer-bottom{
+      display: block !important;
+      width: 100%;
+      padding-right: 50px;
+      padding-left: 50px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      margin-right: auto;
+      margin-left: auto;
+      box-sizing: border-box;
+      background-color: #1a3146;
+      color: #fff !important;
+    }
+    .footer-button-blue {
+      color: #fff;
+    }
+    .footer-button-blue:hover {
+      color: #006eb7 !important;
+      text-decoration: none;
+      text-align: center;
+      padding: 5px 5px;
+    }
+    
+    /* Footer icon styling */
+    .fab {
+      color: #fff !important;
+      font-size: 30px;
+      text-align: center;
+      padding: 5px 5px;
+    }
+  "),
+  windowTitle = "SISOT-R Application",
+  position = "fixed-top",
+  title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:70px;"></a>', "SISOT-R"),
   tabPanel(
     title = "Information",
     HTML('<center><img src="uarf_logo_web.svg", style="width:250px;" href="https://www.unitedagainstrabies.org"/></center>'),
@@ -485,7 +542,64 @@ E.g smartphone replacement due to breakage, theft etc.",
     ),
     h3("Data Management and Utility"),
     fluidRow(
-      
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Does this tool have the capacity to automatically detect anomalies in the data and notify the user? (If this requires human validation/review [manual] then it is not relevant to the tool)",
+          choices = list(
+            "1 - Yes, validation occurs real-time within the same tool without needing internet connection.",
+            "2 - Yes, validation is automated, but occurs post-data collection once an internet connection is available.",
+            "3 - No, validation must occur through a separate process",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Does the tool have the capacity to analyze data?",
+          choices = list(
+            "1 - Yes, comprehensive data analysis is incorporated into the tool.",
+            "2 - Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis.",
+            "3 - No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis.",
+            "NA - Not applicable."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      ),
+      column(
+        width = 4,
+        selectizeInput(
+          inputId = "TBC",
+          label = "Will the tool generate outputs that can assist with data presentation and/or reporting?",
+          choices = list(
+            "1 - Yes.",
+            "2 - No."
+          ),
+          selected = NULL,
+          multiple = FALSE,
+          options = list(
+            "plugins" = list("remove_button"),
+            "create" = FALSE,
+            "persist" = TRUE
+          )
+        )
+      )
     ),
     fluidRow(
       
@@ -528,20 +642,65 @@ E.g smartphone replacement due to breakage, theft etc.",
   tabPanel(
     title = "Results",
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
   tabPanel(
     title = "Authorship & Funding",
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
   tabPanel(
     title = "Legal and Data Management",
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
   ),
   tabPanel(
     title = "Publicated Works Using This App",
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
-  
+  footer = tagList(
+    fluidRow(
+      class = "footer-wrapper",
+      fluidRow(
+        class = "footer-top",
+        column(
+          width = 4,
+          align = "left",
+          HTML('<img src="uarf_footer_logo.svg", style="width:90px;">')
+        ),
+        column(
+          width = 4,
+          align = "center",
+          tags$a(class = "footer-button-blue", "Contact Us"),
+        ),
+        column(
+          width = 4,
+          align = "right",
+          tags$a(style = "color: #B5BBBf !important;", "© United Against Rabies Forum 2023")
+        )
+      ),
+      fluidRow(
+        class = "footer-bottom",
+        column(width = 4),
+        column(
+          width = 4,
+          align = "center",
+          tags$a("Follow us"),
+          tags$a(href = "https://twitter.com/UARForum", icon("twitter")),
+          tags$a(href = "https://www.linkedin.com/company/united-against-rabies/", icon("linkedin")),
+          tags$a(href = "https://www.facebook.com/UnitedAgainstRabies/", icon("facebook")),
+          tags$a(href = "https://www.instagram.com/unitedagainstrabies_/", icon("instagram")),
+          tags$a(href = "https://www.youtube.com/channel/UCQpfAFLhSib0k5aBiwRB-zw", icon("youtube"))
+        ),
+        column(width = 4)
+      )
+    )
+  )
 )
 
 server <- function(input, output, session) {
