@@ -285,6 +285,7 @@ ui <- navbarPage(
         ),
         h2("3. Inclusion Criteria"),
         h3("Accessiblity"),
+        p("Focuses on i) logistics for accessing and using the tool, ii) the platforms on which the tool runs (if applicable), iii) relevant costs, and iv) the level of user support that is provided by the developer/manufacturer."),
         fluidRow(
           column(
             width = 4,
@@ -414,6 +415,7 @@ ui <- navbarPage(
           )
         ),
         h3("Data Collection and Needs"),
+        p("Focuses on the type of data that is captured by the tool."),
         fluidRow(
           column(
             width = 4,
@@ -547,6 +549,7 @@ ui <- navbarPage(
           width = "100%"
         ),
         h3("Data Management and Utility"),
+        p("Focuses on the data analysis and outputs provided by the tool."),
         fluidRow(
           column(
             width = 4,
@@ -617,6 +620,7 @@ ui <- navbarPage(
           
         ),
         h3("Data Storage and Protection"),
+        p("Focuses on data ownership, protection and storage."),
         fluidRow(
           
         ),
@@ -624,6 +628,7 @@ ui <- navbarPage(
           
         ),
         h3("Tool Flexiblity"),
+        p("Focuses on the interoperability of the tool and its adaptability for use in different contexts or scenarios."),
         fluidRow(
           
         ),
@@ -631,6 +636,7 @@ ui <- navbarPage(
           
         ),
         h3("Ease of Use and Training Needs"),
+        p("Focuses on the training requirements, including the level of complexity and difficulty to navigate and understand the tool as well as the technical or operational skillsets that are required to use the tool."),
         fluidRow(
           
         ),
@@ -638,6 +644,7 @@ ui <- navbarPage(
           
         ),
         h3("Sustainability"),
+        p("Focuses on the different scenarios that indicate how sustainable the tool has been and whether it has been thoroughly field-tested for implementation."),
         fluidRow(
           
         ),
@@ -648,10 +655,11 @@ ui <- navbarPage(
       column(
         width = 4,
         position = "fixed",
-        h1("Results"),
+        h1("UAR Evaluation Matrix"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
         plotOutput("barPlot"),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+        h3(paste0("Total Score: ", 86.9, "%")),
+        p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument.")
       )
     )
   ),
