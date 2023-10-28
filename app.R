@@ -9,6 +9,10 @@ ui <- navbarPage(
   tags$style(
     type = "text/css", "
     
+    /* Use Work Sans as the main font for the app. */
+    @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+    * {font-family: Work Sans, sans-serif;}
+    
     /* When narrow-device mode starts*/
     @media only screen and (max-width: 768px) {
       body {
@@ -18,7 +22,6 @@ ui <- navbarPage(
     
     body {
     padding-top: 70px;
-      font-family: sans-serif;
       font-size: 1.5rem;
       font-weight: 400;
       line-height: 1.4;
@@ -731,20 +734,27 @@ server <- function(input, output, session) {
   output$overall_score <- renderText({paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")})
   
   output$barPlot <- renderPlot({
-    par(mar = c(5, 8, 1, 1), las = 1)
+    par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE)
     barplot(
       height = rev(scores),
       names.arg = rev(c(
         "Accessibility", "Data Collection", "Data Management", "Data Storage",
         "Flexibility", "Ease of Use", "Sustainability"
       )),
-      horiz = TRUE,
-      xlab = "Weighted score (out of ten)",
-      ylab = "",
-      xlim = c(0, 10),
+      horiz = TRUE, xlab = "", ylab = "", xlim = c(0, 10), border = NA,
       xaxp = c(0, 10, 10), # Plot from 0 to 10 inclusive with 10 tick marks,
-      col = rev(c(UARF_BLUE1, UARF_RED, UARF_BLUE2, UARF_BLUE3, UARF_GREEN, UARF_YELLOW, UARF_GREEN2)),
-      border = NA,
+      col = rev(
+        c(UARF_BLUE1, UARF_RED, UARF_BLUE2, UARF_BLUE3, UARF_GREEN, UARF_YELLOW,
+          UARF_GREEN2)
+      ),
+    )
+    mtext(
+      substitute(paste(bold("Weighted score (out of ten)"))), side = 1, line = 3,
+      col = UARF_BLUE1, cex = 1.2
+    )
+    text(
+      substitute(paste(bold("Category"))), col = UARF_BLUE1, x = 0, pos = 2,
+      offset = 1, y = length(scores) + 1.5
     )
     # abline(v = seq(from = 2, to = 10, by = 2))
   })
