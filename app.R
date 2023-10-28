@@ -742,8 +742,7 @@ ui <- navbarPage(
               choices = list(
                 "1 - Yes, the tool can operate optimally wihtout developer inputs.",
                 "2 - Yes, the tool has basic functionality without developer input.",
-                "3 - No, the tool cannot operate independently of the developer.",
-                "NA - Not applicable."
+                "3 - No, the tool cannot operate independently of the developer."
               ),
               selected = NULL,
               multiple = FALSE,
@@ -889,7 +888,7 @@ ui <- navbarPage(
             width = 4,
             selectizeInput(
               inputId = "TBC",
-              label = "Does the tool have the ability to interoperate, work with, and integrate with other surveillance/data systems ? (provides framework for data sharing)",
+              label = "Does the tool have the ability to interoperate, work with, and integrate with other surveillance/data systems? (provides framework for data sharing)",
               choices = list(
                 "1 - Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used.",
                 "2 - Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO).",
@@ -937,8 +936,7 @@ ui <- navbarPage(
               choices = list(
                 "1 - End user can implement without external assistance (e.g. user manuals).",
                 "2 - External training is possible but requires remote learning (e.g. shared screen/webinars).",
-                "3 - Face-to-face training of in-country facilitators is required.",
-                "NA - Not applicable."
+                "3 - Face-to-face training of in-country facilitators is required."
               ),
               selected = NULL,
               multiple = FALSE,
