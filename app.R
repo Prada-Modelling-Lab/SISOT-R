@@ -658,7 +658,7 @@ ui <- navbarPage(
         h1("UAR Evaluation Matrix"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
         plotOutput("barPlot"),
-        h3(textOutput(outputId = "overall_score")),
+        h3(htmlOutput(outputId = "overall_score")),
         p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument.")
       )
     )
@@ -728,7 +728,7 @@ server <- function(input, output, session) {
   
   scores <- c(9.1, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
   
-  output$overall_score <- renderText({paste0("Total Score: ", 10*round(mean(scores), 2), "%")})
+  output$overall_score <- renderText({paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")})
   
   output$barPlot <- renderPlot({
     par(mar = c(5, 8, 1, 1), las = 1)
