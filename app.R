@@ -303,8 +303,7 @@ ui <- navbarPage(
         textInput(
           inputId = "tool_description",
           label = "Brief Tool Description",
-          placeholder = "Please describe the tool briefly here.",
-          width = "100%"
+          placeholder = "Please describe the tool here."
         ),
         h2("3. Inclusion Criteria"),
         #### ---- Accessibility ----
@@ -639,33 +638,269 @@ ui <- navbarPage(
           )
         ),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "What type of data outputs does the system provide to visualize collected data? Select how many of the following elements are currently available in the system: 1) Spatio-temporal mapping 2) Graphs 3) Pivot tables 4) Line listed data",
+              choices = list(
+                "1 - All four key data outputs are available.",
+                "2 - Three of the four data outputs are available.",
+                "3 - Two of the four data outputs are available.",
+                "4 - One of the four data outputs are available.",
+                "5 - No data outputs are available within the tool (i.e. a third party software is required to visualize data).",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "How much time does it take to obtain data outputs once the data has been submitted to the server?",
+              choices = list(
+                "1 - Less than 1 hour.",
+                "2 - Within 24 hours.",
+                "3 - Within 1 week.",
+                "4 - Within 1 month.",
+                "5 - More than 1 month.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "How easy is it to understand and interpret the outputs?",
+              choices = list(
+                "1 - Very easy for all readers to understand.",
+                "2 - Some technical language.",
+                "3 - Highly technical language.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         fluidRow(
-          
-        ),
-        fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Do the outputs of the tool inform all relevant One Health sectors (human, animal, environment health)?",
+              choices = list(
+                "1 - Yes, the tool can display aggregate or linked data from multiple sectors.",
+                "2 - Yes, aggregated data can be displayed, but additional steps/user inputs are required.",
+                "3 - No, the tool cannot display aggregate or linked data from multiple sectors.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         
         #### ---- Data Storage and Protection ----
         h3("Data Storage and Protection"),
         p("Focuses on data ownership, protection and storage."),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Can you operate the tool independently of the developer? (e.g. server requirements for an app, etc.).",
+              choices = list(
+                "1 - Yes, the tool can operate optimally wihtout developer inputs.",
+                "2 - Yes, the tool has basic functionality without developer input.",
+                "3 - No, the tool cannot operate independently of the developer.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "How is data loaded onto analytic platforms?.",
+              choices = list(
+                "1 - Data is uploaded automatically once internet connection is available (either during data collection or at a later time point).",
+                "2 - Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer).",
+                "3 - Data is manually entered into an electronic database (i.e. data manually entered from paper forms).",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Who owns and can access the data collected by the tool?",
+              choices = list(
+                "1 - The government owns the data. Non-governmental stakeholders must request permission to use it.",
+                "2 - The government owns the data. Non-governmental stakeholders can use it without prior consent.",
+                "3 - The non-governmental stakeholders own the data. The government can use it without prior consent.",
+                "4 - The non-governmental stakeholders own the data. The government must request permission to use it",
+                "5 - The government cannot access the collected data",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "How secure is data that has been collected using this tool?",
+              choices = list(
+                "1 - Data is fully secured: data collected on password protected devices and stored on secured servers or other secured data repository;",
+                "2 - Data security features exist, but could be improved.",
+                "3 - Data is not secured: data is collected on easily accessible devices or on paper forms.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         
         #### ---- Tool Flexibility ----
         h3("Tool Flexibility"),
         p("Focuses on the interoperability of the tool and its adaptability for use in different contexts or scenarios."),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Can the tool be adapted to work with more than just one specific health event/pathogen?",
+              choices = list(
+                "1 - The tool is already a universal tool for multiple health events/pathogens.",
+                "2 - The tool is easily adaptable to 'other use' cases for free or without permission.",
+                "3 - The tool is easily adaptable to 'other use' cases at a cost and/or permission is needed.",
+                "4 - Significant effort would be required to adapt the tool.",
+                "5 - The tool is not adaptable to other health events/pathogens."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Is the tool multi-functional? e.g. One tool that can assist with Mass Dog Vaccination tracking and/or post vaccination surveys and/or Integrated Bite Case Management, etc.",
+              choices = list(
+                "1 - Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM.",
+                "2 - No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "What is required to adapt the tool?",
+              choices = list(
+                "1 - No costs or permissions associated with adapting the tool.",
+                "2 - Adaptation requires developer permission, but is generally NOT associated with fees.",
+                "3 - Adaptation requires development fees and permission.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "What is required to adapt the tool?",
+              choices = list(
+                "1 - No costs or permissions associated with adapting the tool.",
+                "2 - Adaptation requires developer permission, but is generally NOT associated with fees.",
+                "3 - Adaptation requires development fees and permission.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         
         #### ---- Ease of Use and Training Needs ----
