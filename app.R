@@ -3,9 +3,12 @@
 # United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     26/10/2023 |
 # ============================================================================ #
 
+# ---- Packages ----
 library(shiny)
 
+# ---- UI ----
 ui <- navbarPage(
+  ## ---- CSS Styling ----
   tags$style(
     type = "text/css", "
     
@@ -111,9 +114,13 @@ ui <- navbarPage(
     }
     .fab:hover{text-decoration: none;}
   "),
+  
+  ## ---- Navbar Contents ----
   windowTitle = "SISOT-R Application",
   position = "fixed-top",
   title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:70px;"></a>', "SISOT-R"),
+  
+  ## ---- Information Page ----
   tabPanel(
     title = "Information",
     h1("About This App"),
@@ -129,14 +136,19 @@ ui <- navbarPage(
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
   ),
+  
+  ## ---- Tool Evaluator Page -----
   tabPanel(
     title = "Tool Evaluator",
     fluidRow(
+      ### ---- Tool UI Contents ----
       column(
         width = 8,
         h1("Tool Evaluator"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel fringilla est ullamcorper eget nulla facilisi etiam. Massa tempor nec feugiat nisl. Magna eget est lorem ipsum dolor sit amet. Consectetur a erat nam at. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vitae congue eu consequat ac felis donec et odio. Varius quam quisque id diam vel quam elementum pulvinar. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. Erat pellentesque adipiscing commodo elit. Consequat interdum varius sit amet mattis vulputate enim nulla. In pellentesque massa placerat duis ultricies lacus sed. Risus sed vulputate odio ut. Faucibus in ornare quam viverra orci sagittis eu volutpat. Urna id volutpat lacus laoreet. Morbi tristique senectus et netus et malesuada fames. Ut tortor pretium viverra suspendisse. Pharetra diam sit amet nisl suscipit adipiscing bibendum."),
         p("Tortor at auctor urna nunc id cursus metus aliquam. Nisl condimentum id venenatis a condimentum. Pellentesque dignissim enim sit amet venenatis urna. Amet volutpat consequat mauris nunc congue nisi vitae. Vel pretium lectus quam id leo in vitae turpis. Libero nunc consequat interdum varius sit amet mattis vulputate. Ipsum nunc aliquet bibendum enim facilisis gravida. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Elementum nisi quis eleifend quam adipiscing vitae proin. Nam at lectus urna duis."),
+        
+        #### ---- Reviewer Information ----
         h2("1. Reviewer Information"),
         fluidRow(
           column(
@@ -164,6 +176,8 @@ ui <- navbarPage(
             )
           )
         ),
+        
+        #### ---- Tool Information ----
         h2("2. Tool Information"),
         fluidRow(
           column(
@@ -293,7 +307,8 @@ ui <- navbarPage(
           width = "100%"
         ),
         h2("3. Inclusion Criteria"),
-        h3("Accessiblity"),
+        #### ---- Accessibility ----
+        h3("Accessibility"),
         p("Focuses on i) logistics for accessing and using the tool, ii) the platforms on which the tool runs (if applicable), iii) relevant costs, and iv) the level of user support that is provided by the developer/manufacturer."),
         fluidRow(
           column(
@@ -423,6 +438,8 @@ ui <- navbarPage(
             )
           )
         ),
+        
+        #### ---- Data Collection and Needs ----
         h3("Data Collection and Needs"),
         p("Focuses on the type of data that is captured by the tool."),
         fluidRow(
@@ -557,6 +574,8 @@ ui <- navbarPage(
           placeholder = "Please describe the types of data the tool collects here.",
           width = "100%"
         ),
+        
+        #### ---- Data Management and Utility ----
         h3("Data Management and Utility"),
         p("Focuses on the data analysis and outputs provided by the tool."),
         fluidRow(
@@ -628,6 +647,8 @@ ui <- navbarPage(
         fluidRow(
           
         ),
+        
+        #### ---- Data Storage and Protection ----
         h3("Data Storage and Protection"),
         p("Focuses on data ownership, protection and storage."),
         fluidRow(
@@ -636,7 +657,9 @@ ui <- navbarPage(
         fluidRow(
           
         ),
-        h3("Tool Flexiblity"),
+        
+        #### ---- Tool Flexibility ----
+        h3("Tool Flexibility"),
         p("Focuses on the interoperability of the tool and its adaptability for use in different contexts or scenarios."),
         fluidRow(
           
@@ -644,6 +667,8 @@ ui <- navbarPage(
         fluidRow(
           
         ),
+        
+        #### ---- Ease of Use and Training Needs ----
         h3("Ease of Use and Training Needs"),
         p("Focuses on the training requirements, including the level of complexity and difficulty to navigate and understand the tool as well as the technical or operational skillsets that are required to use the tool."),
         fluidRow(
@@ -652,6 +677,8 @@ ui <- navbarPage(
         fluidRow(
           
         ),
+        
+        #### ---- Sustainability ----
         h3("Sustainability"),
         p("Focuses on the different scenarios that indicate how sustainable the tool has been and whether it has been thoroughly field-tested for implementation."),
         fluidRow(
@@ -661,6 +688,8 @@ ui <- navbarPage(
           
         )
       ),
+      
+      ### ---- Results Pane UI Contents ----
       column(
         width = 4,
         position = "fixed",
@@ -672,6 +701,8 @@ ui <- navbarPage(
       )
     )
   ),
+  
+  ## ---- Legal and Data Management ----
   tabPanel(
     title = "Legal and Data Management",
     h1("Legal and Data Management"),
@@ -682,6 +713,8 @@ ui <- navbarPage(
     h2("Privacy Disclaimer"),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
   ),
+  
+  ## ---- Footer UI Contents ----
   footer = tagList(
     fluidRow(
       class = "footer-wrapper",
@@ -722,6 +755,7 @@ ui <- navbarPage(
   )
 )
 
+# ---- Server ----
 server <- function(input, output, session) {
   # Official United Against Rabies Forum colors and fonts as of 25/10/2023:
   UARF_BLUE1 <- "#1a3146"
