@@ -1233,10 +1233,10 @@ server <- function(input, output, session) {
       )),
       horiz = TRUE, xlab = "", ylab = "", xlim = c(0, 10), border = NA,
       xaxp = c(0, 10, 10), # Plot from 0 to 10 inclusive with 10 tick marks,
-      col = rev(
-        c(UARF_BLUE1, UARF_RED, UARF_BLUE2, UARF_BLUE3, UARF_GREEN, UARF_YELLOW,
-          UARF_GREEN2)
-      ),
+      col = rev(c(
+        UARF_BLUE1, UARF_RED, UARF_BLUE2, UARF_BLUE3, UARF_GREEN, UARF_YELLOW,
+        UARF_GREEN2
+      )),
     )
     mtext(
       substitute(paste(bold("Weighted score (out of ten)"))), side = 1, line = 3,
