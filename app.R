@@ -567,11 +567,15 @@ ui <- navbarPage(
             )
           ),
         ),
-        textInput(
-          inputId = "TBC",
-          label = "What type of data does the tool collect?",
-          placeholder = "Please describe the types of data the tool collects here.",
-          width = "100%"
+        fluidRow(
+          column(
+            width = 4,
+            textInput(
+              inputId = "TBC",
+              label = "What type of data does the tool collect?",
+              placeholder = "Please describe the types of data the tool collects here.",
+            )
+          )
         ),
         
         #### ---- Data Management and Utility ----
@@ -885,11 +889,11 @@ ui <- navbarPage(
             width = 4,
             selectizeInput(
               inputId = "TBC",
-              label = "What is required to adapt the tool?",
+              label = "Does the tool have the ability to interoperate, work with, and integrate with other surveillance/data systems ? (provides framework for data sharing)",
               choices = list(
-                "1 - No costs or permissions associated with adapting the tool.",
-                "2 - Adaptation requires developer permission, but is generally NOT associated with fees.",
-                "3 - Adaptation requires development fees and permission.",
+                "1 - Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used.",
+                "2 - Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO).",
+                "3 - Unique output file formats are used, making it difficult for data to be easily incorporated into other systems.",
                 "NA - Not applicable."
               ),
               selected = NULL,
