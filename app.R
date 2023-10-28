@@ -21,7 +21,7 @@ ui <- navbarPage(
     }
     
     body {
-    padding-top: 70px;
+      padding-top: 70px;
       font-size: 1.5rem;
       font-weight: 400;
       line-height: 1.4;
@@ -52,6 +52,12 @@ ui <- navbarPage(
     }
     .navbar a:focus {
       border-color: #ff6960 !important;
+      border: 1px solid;
+    }
+    .navbar-brand a:hover{
+      /* This stops hover-effects from appearing over the UAR navbar logo. */
+      background-color: #1a3146 !important;
+      border-color: #1a3146 !important;
       border: 1px solid;
     }
     
