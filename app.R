@@ -911,27 +911,240 @@ ui <- navbarPage(
         h3("Ease of Use and Training Needs"),
         p("Focuses on the training requirements, including the level of complexity and difficulty to navigate and understand the tool as well as the technical or operational skillsets that are required to use the tool."),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Is data collection reliant on language?",
+              choices = list(
+                "1 - No, the data collection is primarily based on universal language (e.g. numbers or pictures).",
+                "2 - Yes, the user must be able to read the relevant language to collect data"
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "What are the training requirements to use the tool?",
+              choices = list(
+                "1 - End user can implement without external assistance (e.g. user manuals).",
+                "2 - External training is possible but requires remote learning (e.g. shared screen/webinars).",
+                "3 - Face-to-face training of in-country facilitators is required.",
+                "NA - Not applicable."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Have training materials been developed?",
+              choices = list(
+                "1 - Yes, written instructions and training videos are available.",
+                "2 - Yes, but only training videos.",
+                "3 - Yes, but only written instructions.",
+                "4 - No, but materials are being developed.",
+                "5 - No."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "How easy is it to understand and interpret the manuals/instructions?",
+              choices = list(
+                "1 - Very easy for all readers to understand.",
+                "2 - Some technical language.",
+                "3 - Highly technical language.",
+                "NA - Not applicable"
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "How much time does it take to become proficient with the tool?",
+              choices = list(
+                "1 - Days (up to a week).",
+                "2 - Weeks (up to one month).",
+                "3 - One month or more."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Based on user experience, is a dedicated data capturer (in addition to the person undertaking the task; e.g. vaccination) required when using the tool in field conditions?",
+              choices = list(
+                "1 - No, the tool can be used by the implementer of the action without interfering with or hindering the activity (i.e. the vaccinator also collects the data using the tool).",
+                "2 - No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended).",
+                "3 - Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         
         #### ---- Sustainability ----
         h3("Sustainability"),
         p("Focuses on the different scenarios that indicate how sustainable the tool has been and whether it has been thoroughly field-tested for implementation."),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Has the tool been proven effective and sustainable for implementation?",
+              choices = list(
+                "1 - Yes, the tool has been implemented in multi-year projects in multiple countries.",
+                "2 - Yes, the tool has been implmented in a multi-year project in one country.",
+                "3 - No, the tool has just been launched (less than 1 year) in multiple countries.",
+                "4 - No, the tool has just been launched (less than 1 year) in one country.",
+                "5 - No, the tool has not yet been field tested."
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Does the tool support development of project plans and strategies for rabies control activities?",
+              choices = list(
+                "1 - Yes, the tool has supported the development of project plans and strategies in multiple countries.",
+                "2 - Yes, the tool has supported the development of project plans and strategies in one country.",
+                "3 - No, the tool has not yet been field tested.",
+                "NA - Not applicable"
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Has the tool been implemented with only remote assistance (e.g. sharing instruction materials and online trainings)?",
+              choices = list(
+                "1 - Yes, in more than one country.",
+                "2 - Yes, in one country.",
+                "3 - No.",
+                "NA - Not applicable"
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         ),
         fluidRow(
-          
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Has continued use of the tool been observed in project sites AFTER THE EXTERNAL SOURCE (e.g. developer) STOPPED PROVIDING programmatic or financial SUPPORT?",
+              choices = list(
+                "1 - Yes, in more than one country.",
+                "2 - Yes, in one country.",
+                "3 - 3 - No, the tool has always required additional external support to be effectively implemented.",
+                "NA - Not applicable"
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          ),
+          column(
+            width = 4,
+            selectizeInput(
+              inputId = "TBC",
+              label = "Has the tool been implemented without any financial support from any external sources? e.g. The government purchases the tool and implements it without any financial support from an external source.",
+              choices = list(
+                "1 - Yes, in more than one country.",
+                "2 - Yes, in one country.",
+                "3 - No.",
+                "NA - Not applicable"
+              ),
+              selected = NULL,
+              multiple = FALSE,
+              options = list(
+                "plugins" = list("remove_button"),
+                "create" = FALSE,
+                "persist" = TRUE
+              )
+            )
+          )
         )
       ),
       
       ### ---- Results Pane UI Contents ----
       column(
         width = 4,
-        position = "fixed",
         h1("UAR Evaluation Matrix"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
         plotOutput("barPlot"),
