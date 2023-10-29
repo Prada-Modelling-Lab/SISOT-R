@@ -66,6 +66,11 @@ ui <- navbarPage(
       border: 1px solid;
     }
     
+    /* Remove 300px max width of tool input fields */
+    .shiny-input-container:not(.shiny-input-container-inline) {
+      width: auto !important;
+    }
+    
     /* Restrict width text-based pages*/
     .info-and-legal {
       max-width: 600px !important;
@@ -1231,10 +1236,9 @@ server <- function(input, output, session) {
   
   scores <- c(9.1, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
   
-  output$overall_score <- renderText({paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")})
-  
   output$barPlot <- renderPlot({
     par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE)
+    plot.new()
     barplot(
       height = rev(scores),
       names.arg = rev(c(
@@ -1256,8 +1260,9 @@ server <- function(input, output, session) {
       substitute(paste(bold("Category"))), col = UARF_BLUE1, x = 0, pos = 2,
       offset = 1, y = length(scores) + 1.5
     )
-    # abline(v = seq(from = 2, to = 10, by = 2))
   })
+  
+  output$overall_score <- renderText({paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")})
 }
 
 shinyApp(ui, server)
