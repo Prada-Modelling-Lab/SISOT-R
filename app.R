@@ -92,7 +92,6 @@ ui <- navbarPage(
       color: #fff;
       background-color: #1a3146;
       border-color: #1a3146;
-      margin-top: 5px;
     }
     .btn-default:hover {
       color: #fff;
@@ -1185,9 +1184,9 @@ ui <- navbarPage(
         fluidRow(
           column(
             width = 12,
-            downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save")),
-            downloadButton(outputId = "downloadReport",  label = "Download Report",  icon = icon("save")),
-            downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"))
+            downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save"), style = "margin-top: 10px"),
+            downloadButton(outputId = "downloadReport",  label = "Download Report",  icon = icon("save"), style = "margin-top: 10px"),
+            downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"), style = "margin-top: 10px")
           )
         )
       )
@@ -1260,6 +1259,10 @@ server <- function(input, output, session) {
   UARF_LIGHTGREY <- "#f6f6f6"
   UARF_FONT <- "Work Sans"
   UARF_FONT_COLOUR <- "#212529"
+  
+  
+  # Calculate scores here
+  
   
   scores <- c(9.1, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
   
