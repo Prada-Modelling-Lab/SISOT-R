@@ -78,10 +78,25 @@ ui <- navbarPage(
       min-height: 100%;
     }
     
+    /* File Uploader Styling */
+    .progress-bar{background-color: #1a3146;}
+    
     /* Fix Results Pane To Side of Screen */
     .results-pane {
       position: fixed;
       right: 0;
+    }
+    
+    /* Download Button Styling */
+    .btn-default {
+      color: #fff;
+      background-color: #1a3146;
+      border-color: #1a3146;
+    }
+    .btn-default:hover {
+      color: #fff;
+      background-color: #6e818f;
+      border-color: #1a3146;
     }
     
     /* Footer Styling */
@@ -161,7 +176,9 @@ ui <- navbarPage(
         width = 8,
         h1("Tool Evaluator"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel fringilla est ullamcorper eget nulla facilisi etiam. Massa tempor nec feugiat nisl. Magna eget est lorem ipsum dolor sit amet. Consectetur a erat nam at. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vitae congue eu consequat ac felis donec et odio. Varius quam quisque id diam vel quam elementum pulvinar. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. Erat pellentesque adipiscing commodo elit. Consequat interdum varius sit amet mattis vulputate enim nulla. In pellentesque massa placerat duis ultricies lacus sed. Risus sed vulputate odio ut. Faucibus in ornare quam viverra orci sagittis eu volutpat. Urna id volutpat lacus laoreet. Morbi tristique senectus et netus et malesuada fames. Ut tortor pretium viverra suspendisse. Pharetra diam sit amet nisl suscipit adipiscing bibendum."),
+        h2("Upload Answers"),
         p("Tortor at auctor urna nunc id cursus metus aliquam. Nisl condimentum id venenatis a condimentum. Pellentesque dignissim enim sit amet venenatis urna. Amet volutpat consequat mauris nunc congue nisi vitae. Vel pretium lectus quam id leo in vitae turpis. Libero nunc consequat interdum varius sit amet mattis vulputate. Ipsum nunc aliquet bibendum enim facilisis gravida. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Elementum nisi quis eleifend quam adipiscing vitae proin. Nam at lectus urna duis."),
+        fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
         
         #### ---- Reviewer Information ----
         h2("1. Reviewer Information"),
@@ -1161,11 +1178,21 @@ ui <- navbarPage(
         class = "results-pane",
         h1("UAR Evaluation Matrix"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-        plotOutput("barPlot"),
+        plotOutput("show_barPlot"),
+        br(),
+        downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save")),
         h3(htmlOutput(outputId = "overall_score")),
-        p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument.")
+        p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument."),
+        fluidRow(
+          column(
+            width = 12,
+            downloadButton(outputId = "downloadReport",  label = "Download Report",  icon = icon("save")),
+            downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"))
+          )
+        )
       )
-    )
+    ),
+    br()
   ),
   
   ## ---- Legal and Data Management ----
@@ -1236,7 +1263,7 @@ server <- function(input, output, session) {
   
   scores <- c(9.1, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
   
-  output$barPlot <- renderPlot({
+  barPlot <- reactive({
     par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE)
     plot.new()
     barplot(
@@ -1262,7 +1289,34 @@ server <- function(input, output, session) {
     )
   })
   
-  output$overall_score <- renderText({paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")})
+  output$show_barPlot <- renderPlot({barPlot()})
+  
+  output$overall_score <- renderText({
+    paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")
+  })
+  
+  output$downloadFigure <- downloadHandler(
+    filename = "Bar_Plot.svg",
+    content = function(file){
+      
+    }
+  )
+  output$downloadReport <- downloadHandler(
+    filename = "SISOT-R_Report.pdf",
+    content = function(file){
+      # Copy the report file to a temporary directory before processing it, in
+      # case we don't have write permissions to the current working directory.
+      temp_report <- file.path(tempdir(), "SISOT-R_Report.pdf")
+      file.copy("report_template.rmd", temp_report, overwrite = TRUE)
+      # Knit the document, and eval it in the current environment
+      rmarkdown::render(temp_report, output_file = file)
+    }
+  )
+  output$downloadAnswers <- downloadHandler(
+    filename = "Answers.csv",
+    content = ""
+  )
+  
 }
 
 shinyApp(ui, server)
