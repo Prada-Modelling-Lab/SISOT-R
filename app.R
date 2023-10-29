@@ -92,6 +92,7 @@ ui <- navbarPage(
       color: #fff;
       background-color: #1a3146;
       border-color: #1a3146;
+      margin-top: 5px;
     }
     .btn-default:hover {
       color: #fff;
@@ -1179,13 +1180,12 @@ ui <- navbarPage(
         h1("UAR Evaluation Matrix"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
         plotOutput("show_barPlot"),
-        br(),
-        downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save")),
         h3(htmlOutput(outputId = "overall_score")),
         p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument."),
         fluidRow(
           column(
             width = 12,
+            downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save")),
             downloadButton(outputId = "downloadReport",  label = "Download Report",  icon = icon("save")),
             downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"))
           )
