@@ -69,7 +69,7 @@ ui <- navbarPage(
     /* Restrict width text-based pages*/
     .info-and-legal {
       max-width: 600px !important;
-      margin:  0px auto;
+      margin: 0px auto;
       min-height: 100%;
     }
     
@@ -80,13 +80,8 @@ ui <- navbarPage(
     }
     
     /* Footer Styling */
-    .footer-wrapper {
-      z-index: 1000;
-      align: right;
-    }
     .footer-top {
       display: block !important;
-      width: 100%;
       padding-right: 50px;
       padding-left: 50px;
       padding-top: 25px;
@@ -99,7 +94,6 @@ ui <- navbarPage(
     }
     .footer-bottom{
       display: block !important;
-      width: 100%;
       padding-right: 50px;
       padding-left: 50px;
       padding-top: 25px;
@@ -1185,40 +1179,37 @@ ui <- navbarPage(
   ## ---- Footer UI Contents ----
   footer = tagList(
     fluidRow(
-      class = "footer-wrapper",
-      fluidRow(
-        class = "footer-top",
-        column(
-          width = 4,
-          align = "center",
-          HTML('<img src="uarf_footer_logo.svg", style="width:90px;">')
-        ),
-        column(
-          width = 4,
-          align = "center",
-          tags$a(class = "footer-button-blue", href = "https://www.unitedagainstrabies.org/contact/", "Contact Us"),
-        ),
-        column(
-          width = 4,
-          align = "center",
-          tags$a(style = "color: #B5BBBf !important;", "© United Against Rabies Forum 2023")
-        )
+      class = "footer-top",
+      column(
+        width = 4,
+        align = "center",
+        HTML('<img src="uarf_footer_logo.svg", style="width:90px;">')
       ),
-      fluidRow(
-        class = "footer-bottom",
-        column(width = 4),
-        column(
-          width = 4,
-          align = "center",
-          "Follow us",
-          tags$a(href = "https://twitter.com/UARForum", icon("twitter")),
-          tags$a(href = "https://www.linkedin.com/company/united-against-rabies/", icon("linkedin")),
-          tags$a(href = "https://www.facebook.com/UnitedAgainstRabies/", icon("facebook")),
-          tags$a(href = "https://www.instagram.com/unitedagainstrabies_/", icon("instagram")),
-          tags$a(href = "https://www.youtube.com/channel/UCQpfAFLhSib0k5aBiwRB-zw", icon("youtube"))
-        ),
-        column(width = 4)
+      column(
+        width = 4,
+        align = "center",
+        tags$a(class = "footer-button-blue", href = "https://www.unitedagainstrabies.org/contact/", "Contact Us"),
+      ),
+      column(
+        width = 4,
+        align = "center",
+        tags$a(style = "color: #B5BBBf !important;", "© United Against Rabies Forum 2023")
       )
+    ),
+    fluidRow(
+      class = "footer-bottom",
+      column(width = 4),
+      column(
+        width = 4,
+        align = "center",
+        "Follow us",
+        tags$a(href = "https://twitter.com/UARForum", icon("twitter")),
+        tags$a(href = "https://www.linkedin.com/company/united-against-rabies/", icon("linkedin")),
+        tags$a(href = "https://www.facebook.com/UnitedAgainstRabies/", icon("facebook")),
+        tags$a(href = "https://www.instagram.com/unitedagainstrabies_/", icon("instagram")),
+        tags$a(href = "https://www.youtube.com/channel/UCQpfAFLhSib0k5aBiwRB-zw", icon("youtube"))
+      ),
+      column(width = 4)
     )
   )
   ## ----
