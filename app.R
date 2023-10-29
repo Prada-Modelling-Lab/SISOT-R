@@ -21,6 +21,9 @@ ui <- navbarPage(
       body {
         padding-top: 220px !important;
       }
+      .results-pane{
+        position: unset !important; /* Allow pane to float under questionnaire */
+      }
     }
     
     body {
@@ -30,7 +33,7 @@ ui <- navbarPage(
       line-height: 1.4;
       color: #212529;
       text-align: left;
-      background-color: #fff;
+      background-color: #ededed !important;
     }
     
     p {text-align: justify;}
@@ -62,6 +65,12 @@ ui <- navbarPage(
       background-color: #1a3146 !important;
       border-color: #1a3146 !important;
       border: 1px solid;
+    }
+    
+    /* Fix Results Pane To Side of Screen */
+    .results-pane {
+      position: fixed;
+      right: 0;
     }
     
     /* Footer Styling */
@@ -134,7 +143,7 @@ ui <- navbarPage(
     h2("Authorship Statement"),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
   ),
   
   ## ---- Tool Evaluator Page -----
@@ -1143,6 +1152,7 @@ ui <- navbarPage(
       ### ---- Results Pane UI Contents ----
       column(
         width = 4,
+        class = "results-pane",
         h1("UAR Evaluation Matrix"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
         plotOutput("barPlot"),
