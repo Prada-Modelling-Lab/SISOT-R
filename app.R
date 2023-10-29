@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # ============================================================================ #
-# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     26/10/2023 |
+# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     29/10/2023 |
 # ============================================================================ #
 
 # ---- Packages ----
@@ -11,7 +11,6 @@ ui <- navbarPage(
   ## ---- CSS Styling ----
   tags$style(
     type = "text/css", "
-    
     /* Use Work Sans as the main font for the app. */
     @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
     * {font-family: Work Sans, sans-serif;}
@@ -65,6 +64,13 @@ ui <- navbarPage(
       background-color: #1a3146 !important;
       border-color: #1a3146 !important;
       border: 1px solid;
+    }
+    
+    /* Restrict width text-based pages*/
+    .info-and-legal {
+      max-width: 600px !important;
+      margin:  0px auto;
+      min-height: 100%;
     }
     
     /* Fix Results Pane To Side of Screen */
@@ -132,6 +138,7 @@ ui <- navbarPage(
   ## ---- Information Page ----
   tabPanel(
     title = "Information",
+    class = "info-and-legal",
     h1("About This App"),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
@@ -1165,6 +1172,7 @@ ui <- navbarPage(
   ## ---- Legal and Data Management ----
   tabPanel(
     title = "Legal and Data Management",
+    class = "info-and-legal",
     h1("Legal and Data Management"),
     h2("Legal"),
     p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
@@ -1213,6 +1221,7 @@ ui <- navbarPage(
       )
     )
   )
+  ## ----
 )
 
 # ---- Server ----
