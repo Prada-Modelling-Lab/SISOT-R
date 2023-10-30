@@ -302,9 +302,11 @@ ui <- navbarPage(
             radioButtons( # need to be able to input the number of countries if # countries, if known is selected
               inputId = "tool_history_of_use",
               label = "History of Use:",
-              choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used", "# countries, if known"),
+              choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used"),
               selected = NA
-            )
+            ),
+            textInput(inputId = "number_of_countries", label = "Number of Countries:", width = "50%"),
+            actionButton(inputId = "add_number_of_countries", label = "Add Value")
           ),
           column(
             width = 4,
@@ -1036,6 +1038,22 @@ server <- function(input, output, session) {
   
   
   scores <- reactive({
+    # When users want to add the number of countries, they must first type it,
+    # then add to the radioButton list
+    observeEvent(
+      input$add_number_of_countries, {
+        req(input$number_of_countries)
+        otherVal <- "other"
+        names(otherVal) <- input$number_of_countries
+        updatedValues <- c(
+          "Developed, no pilot test", "Pilot tested", "Pilot tested, limited use",
+          "Frequently used", otherVal
+        )
+        updateRadioButtons(session, "tool_history_of_use", choices = updatedValues)
+      }
+    )
+    
+    
     # First extract the scores of the categories
     accessibility_points <- c(input$Q311, input$Q312, input$Q313, input$Q314, input$Q315, input$Q316)
     data_collection_points <- c(input$Q321, input$Q322, input$Q323, input$Q324, input$Q325, input$Q326, input$Q327)
