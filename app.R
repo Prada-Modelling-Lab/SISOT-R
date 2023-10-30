@@ -353,7 +353,8 @@ ui <- navbarPage(
                 "3 - Paper based, free to download/access." = 3,
                 "4 - Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person)." = 2,
                 "5 - Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.)." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -365,7 +366,8 @@ ui <- navbarPage(
                 "1 - ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.)." = 5,
                 "2 - At least one digital platform (e.g. only mobile phones or only computers)." = 3,
                 "3 - Only paper-based." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -380,7 +382,8 @@ ui <- navbarPage(
                 "4 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned." = 2,
                 "5 - No, and it wont be possible." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
         ),
@@ -394,7 +397,8 @@ ui <- navbarPage(
                 "1 - No, it's free to access." = 5,
                 "2 - Yes, the tool needs to be purchased at a once-off cost." = 3,
                 "3 - Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription)." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -407,7 +411,8 @@ ui <- navbarPage(
                 "2 - Equipment might need to be replaced sporadically (less than once a year)." = 3,
                 "3 - The developer noted that equipment such as smartphones might need to be replaced often (more than once a year)." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -422,7 +427,8 @@ ui <- navbarPage(
                 "4 - Limited support at a cost." = 2,
                 "5 - No support available." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -442,7 +448,8 @@ ui <- navbarPage(
                 "3 - Continuous access to standard WIFI/3g" = 3,
                 "4 - Continuous access to LTE/4g." = 2,
                 "5 - Requires continuous stable high speed internet (5g/9Mbps or greater)." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -455,7 +462,8 @@ ui <- navbarPage(
                 "2 - Yes, limited data is collected for animal cases." = 3,
                 "3 - No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection." = 1,
                 "NA - Not applicable." =  NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -468,7 +476,8 @@ ui <- navbarPage(
                 "2 - Yes, limited data is collected for human cases." = 3,
                 "3 - No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -485,7 +494,8 @@ ui <- navbarPage(
                 "4 - IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible." = 2,
                 "5 - No, this is currently not a feature of the tool." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -498,7 +508,8 @@ ui <- navbarPage(
                 "2 - Yes, one communication channel is available." = 3,
                 "3 - No, this is currently not a feature of the tool." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -510,7 +521,8 @@ ui <- navbarPage(
                 "1 - Yes, the tool allows for program managers to push out messages and allows users to reply." = 5,
                 "2 - No, this is currently not a feature of the tool." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
         ),
@@ -539,7 +551,8 @@ ui <- navbarPage(
                 "2 - Yes, validation is automated, but occurs post-data collection once an internet connection is available." = 3,
                 "3 - No, validation must occur through a separate process" = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -552,7 +565,8 @@ ui <- navbarPage(
                 "2 - Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis." = 3,
                 "3 - No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -563,7 +577,8 @@ ui <- navbarPage(
               choices = list(
                 "1 - Yes." = 5,
                 "2 - No." = 1 # Make it so that suggested answers for questions 38, 39, and 40 are NA later
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -580,7 +595,8 @@ ui <- navbarPage(
                 "4 - One of the four data outputs are available." = 2,
                 "5 - No data outputs are available within the tool (i.e. a third party software is required to visualize data)." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -595,7 +611,8 @@ ui <- navbarPage(
                 "4 - Within 1 month." = 2,
                 "5 - More than 1 month." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -608,7 +625,8 @@ ui <- navbarPage(
                 "2 - Some technical language." = 3,
                 "3 - Highly technical language." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -623,7 +641,8 @@ ui <- navbarPage(
                 "2 - Yes, aggregated data can be displayed, but additional steps/user inputs are required." = 3,
                 "3 - No, the tool cannot display aggregate or linked data from multiple sectors." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -641,7 +660,8 @@ ui <- navbarPage(
                 "1 - Yes, the tool can operate optimally wihtout developer inputs." = 5,
                 "2 - Yes, the tool has basic functionality without developer input." = 3,
                 "3 - No, the tool cannot operate independently of the developer." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -654,7 +674,8 @@ ui <- navbarPage(
                 "2 - Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer)." = 3,
                 "3 - Data is manually entered into an electronic database (i.e. data manually entered from paper forms)." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -669,7 +690,8 @@ ui <- navbarPage(
                 "4 - The non-governmental stakeholders own the data. The government must request permission to use it" = 2,
                 "5 - The government cannot access the collected data" = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -684,7 +706,8 @@ ui <- navbarPage(
                 "2 - Data security features exist, but could be improved." = 3,
                 "3 - Data is not secured: data is collected on easily accessible devices or on paper forms." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -704,7 +727,8 @@ ui <- navbarPage(
                 "3 - The tool is easily adaptable to 'other use' cases at a cost and/or permission is needed." = 3,
                 "4 - Significant effort would be required to adapt the tool." = 2,
                 "5 - The tool is not adaptable to other health events/pathogens." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -715,7 +739,8 @@ ui <- navbarPage(
               choices = list(
                 "1 - Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM." = 5,
                 "2 - No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -728,7 +753,8 @@ ui <- navbarPage(
                 "2 - Adaptation requires developer permission, but is generally NOT associated with fees." = 3,
                 "3 - Adaptation requires development fees and permission." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -743,7 +769,8 @@ ui <- navbarPage(
                 "2 - Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO)." = 3,
                 "3 - Unique output file formats are used, making it difficult for data to be easily incorporated into other systems." = 1,
                 "NA - Not applicable." = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -760,7 +787,8 @@ ui <- navbarPage(
               choices = list(
                 "1 - No, the data collection is primarily based on universal language (e.g. numbers or pictures)." = 5,
                 "2 - Yes, the user must be able to read the relevant language to collect data" = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -772,7 +800,8 @@ ui <- navbarPage(
                 "1 - End user can implement without external assistance (e.g. user manuals)." = 5,
                 "2 - External training is possible but requires remote learning (e.g. shared screen/webinars)." = 3,
                 "3 - Face-to-face training of in-country facilitators is required." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -786,7 +815,8 @@ ui <- navbarPage(
                 "3 - Yes, but only written instructions." = 3,
                 "4 - No, but materials are being developed." = 2,
                 "5 - No." = 1
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -801,7 +831,8 @@ ui <- navbarPage(
                 "2 - Some technical language." = 3,
                 "3 - Highly technical language." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -813,7 +844,8 @@ ui <- navbarPage(
                 "1 - Days (up to a week)." = 5,
                 "2 - Weeks (up to one month)." = 3,
                 "3 - One month or more." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -825,7 +857,8 @@ ui <- navbarPage(
                 "1 - No, the tool can be used by the implementer of the action without interfering with or hindering the activity (i.e. the vaccinator also collects the data using the tool)." = 5,
                 "2 - No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended)." = 3,
                 "3 - Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency." = 1
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -845,7 +878,8 @@ ui <- navbarPage(
                 "3 - No, the tool has just been launched (less than 1 year) in multiple countries." = 3,
                 "4 - No, the tool has just been launched (less than 1 year) in one country." = 2,
                 "5 - No, the tool has not yet been field tested." = 1
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -858,7 +892,8 @@ ui <- navbarPage(
                 "2 - Yes, the tool has supported the development of project plans and strategies in one country." = 3,
                 "3 - No, the tool has not yet been field tested." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -871,7 +906,8 @@ ui <- navbarPage(
                 "2 - Yes, in one country." = 3,
                 "3 - No." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           )
         ),
@@ -886,7 +922,8 @@ ui <- navbarPage(
                 "2 - Yes, in one country." = 3,
                 "3 - 3 - No, the tool has always required additional external support to be effectively implemented." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           ),
           column(
@@ -899,7 +936,8 @@ ui <- navbarPage(
                 "2 - Yes, in one country." = 3,
                 "3 - No." = 1,
                 "NA - Not applicable" = NA
-              )
+              ),
+              selected = 0
             )
           )
         )
@@ -1032,6 +1070,8 @@ server <- function(input, output, session) {
       sum(as.numeric(ease_of_use_points), na.rm = TRUE),
       sum(as.numeric(sustainability_points), na.rm = TRUE)
     )/total_point_values
+    
+    
     return(category_scores)
   })
   
@@ -1067,7 +1107,15 @@ server <- function(input, output, session) {
   
   # This prints the overall score text
   output$overall_score <- renderText({
-    paste0("Total Score: <b>", 10*round(mean(scores()), 2), "%</b>")
+    overall_score_value <- 10*round(mean(scores()), 2)
+    paste0(
+      "Total Score: <b>",
+      ifelse(
+        test = is.nan(overall_score_value),
+        yes = "TBD</b>",
+        no = paste0(overall_score_value, "%</b>") 
+      )
+    )
   })
   
   # Download button logic
