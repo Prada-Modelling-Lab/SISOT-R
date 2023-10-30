@@ -994,13 +994,49 @@ server <- function(input, output, session) {
   UARF_FONT_COLOUR <- "#212529"
   
   
-  scores <- c(9.1, 8.3, 8.9, 8.0, 8.0, 8.7, 10.0)
+  
+  scores <- reactive({
+    
+    accessibility_points <- c(input$Q311, input$Q312, input$Q313, input$Q314, input$Q315, input$Q316)
+    data_collection_points <- c(input$Q321, input$Q322, input$Q323, input$Q324, input$Q325, input$Q326, input$Q327)
+    data_management_points <- c(input$Q331, input$Q332, input$Q333, input$Q334, input$Q335, input$Q336, input$Q337)
+    data_storage_points <- c(input$Q341, input$Q342, input$Q343, input$Q344)
+    flexibility_points <- c(input$Q351, input$Q352, input$Q353, input$Q354)
+    ease_of_use_points <- c(input$Q361, input$Q362, input$Q363, input$Q364, input$Q365, input$Q366)
+    sustainability_points <- c(input$Q371, input$Q372, input$Q373, input$Q374, input$Q375)
+    
+    # Number of categories that aren't NA responses
+    eliblble_categories <- unlist(lapply(
+      X = list(
+        accessibility_points, data_collection_points, data_management_points,
+        data_storage_points, flexibility_points, ease_of_use_points,
+        sustainability_points
+      ),
+      FUN = function(category){
+        return(sum(!is.na(category)))
+      }
+    ))
+    
+    total_point_values <- 5 * eliblble_categories
+    
+    category_scores <- 10*c(
+      sum(as.numeric(accessibility_points, na.rm = TRUE)),
+      sum(as.numeric(data_collection_points, na.rm = TRUE)),
+      sum(as.numeric(data_management_points, na.rm = TRUE)),
+      sum(as.numeric(data_storage_points, na.rm = TRUE)),
+      sum(as.numeric(flexibility_points, na.rm = TRUE)),
+      sum(as.numeric(ease_of_use_points, na.rm = TRUE)),
+      sum(as.numeric(sustainability_points, na.rm = TRUE))
+    )/total_point_values
+    return(category_scores)
+  })
+  
   
   barPlot <- reactive({
     par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE)
     plot.new()
     barplot(
-      height = rev(scores),
+      height = rev(scores()),
       names.arg = rev(c(
         "Accessibility", "Data Collection", "Data Management", "Data Storage",
         "Flexibility", "Ease of Use", "Sustainability"
@@ -1018,14 +1054,14 @@ server <- function(input, output, session) {
     )
     text(
       substitute(paste(bold("Category"))), col = UARF_BLUE1, x = 0, pos = 2,
-      offset = 1, y = length(scores) + 1.5
+      offset = 1, y = 8.5
     )
   })
   
   output$show_barPlot <- renderPlot({barPlot()})
   
   output$overall_score <- renderText({
-    paste0("Total Score: <b>", 10*round(mean(scores), 2), "%</b>")
+    paste0("Total Score: <b>", 10*round(mean(scores()), 2), "%</b>")
   })
   
   output$downloadFigure <- downloadHandler(
