@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # ============================================================================ #
-# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     29/10/2023 |
+# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     30/10/2023 |
 # ============================================================================ #
 
 # ---- Packages ----
@@ -996,7 +996,7 @@ server <- function(input, output, session) {
   
   
   scores <- reactive({
-    
+    # First extract the scores of the categories
     accessibility_points <- c(input$Q311, input$Q312, input$Q313, input$Q314, input$Q315, input$Q316)
     data_collection_points <- c(input$Q321, input$Q322, input$Q323, input$Q324, input$Q325, input$Q326, input$Q327)
     data_management_points <- c(input$Q331, input$Q332, input$Q333, input$Q334, input$Q335, input$Q336, input$Q337)
@@ -1005,7 +1005,7 @@ server <- function(input, output, session) {
     ease_of_use_points <- c(input$Q361, input$Q362, input$Q363, input$Q364, input$Q365, input$Q366)
     sustainability_points <- c(input$Q371, input$Q372, input$Q373, input$Q374, input$Q375)
     
-    # Number of categories that aren't NA responses
+    # Then find the number of questions in each category that aren't NA responses
     eliblble_categories <- unlist(lapply(
       X = list(
         accessibility_points, data_collection_points, data_management_points,
@@ -1017,21 +1017,25 @@ server <- function(input, output, session) {
       }
     ))
     
+    # The total number of points you can score is 5 x the number of non-NA
+    # responses to questions
     total_point_values <- 5 * eliblble_categories
     
+    # Find the weighted scores of each category; defined by the sum of scores
+    # divided by the total point values
     category_scores <- 10*c(
-      sum(as.numeric(accessibility_points, na.rm = TRUE)),
-      sum(as.numeric(data_collection_points, na.rm = TRUE)),
-      sum(as.numeric(data_management_points, na.rm = TRUE)),
-      sum(as.numeric(data_storage_points, na.rm = TRUE)),
-      sum(as.numeric(flexibility_points, na.rm = TRUE)),
-      sum(as.numeric(ease_of_use_points, na.rm = TRUE)),
-      sum(as.numeric(sustainability_points, na.rm = TRUE))
+      sum(as.numeric(accessibility_points), na.rm = TRUE),
+      sum(as.numeric(data_collection_points), na.rm = TRUE),
+      sum(as.numeric(data_management_points), na.rm = TRUE),
+      sum(as.numeric(data_storage_points), na.rm = TRUE),
+      sum(as.numeric(flexibility_points), na.rm = TRUE),
+      sum(as.numeric(ease_of_use_points), na.rm = TRUE),
+      sum(as.numeric(sustainability_points), na.rm = TRUE)
     )/total_point_values
     return(category_scores)
   })
   
-  
+  # Results figure logic
   barPlot <- reactive({
     par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE)
     plot.new()
@@ -1058,12 +1062,15 @@ server <- function(input, output, session) {
     )
   })
   
+  # This actually plots it to the Shiny App window
   output$show_barPlot <- renderPlot({barPlot()})
   
+  # This prints the overall score text
   output$overall_score <- renderText({
     paste0("Total Score: <b>", 10*round(mean(scores()), 2), "%</b>")
   })
   
+  # Download button logic
   output$downloadFigure <- downloadHandler(
     filename = "Bar_Plot.svg",
     content = function(file){
@@ -1085,7 +1092,6 @@ server <- function(input, output, session) {
     filename = "Answers.csv",
     content = ""
   )
-  
 }
 
 shinyApp(ui, server)
