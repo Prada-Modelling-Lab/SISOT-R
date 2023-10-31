@@ -1120,6 +1120,7 @@ server <- function(input, output, session) {
       substitute(paste(bold("Category"))), col = UARF_BLUE1, x = 0, pos = 2,
       offset = 1, y = 8.5
     )
+    recordPlot()
   })
   
   # This actually plots it to the Shiny App window
@@ -1140,9 +1141,11 @@ server <- function(input, output, session) {
   
   # Download button logic
   output$downloadFigure <- downloadHandler(
-    filename = "Bar_Plot.svg",
+    filename = function(){"Bar_Plot.svg"},
     content = function(file){
-      
+      svg(filename = file, width = 8, height = 4)
+      replayPlot(barPlot())
+      dev.off()
     }
   )
   output$downloadReport <- downloadHandler(
