@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # ============================================================================ #
-# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     30/10/2023 |
+# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     31/10/2023 |
 # ============================================================================ #
 
 # ---- Packages ----
@@ -274,7 +274,7 @@ ui <- navbarPage(
             width = 4,
             textInput(
               inputId = "tool_availability",
-              label = "Version Number of the Tool:",
+              label = "Availability:",
               placeholder = "Please describe the availability of the tool."
             )
           ),
@@ -661,7 +661,7 @@ ui <- navbarPage(
               inputId = "Q341",
               label = "Can you operate the tool independently of the developer? (e.g. server requirements for an app, etc.).",
               choices = list(
-                "1 - Yes, the tool can operate optimally wihtout developer inputs." = 5,
+                "1 - Yes, the tool can operate optimally without developer inputs." = 5,
                 "2 - Yes, the tool has basic functionality without developer input." = 3,
                 "3 - No, the tool cannot operate independently of the developer." = 1
               ),
@@ -1036,39 +1036,52 @@ server <- function(input, output, session) {
   UARF_FONT_COLOUR <- "#212529"
   
   
+  # When users want to add the number of countries, they must first type it,
+  # then add to the radioButton list
+  observeEvent(
+    input$add_number_of_countries, {
+      req(input$number_of_countries)
+      otherVal <- "other"
+      names(otherVal) <- input$number_of_countries
+      updatedValues <- c(
+        "Developed, no pilot test", "Pilot tested", "Pilot tested, limited use",
+        "Frequently used", otherVal
+      )
+      updateRadioButtons(session, "tool_history_of_use", choices = updatedValues)
+    }
+  )
+  
+  
+  # First extract the scores of the categories
+  accessibility_points <- reactive({c(
+    input$Q311, input$Q312, input$Q313, input$Q314, input$Q315, input$Q316)
+  })
+  data_collection_points <- reactive({
+    c(input$Q321, input$Q322, input$Q323, input$Q324, input$Q325, input$Q326, input$Q327)
+  })
+  data_management_points <- reactive({
+    c(input$Q331, input$Q332, input$Q333, input$Q334, input$Q335, input$Q336, input$Q337)
+  })
+  data_storage_points <- reactive({
+    c(input$Q341, input$Q342, input$Q343, input$Q344)
+  })
+  flexibility_points <- reactive({
+    c(input$Q351, input$Q352, input$Q353, input$Q354)
+  })
+  ease_of_use_points <- reactive({
+    c(input$Q361, input$Q362, input$Q363, input$Q364, input$Q365, input$Q366)
+  })
+  sustainability_points <- reactive({
+    c(input$Q371, input$Q372, input$Q373, input$Q374, input$Q375)
+  })
   
   scores <- reactive({
-    # When users want to add the number of countries, they must first type it,
-    # then add to the radioButton list
-    observeEvent(
-      input$add_number_of_countries, {
-        req(input$number_of_countries)
-        otherVal <- "other"
-        names(otherVal) <- input$number_of_countries
-        updatedValues <- c(
-          "Developed, no pilot test", "Pilot tested", "Pilot tested, limited use",
-          "Frequently used", otherVal
-        )
-        updateRadioButtons(session, "tool_history_of_use", choices = updatedValues)
-      }
-    )
-    
-    
-    # First extract the scores of the categories
-    accessibility_points <- c(input$Q311, input$Q312, input$Q313, input$Q314, input$Q315, input$Q316)
-    data_collection_points <- c(input$Q321, input$Q322, input$Q323, input$Q324, input$Q325, input$Q326, input$Q327)
-    data_management_points <- c(input$Q331, input$Q332, input$Q333, input$Q334, input$Q335, input$Q336, input$Q337)
-    data_storage_points <- c(input$Q341, input$Q342, input$Q343, input$Q344)
-    flexibility_points <- c(input$Q351, input$Q352, input$Q353, input$Q354)
-    ease_of_use_points <- c(input$Q361, input$Q362, input$Q363, input$Q364, input$Q365, input$Q366)
-    sustainability_points <- c(input$Q371, input$Q372, input$Q373, input$Q374, input$Q375)
-    
-    # Then find the number of questions in each category that aren't NA responses
+    # Find the number of questions in each category that aren't NA responses
     eliblble_categories <- unlist(lapply(
       X = list(
-        accessibility_points, data_collection_points, data_management_points,
-        data_storage_points, flexibility_points, ease_of_use_points,
-        sustainability_points
+        accessibility_points(), data_collection_points(), data_management_points(),
+        data_storage_points(), flexibility_points(), ease_of_use_points(),
+        sustainability_points()
       ),
       FUN = function(category){
         return(sum(!is.na(category)))
@@ -1082,18 +1095,48 @@ server <- function(input, output, session) {
     # Find the weighted scores of each category; defined by the sum of scores
     # divided by the total point values
     category_scores <- 10*c(
-      sum(as.numeric(accessibility_points), na.rm = TRUE),
-      sum(as.numeric(data_collection_points), na.rm = TRUE),
-      sum(as.numeric(data_management_points), na.rm = TRUE),
-      sum(as.numeric(data_storage_points), na.rm = TRUE),
-      sum(as.numeric(flexibility_points), na.rm = TRUE),
-      sum(as.numeric(ease_of_use_points), na.rm = TRUE),
-      sum(as.numeric(sustainability_points), na.rm = TRUE)
+      sum(as.numeric(accessibility_points()), na.rm = TRUE),
+      sum(as.numeric(data_collection_points()), na.rm = TRUE),
+      sum(as.numeric(data_management_points()), na.rm = TRUE),
+      sum(as.numeric(data_storage_points()), na.rm = TRUE),
+      sum(as.numeric(flexibility_points()), na.rm = TRUE),
+      sum(as.numeric(ease_of_use_points()), na.rm = TRUE),
+      sum(as.numeric(sustainability_points()), na.rm = TRUE)
     )/total_point_values
-    
     
     return(category_scores)
   })
+  
+  # Questionnaire Logic Answers
+  questionnaire_answers <- reactive({
+    
+    # Vector with all question numbers. These need to be hard-coded since if not
+    # all categories have been answered, then NULL values will break the formatting.
+    questions <- c(
+      paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7), paste0("Q34", 1:4),
+      paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
+    )
+    
+    # Find the questions that have been filled out by the user
+    answers_filled <- data.frame(
+      "Questions" = questions,
+      "Answers" = c(
+        accessibility_points(), data_collection_points(), data_management_points(),
+        data_storage_points(), flexibility_points(), ease_of_use_points(),
+        sustainability_points()
+      )
+    )
+    
+    # Initialize (assume) all questions have not been filled. Find which answers
+    # were filled then add them to the "answers" data frame, appending a preceding
+    # column of question numbers.
+    answers <- rep(x = NA, times = length(questions))
+    answers[match(answers_filled$Questions, questions)] <- answers_filled$Answers
+    answers <- data.frame("Questions" = questions, "Answers" = answers)
+    return(answers)
+  })
+  
+  reactive({print(questionnaire_answers())})
   
   # Results figure logic
   barPlot <- reactive({
@@ -1160,8 +1203,10 @@ server <- function(input, output, session) {
     }
   )
   output$downloadAnswers <- downloadHandler(
-    filename = "Answers.csv",
-    content = ""
+    filename =  function(){"Answers.csv"},
+    content = function(file) {
+      write.csv(questionnaire_answers(), file, row.names = FALSE)
+    }
   )
 }
 
