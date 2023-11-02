@@ -191,26 +191,29 @@ ui <- navbarPage(
         fluidRow(
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "reviewer_names",
               label = "Reviewer Name(s)",
-              placeholder = "Please insert your name(s) here."
+              placeholder = "Please insert your name(s) here.",
+              resize = "vertical"
             )
           ),
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "reviewer_titles_and_affiliations",
               label = "Reviewer Titles and Affiliations:",
-              placeholder = "Please insert your titles and affiliations here."
+              placeholder = "Please insert your titles and affiliations here.",
+              resize = "vertical"
             )
           ),
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "reviewer_familiarity",
               label = "Please describe your tool familiarity:",
-              placeholder = "Please describe your familiarity here."
+              placeholder = "Please describe your familiarity here.",
+              resize = "vertical"
             )
           )
         ),
@@ -220,10 +223,11 @@ ui <- navbarPage(
         fluidRow(
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "tool_name",
               label = "Name of Tool:",
-              placeholder = "Please insert the name of the tool."
+              placeholder = "Please insert the name of the tool.",
+              resize = "vertical"
             )
           ),
           column(
@@ -246,36 +250,40 @@ ui <- navbarPage(
         fluidRow(
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "tool_source",
               label = "Tool Source:",
-              placeholder = "Please insert the source of the tool."
+              placeholder = "Please insert the source of the tool.",
+              resize = "vertical"
             )
           ),
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "tool_version",
               label = "Version Number of the Tool:",
-              placeholder = "Please insert the version number of the tool."
+              placeholder = "Please insert the version number of the tool.",
+              resize = "vertical"
             )
           ),
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "tool_point_of_contact",
               label = "Point of Contact:",
-              placeholder = "Please insert the tool's contact information."
+              placeholder = "Please insert the tool's contact information.",
+              resize = "vertical"
             )
           )
         ),
         fluidRow(
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "tool_availability",
               label = "Availability:",
-              placeholder = "Please describe the availability of the tool."
+              placeholder = "Please describe the availability of the tool.",
+              resize = "vertical"
             )
           ),
           column(
@@ -289,33 +297,44 @@ ui <- navbarPage(
           ),
           column(
             width = 4,
-            textInput( # Future task: be able to import all recognized languages
+            textAreaInput( # Future task: be able to import all recognized languages
               inputId = "tool_prerequisites",
               label = "Tool Prerequisites:",
-              placeholder = "Please describe the tool prerequisites."
+              placeholder = "Please describe the tool prerequisites.",
+              resize = "vertical"
             )
           )
         ),
         fluidRow(
           column(
             width = 4,
-            radioButtons( # need to be able to input the number of countries if # countries, if known is selected
+            radioButtons(
               inputId = "tool_history_of_use",
               label = "History of Use:",
               choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used"),
               selected = NA
             ),
-            textInput(inputId = "number_of_countries", label = "Number of Countries:", width = "50%"),
-            actionButton(inputId = "add_number_of_countries", label = "Add Value")
           ),
           column(
             width = 4,
-            textInput(
-              inputId = "tool_publishing",
-              label = "Publishing:",
-              placeholder = "Please describe how the tool is published."
+            numericInput(
+              inputId = "number_of_countries",
+              label = "Number of Countries, if known:",
+              min = 0, # Minimum amount of countries cannot be negative.
+              value = NA # This is the default value unless otherwise changed.
             )
           ),
+          column(
+            width = 4,
+            textAreaInput(
+              inputId = "tool_publishing",
+              label = "Publishing:",
+              placeholder = "Please describe how the tool is published.",
+              resize = "vertical"
+            )
+          )
+        ),
+        fluidRow(
           column(
             width = 4,
             selectizeInput( # Future task: be able to import all recognized languages
@@ -334,12 +353,16 @@ ui <- navbarPage(
                 "persist" = TRUE
               )
             )
+          ),
+          column(
+            width = 4,
+            textAreaInput(
+              inputId = "tool_description",
+              label = "Brief Tool Description",
+              placeholder = "Please describe the tool here.",
+              resize = "vertical"
+            )
           )
-        ),
-        textInput(
-          inputId = "tool_description",
-          label = "Brief Tool Description",
-          placeholder = "Please describe the tool here."
         ),
         h2("3. Inclusion Criteria"),
         #### ---- Accessibility ----
@@ -533,10 +556,11 @@ ui <- navbarPage(
         fluidRow(
           column(
             width = 4,
-            textInput(
+            textAreaInput(
               inputId = "327",
               label = "What type of data does the tool collect?",
               placeholder = "Please describe the types of data the tool collects here.",
+              resize = "vertical"
             )
           )
         ),
@@ -1035,26 +1059,11 @@ server <- function(input, output, session) {
   UARF_FONT <- "Work Sans"
   UARF_FONT_COLOUR <- "#212529"
   
-  
-  # When users want to add the number of countries, they must first type it,
-  # then add to the radioButton list
-  observeEvent(
-    input$add_number_of_countries, {
-      req(input$number_of_countries)
-      otherVal <- "other"
-      names(otherVal) <- input$number_of_countries
-      updatedValues <- c(
-        "Developed, no pilot test", "Pilot tested", "Pilot tested, limited use",
-        "Frequently used", otherVal
-      )
-      updateRadioButtons(session, "tool_history_of_use", choices = updatedValues)
-    }
-  )
-  
-  
   # First extract the scores of the categories. Since input$<input name> is first
   # initialized as NULL, this will break the structure of vectors, so we should
-  # convert NULL values to NA's.
+  # convert NULL values to NA's. Not the most elegant of ways to implement this
+  # however it is easier to read and reproduce should more questions be added in
+  # the future.
   reviewer_info <- reactive({
     return(c(
       ifelse(test = is.null(input$reviewer_names), yes = NA, no = input$reviewer_names),
@@ -1074,6 +1083,7 @@ server <- function(input, output, session) {
       ifelse(test = is.null(input$tool_platforms), yes = NA, no = input$tool_platforms),
       ifelse(test = is.null(input$tool_prerequisites), yes = NA, no = input$tool_prerequisites),
       ifelse(test = is.null(input$tool_history_of_use), yes = NA, no = input$tool_history_of_use),
+      ifelse(test = is.null(input$number_of_countries), yes = NA, no = input$number_of_countries),
       ifelse(test = is.null(input$tool_publishing), yes = NA, no = input$tool_publishing),
       ifelse(test = is.null(input$tool_languages), yes = NA, no = paste(input$tool_languages, collapse = "|")),
       ifelse(test = is.null(input$tool_description), yes = NA, no = input$tool_description)
@@ -1188,9 +1198,9 @@ server <- function(input, output, session) {
       "Reviewer_Names", "Reviewer_Titles_and_Affiliations", "Reviewer_Familiarity",
       "Tool_Name", "Tool_Types", "Tool_Objectives", "Tool_Source", "Tool_Version",
       "Tool_Point_of_Contact", "Tool_Availability", "Tool_Platforms", "Tool_Prerequisites",
-      "Tool_History_of_Use", "Tool_Publishing", "Tool_Languages", "Tool_Description",
-      paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7), paste0("Q34", 1:4),
-      paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
+      "Tool_History_of_Use", "Number_of_Countries","Tool_Publishing", "Tool_Languages",
+      "Tool_Description", paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7),
+      paste0("Q34", 1:4), paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
     )
     
     # Find the questions that have been filled out by the user
