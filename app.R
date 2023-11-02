@@ -1065,8 +1065,8 @@ server <- function(input, output, session) {
   tool_info <- reactive({
     return(c(
       ifelse(test = is.null(input$tool_name), yes = NA, no = input$tool_name),
-      ifelse(test = is.null(input$tool_types), yes = NA, no = input$tool_types),
-      ifelse(test = is.null(input$tool_objectives), yes = NA, no = input$tool_objectives),
+      ifelse(test = is.null(input$tool_types), yes = NA, no = paste(input$tool_types, collapse = "|")),
+      ifelse(test = is.null(input$tool_objectives), yes = NA, no = paste(input$tool_objectives, collapse = "|")),
       ifelse(test = is.null(input$tool_source), yes = NA, no = input$tool_source),
       ifelse(test = is.null(input$tool_version), yes = NA, no = input$tool_version),
       ifelse(test = is.null(input$tool_point_of_contact), yes = NA, no = input$tool_point_of_contact),
@@ -1075,7 +1075,7 @@ server <- function(input, output, session) {
       ifelse(test = is.null(input$tool_prerequisites), yes = NA, no = input$tool_prerequisites),
       ifelse(test = is.null(input$tool_history_of_use), yes = NA, no = input$tool_history_of_use),
       ifelse(test = is.null(input$tool_publishing), yes = NA, no = input$tool_publishing),
-      ifelse(test = is.null(input$tool_languages), yes = NA, no = input$tool_languages),
+      ifelse(test = is.null(input$tool_languages), yes = NA, no = paste(input$tool_languages, collapse = "|")),
       ifelse(test = is.null(input$tool_description), yes = NA, no = input$tool_description)
     ))
   })
