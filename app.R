@@ -358,7 +358,7 @@ ui <- navbarPage(
                 "4 - Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person)." = 2,
                 "5 - Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.)." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -371,7 +371,7 @@ ui <- navbarPage(
                 "2 - At least one digital platform (e.g. only mobile phones or only computers)." = 3,
                 "3 - Only paper-based." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -387,7 +387,7 @@ ui <- navbarPage(
                 "5 - No, and it wont be possible." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
         ),
@@ -402,7 +402,7 @@ ui <- navbarPage(
                 "2 - Yes, the tool needs to be purchased at a once-off cost." = 3,
                 "3 - Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription)." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -416,7 +416,7 @@ ui <- navbarPage(
                 "3 - The developer noted that equipment such as smartphones might need to be replaced often (more than once a year)." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -432,7 +432,7 @@ ui <- navbarPage(
                 "5 - No support available." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -453,7 +453,7 @@ ui <- navbarPage(
                 "4 - Continuous access to LTE/4g." = 2,
                 "5 - Requires continuous stable high speed internet (5g/9Mbps or greater)." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -467,7 +467,7 @@ ui <- navbarPage(
                 "3 - No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection." = 1,
                 "NA - Not applicable." =  NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -481,7 +481,7 @@ ui <- navbarPage(
                 "3 - No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -499,7 +499,7 @@ ui <- navbarPage(
                 "5 - No, this is currently not a feature of the tool." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -513,7 +513,7 @@ ui <- navbarPage(
                 "3 - No, this is currently not a feature of the tool." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -526,7 +526,7 @@ ui <- navbarPage(
                 "2 - No, this is currently not a feature of the tool." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
         ),
@@ -556,7 +556,7 @@ ui <- navbarPage(
                 "3 - No, validation must occur through a separate process" = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -570,7 +570,7 @@ ui <- navbarPage(
                 "3 - No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -582,7 +582,7 @@ ui <- navbarPage(
                 "1 - Yes." = 5,
                 "2 - No." = 1 # Make it so that suggested answers for questions 38, 39, and 40 are NA later
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -600,7 +600,7 @@ ui <- navbarPage(
                 "5 - No data outputs are available within the tool (i.e. a third party software is required to visualize data)." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -616,7 +616,7 @@ ui <- navbarPage(
                 "5 - More than 1 month." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -630,7 +630,7 @@ ui <- navbarPage(
                 "3 - Highly technical language." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -646,7 +646,7 @@ ui <- navbarPage(
                 "3 - No, the tool cannot display aggregate or linked data from multiple sectors." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -665,7 +665,7 @@ ui <- navbarPage(
                 "2 - Yes, the tool has basic functionality without developer input." = 3,
                 "3 - No, the tool cannot operate independently of the developer." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -679,7 +679,7 @@ ui <- navbarPage(
                 "3 - Data is manually entered into an electronic database (i.e. data manually entered from paper forms)." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -695,7 +695,7 @@ ui <- navbarPage(
                 "5 - The government cannot access the collected data" = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -711,7 +711,7 @@ ui <- navbarPage(
                 "3 - Data is not secured: data is collected on easily accessible devices or on paper forms." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -732,7 +732,7 @@ ui <- navbarPage(
                 "4 - Significant effort would be required to adapt the tool." = 2,
                 "5 - The tool is not adaptable to other health events/pathogens." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -744,7 +744,7 @@ ui <- navbarPage(
                 "1 - Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM." = 5,
                 "2 - No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -758,7 +758,7 @@ ui <- navbarPage(
                 "3 - Adaptation requires development fees and permission." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -774,7 +774,7 @@ ui <- navbarPage(
                 "3 - Unique output file formats are used, making it difficult for data to be easily incorporated into other systems." = 1,
                 "NA - Not applicable." = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -792,7 +792,7 @@ ui <- navbarPage(
                 "1 - No, the data collection is primarily based on universal language (e.g. numbers or pictures)." = 5,
                 "2 - Yes, the user must be able to read the relevant language to collect data" = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -805,7 +805,7 @@ ui <- navbarPage(
                 "2 - External training is possible but requires remote learning (e.g. shared screen/webinars)." = 3,
                 "3 - Face-to-face training of in-country facilitators is required." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -820,7 +820,7 @@ ui <- navbarPage(
                 "4 - No, but materials are being developed." = 2,
                 "5 - No." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -836,7 +836,7 @@ ui <- navbarPage(
                 "3 - Highly technical language." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -849,7 +849,7 @@ ui <- navbarPage(
                 "2 - Weeks (up to one month)." = 3,
                 "3 - One month or more." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -862,7 +862,7 @@ ui <- navbarPage(
                 "2 - No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended)." = 3,
                 "3 - Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -883,7 +883,7 @@ ui <- navbarPage(
                 "4 - No, the tool has just been launched (less than 1 year) in one country." = 2,
                 "5 - No, the tool has not yet been field tested." = 1
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -897,7 +897,7 @@ ui <- navbarPage(
                 "3 - No, the tool has not yet been field tested." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -911,7 +911,7 @@ ui <- navbarPage(
                 "3 - No." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         ),
@@ -927,7 +927,7 @@ ui <- navbarPage(
                 "3 - 3 - No, the tool has always required additional external support to be effectively implemented." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           ),
           column(
@@ -941,7 +941,7 @@ ui <- navbarPage(
                 "3 - No." = 1,
                 "NA - Not applicable" = NA
               ),
-              selected = 0
+              selected = character(0)
             )
           )
         )
@@ -1052,27 +1052,99 @@ server <- function(input, output, session) {
   )
   
   
-  # First extract the scores of the categories
-  accessibility_points <- reactive({c(
-    input$Q311, input$Q312, input$Q313, input$Q314, input$Q315, input$Q316)
+  # First extract the scores of the categories. Since input$<input name> is first
+  # initialized as NULL, this will break the structure of vectors, so we should
+  # convert NULL values to NA's.
+  reviewer_info <- reactive({
+    return(c(
+      ifelse(test = is.null(input$reviewer_names), yes = NA, no = input$reviewer_names),
+      ifelse(test = is.null(input$reviewer_titles_and_affiliations), yes = NA, no = input$reviewer_titles_and_affiliations),
+      ifelse(test = is.null(input$reviewer_familiarity), yes = NA, no = input$reviewer_familiarity)
+    ))
+  })
+  tool_info <- reactive({
+    return(c(
+      ifelse(test = is.null(input$tool_name), yes = NA, no = input$tool_name),
+      ifelse(test = is.null(input$tool_types), yes = NA, no = input$tool_types),
+      ifelse(test = is.null(input$tool_objectives), yes = NA, no = input$tool_objectives),
+      ifelse(test = is.null(input$tool_source), yes = NA, no = input$tool_source),
+      ifelse(test = is.null(input$tool_version), yes = NA, no = input$tool_version),
+      ifelse(test = is.null(input$tool_point_of_contact), yes = NA, no = input$tool_point_of_contact),
+      ifelse(test = is.null(input$tool_availability), yes = NA, no = input$tool_availability),
+      ifelse(test = is.null(input$tool_platforms), yes = NA, no = input$tool_platforms),
+      ifelse(test = is.null(input$tool_prerequisites), yes = NA, no = input$tool_prerequisites),
+      ifelse(test = is.null(input$tool_history_of_use), yes = NA, no = input$tool_history_of_use),
+      ifelse(test = is.null(input$tool_publishing), yes = NA, no = input$tool_publishing),
+      ifelse(test = is.null(input$tool_languages), yes = NA, no = input$tool_languages),
+      ifelse(test = is.null(input$tool_description), yes = NA, no = input$tool_description)
+    ))
+  })
+  accessibility_points <- reactive({
+    return(c(
+      ifelse(test = is.null(input$Q311), yes = NA, no = input$Q311),
+      ifelse(test = is.null(input$Q312), yes = NA, no = input$Q312),
+      ifelse(test = is.null(input$Q313), yes = NA, no = input$Q313),
+      ifelse(test = is.null(input$Q314), yes = NA, no = input$Q314),
+      ifelse(test = is.null(input$Q315), yes = NA, no = input$Q315),
+      ifelse(test = is.null(input$Q316), yes = NA, no = input$Q316)
+    ))
   })
   data_collection_points <- reactive({
-    c(input$Q321, input$Q322, input$Q323, input$Q324, input$Q325, input$Q326, input$Q327)
+    return(c(
+      ifelse(test = is.null(input$Q321), yes = NA, no = input$Q321),
+      ifelse(test = is.null(input$Q322), yes = NA, no = input$Q322),
+      ifelse(test = is.null(input$Q323), yes = NA, no = input$Q323),
+      ifelse(test = is.null(input$Q324), yes = NA, no = input$Q324),
+      ifelse(test = is.null(input$Q325), yes = NA, no = input$Q325),
+      ifelse(test = is.null(input$Q326), yes = NA, no = input$Q326),
+      ifelse(test = is.null(input$Q327), yes = NA, no = input$Q327)
+    ))
   })
   data_management_points <- reactive({
-    c(input$Q331, input$Q332, input$Q333, input$Q334, input$Q335, input$Q336, input$Q337)
+    return(c(
+      ifelse(test = is.null(input$Q331), yes = NA, no = input$Q331),
+      ifelse(test = is.null(input$Q332), yes = NA, no = input$Q332),
+      ifelse(test = is.null(input$Q333), yes = NA, no = input$Q333),
+      ifelse(test = is.null(input$Q334), yes = NA, no = input$Q334),
+      ifelse(test = is.null(input$Q335), yes = NA, no = input$Q335),
+      ifelse(test = is.null(input$Q336), yes = NA, no = input$Q336),
+      ifelse(test = is.null(input$Q337), yes = NA, no = input$Q337)
+    ))
   })
   data_storage_points <- reactive({
-    c(input$Q341, input$Q342, input$Q343, input$Q344)
+    return(c(
+      ifelse(test = is.null(input$Q341), yes = NA, no = input$Q341),
+      ifelse(test = is.null(input$Q342), yes = NA, no = input$Q342),
+      ifelse(test = is.null(input$Q343), yes = NA, no = input$Q343),
+      ifelse(test = is.null(input$Q344), yes = NA, no = input$Q344)
+    ))
   })
   flexibility_points <- reactive({
-    c(input$Q351, input$Q352, input$Q353, input$Q354)
+    return(c(
+      ifelse(test = is.null(input$Q351), yes = NA, no = input$Q351),
+      ifelse(test = is.null(input$Q352), yes = NA, no = input$Q352),
+      ifelse(test = is.null(input$Q353), yes = NA, no = input$Q353),
+      ifelse(test = is.null(input$Q354), yes = NA, no = input$Q354)
+    ))
   })
   ease_of_use_points <- reactive({
-    c(input$Q361, input$Q362, input$Q363, input$Q364, input$Q365, input$Q366)
+    return(c(
+      ifelse(test = is.null(input$Q361), yes = NA, no = input$Q361),
+      ifelse(test = is.null(input$Q362), yes = NA, no = input$Q362),
+      ifelse(test = is.null(input$Q363), yes = NA, no = input$Q363),
+      ifelse(test = is.null(input$Q364), yes = NA, no = input$Q364),
+      ifelse(test = is.null(input$Q365), yes = NA, no = input$Q365),
+      ifelse(test = is.null(input$Q366), yes = NA, no = input$Q366)
+    ))
   })
   sustainability_points <- reactive({
-    c(input$Q371, input$Q372, input$Q373, input$Q374, input$Q375)
+    return(c(
+      ifelse(test = is.null(input$Q371), yes = NA, no = input$Q371),
+      ifelse(test = is.null(input$Q372), yes = NA, no = input$Q372),
+      ifelse(test = is.null(input$Q373), yes = NA, no = input$Q373),
+      ifelse(test = is.null(input$Q374), yes = NA, no = input$Q374),
+      ifelse(test = is.null(input$Q375), yes = NA, no = input$Q375)
+    ))
   })
   
   scores <- reactive({
@@ -1113,30 +1185,25 @@ server <- function(input, output, session) {
     # Vector with all question numbers. These need to be hard-coded since if not
     # all categories have been answered, then NULL values will break the formatting.
     questions <- c(
+      "Reviewer_Names", "Reviewer_Titles_and_Affiliations", "Reviewer_Familiarity",
+      "Tool_Name", "Tool_Types", "Tool_Objectives", "Tool_Source", "Tool_Version",
+      "Tool_Point_of_Contact", "Tool_Availability", "Tool_Platforms", "Tool_Prerequisites",
+      "Tool_History_of_Use", "Tool_Publishing", "Tool_Languages", "Tool_Description",
       paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7), paste0("Q34", 1:4),
       paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
     )
     
     # Find the questions that have been filled out by the user
-    answers_filled <- data.frame(
+    answers <- data.frame(
       "Questions" = questions,
       "Answers" = c(
-        accessibility_points(), data_collection_points(), data_management_points(),
-        data_storage_points(), flexibility_points(), ease_of_use_points(),
-        sustainability_points()
+        reviewer_info(), tool_info(), accessibility_points(), data_collection_points(),
+        data_management_points(), data_storage_points(), flexibility_points(),
+        ease_of_use_points(), sustainability_points()
       )
     )
-    
-    # Initialize (assume) all questions have not been filled. Find which answers
-    # were filled then add them to the "answers" data frame, appending a preceding
-    # column of question numbers.
-    answers <- rep(x = NA, times = length(questions))
-    answers[match(answers_filled$Questions, questions)] <- answers_filled$Answers
-    answers <- data.frame("Questions" = questions, "Answers" = answers)
     return(answers)
   })
-  
-  reactive({print(questionnaire_answers())})
   
   # Results figure logic
   barPlot <- reactive({
