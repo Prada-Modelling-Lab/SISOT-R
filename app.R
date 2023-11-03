@@ -419,7 +419,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q314",
-              label = "Does the tool need to be purchased (e.g. purchasing an app or tool-specific equipment)?",
+              label = tags$span(
+                "Does the tool need to be purchased (e.g. purchasing an app or tool-specific equipment)?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "This does NOT include the purchase of a mobile phone in the case of using a mobile phone app."
+                )
+              ),
               choices = list(
                 "1 - No, it's free to access." = 5,
                 "2 - Yes, the tool needs to be purchased at a once-off cost." = 3,
@@ -446,7 +453,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q316",
-              label = "Can the developer offer support?",
+              label = tags$span(
+                "Can the developer offer support?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Support: Technical assistance or guidance."
+                )
+              ),
               choices = list(
                 "1 - Free comprehensive support" = 5,
                 "2 - Comprehensive support at a cost, limited support for free." = 4,
@@ -513,7 +527,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons( # Future task: Make the label points on new lines
               inputId = "Q324",
-              label = "If this is a case detection tool: does it have an IBCM component based on active rabies surveillance LINKING data together about the:\n1) Suspect animal,\n2) Exposed human\n3) Laboratory results,\n4) Quarantine data.",
+              label = tags$span(
+                "If this is a case detection tool: does it have an IBCM component based on active rabies surveillance LINKING data together about the:\n1) Suspect animal,\n2) Exposed human\n3) Laboratory results,\n4) Quarantine data.", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "IBCM: Integrated Bite Case Management."
+                )
+              ),
               choices = list(
                 "1 - Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, and data is EASILY LINKED within the tool." = 5,
                 "2- Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, but data is NOT EASILY LINKABLE within the tool." = 4,
@@ -529,7 +550,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q325",
-              label = "Does the tool send notifications to the user?",
+              label = tags$span(
+                "Does the tool send notifications to the user?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Notifications: Include Emails, Text messages (SMS) and in-app alerts. A forum does not constitute notifications unless push alerts are sent through to the user."
+                )
+              ),
               choices = list(
                 "1 - Yes, various communication channels are available." = 5,
                 "2 - Yes, one communication channel is available." = 3,
@@ -573,7 +601,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q331",
-              label = "Does this tool have the capacity to automatically detect anomalies in the data and notify the user? (If this requires human validation/review [manual] then it is not relevant to the tool)",
+              label = tags$span(
+                "Does this tool have the capacity to automatically detect anomalies in the data and notify the user? (If this requires human validation/review [manual] then it is not relevant to the tool)", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Detecting anomalies: the process whereby the system verifies data are both correct and interpretable."
+                )
+              ),
               choices = list(
                 "1 - Yes, validation occurs real-time within the same tool without needing internet connection." = 5,
                 "2 - Yes, validation is automated, but occurs post-data collection once an internet connection is available." = 3,
@@ -587,7 +622,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q332",
-              label = "Does the tool have the capacity to analyze data?",
+              label = tags$span(
+                "Does the tool have the capacity to analyze data?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Data Analysis: The process of systematically applying statistical and/or logical techniques to describe and illustrate, condense and recap, and evaluate data."
+                )
+              ),
               choices = list(
                 "1 - Yes, comprehensive data analysis is incorporated into the tool." = 5,
                 "2 - Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis." = 3,
@@ -663,7 +705,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q337",
-              label = "Do the outputs of the tool inform all relevant One Health sectors (human, animal, environment health)?",
+              label = tags$span(
+                "Do the outputs of the tool inform all relevant One Health sectors (human, animal, environment health)?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "One Health recognizes that the health of people is connected to the health of animals and the environment. It is a collaborative, multisectoral, and transdisciplinary approach — working at the local, regional, national, and global levels — with the goal of achieving optimal health outcomes recognizing the interconnection between people, animals, plants, and their shared environment."
+                )
+              ),
               choices = list(
                 "1 - Yes, the tool can display aggregate or linked data from multiple sectors." = 5,
                 "2 - Yes, aggregated data can be displayed, but additional steps/user inputs are required." = 3,
@@ -775,7 +824,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q353",
-              label = "What is required to adapt the tool?",
+              label = tags$span(
+                "What is required to adapt the tool?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Adapt: To make any changes to the tool, including customizing the tool for use in a specific country."
+                )
+              ),
               choices = list(
                 "1 - No costs or permissions associated with adapting the tool." = 5,
                 "2 - Adaptation requires developer permission, but is generally NOT associated with fees." = 3,
@@ -867,7 +923,14 @@ ui <- navbarPage(
             width = 4,
             radioButtons(
               inputId = "Q365",
-              label = "How much time does it take to become proficient with the tool?",
+              label = tags$span(
+                "How much time does it take to become proficient with the tool?", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Proficient: Users are skilled and competent in the use of the tool."
+                )
+              ),
               choices = list(
                 "1 - Days (up to a week)." = 5,
                 "2 - Weeks (up to one month)." = 3,
