@@ -444,7 +444,7 @@ ui <- navbarPage(
                 "1 - No noteworthy equipment running costs." = 5,
                 "2 - Equipment might need to be replaced sporadically (less than once a year)." = 3,
                 "3 - The developer noted that equipment such as smartphones might need to be replaced often (more than once a year)." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -467,7 +467,7 @@ ui <- navbarPage(
                 "3 - Free limited support, comprehensive support not available." = 3,
                 "4 - Limited support at a cost." = 2,
                 "5 - No support available." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -914,7 +914,7 @@ ui <- navbarPage(
                 "1 - Very easy for all readers to understand." = 5,
                 "2 - Some technical language." = 3,
                 "3 - Highly technical language." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -1222,33 +1222,33 @@ server <- function(input, output, session) {
   
   scores <- reactive({
     # Find the number of questions in each category that aren't NA responses
-    eliblble_categories <- unlist(lapply(
+    eligible_categories <- unlist(lapply(
       X = list(
-        accessibility_points(), data_collection_points(), data_management_points(),
+        accessibility_points(), data_collection_points()[1:6], data_management_points(),
         data_storage_points(), flexibility_points(), ease_of_use_points(),
         sustainability_points()
       ),
       FUN = function(category){
-        return(sum(!is.na(category)))
+        return(sum(!is.na(as.numeric(category))))
       }
     ))
     
     # The total number of points you can score is 5 x the number of non-NA
     # responses to questions
-    total_point_values <- 5 * eliblble_categories
+    total_point_values <- 5 * eligible_categories
     
     # Find the weighted scores of each category; defined by the sum of scores
     # divided by the total point values
     category_scores <- 10*c(
       sum(as.numeric(accessibility_points()), na.rm = TRUE),
-      sum(as.numeric(data_collection_points()), na.rm = TRUE),
+      sum(as.numeric(data_collection_points()[1:6]), na.rm = TRUE),
       sum(as.numeric(data_management_points()), na.rm = TRUE),
       sum(as.numeric(data_storage_points()), na.rm = TRUE),
       sum(as.numeric(flexibility_points()), na.rm = TRUE),
       sum(as.numeric(ease_of_use_points()), na.rm = TRUE),
       sum(as.numeric(sustainability_points()), na.rm = TRUE)
     )/total_point_values
-    
+
     return(category_scores)
   })
   
