@@ -41,7 +41,10 @@ ui <- navbarPage(
       background-color: #ededed !important;
     }
     
-    p {text-align: justify;}
+    p {
+      text-align: justify;
+      color: #575756;
+    }
     
     /* Change the headings to have UARF branding */
     h1 {color: #1a3146;}
