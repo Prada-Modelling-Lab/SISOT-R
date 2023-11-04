@@ -185,6 +185,7 @@ ui <- navbarPage(
         h2("Upload Answers"),
         p("Tortor at auctor urna nunc id cursus metus aliquam. Nisl condimentum id venenatis a condimentum. Pellentesque dignissim enim sit amet venenatis urna. Amet volutpat consequat mauris nunc congue nisi vitae. Vel pretium lectus quam id leo in vitae turpis. Libero nunc consequat interdum varius sit amet mattis vulputate. Ipsum nunc aliquet bibendum enim facilisis gravida. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Elementum nisi quis eleifend quam adipiscing vitae proin. Nam at lectus urna duis."),
         fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
+        tableOutput("uploadedQuestionnaire"),
         
         #### ---- Reviewer Information ----
         h2("1. Reviewer Information"),
@@ -1122,6 +1123,30 @@ server <- function(input, output, session) {
   UARF_FONT <- "Work Sans"
   UARF_FONT_COLOUR <- "#212529"
   
+  # Vector with all question numbers. These need to be hard-coded since if not
+  # all categories have been answered, then NULL values will break formatting.
+  questions <- c(
+    "Reviewer_Names", "Reviewer_Titles_and_Affiliations", "Reviewer_Familiarity",
+    "Tool_Name", "Tool_Types", "Tool_Objectives", "Tool_Source", "Tool_Version",
+    "Tool_Point_of_Contact", "Tool_Availability", "Tool_Platforms", "Tool_Prerequisites",
+    "Tool_History_of_Use", "Number_of_Countries","Tool_Publishing", "Tool_Languages",
+    "Tool_Description", paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7),
+    paste0("Q34", 1:4), paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
+  )
+  
+  output$uploadedQuestionnaire <- renderTable(
+    {
+      file_location <- input$uploadFile$datapath
+      if(is.null(file_location)){return()}
+      in_file <- read.csv(file_location)
+    },
+    rownames = TRUE,
+    colnames = TRUE,
+    striped = TRUE,
+    hover = TRUE,
+    bordered = TRUE
+  )
+  
   # First extract the scores of the categories. Since input$<input name> is first
   # initialized as NULL, this will break the structure of vectors, so we should
   # convert NULL values to NA's. Not the most elegant of ways to implement this
@@ -1254,18 +1279,6 @@ server <- function(input, output, session) {
   
   # Questionnaire Logic Answers
   questionnaire_answers <- reactive({
-    
-    # Vector with all question numbers. These need to be hard-coded since if not
-    # all categories have been answered, then NULL values will break the formatting.
-    questions <- c(
-      "Reviewer_Names", "Reviewer_Titles_and_Affiliations", "Reviewer_Familiarity",
-      "Tool_Name", "Tool_Types", "Tool_Objectives", "Tool_Source", "Tool_Version",
-      "Tool_Point_of_Contact", "Tool_Availability", "Tool_Platforms", "Tool_Prerequisites",
-      "Tool_History_of_Use", "Number_of_Countries","Tool_Publishing", "Tool_Languages",
-      "Tool_Description", paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7),
-      paste0("Q34", 1:4), paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
-    )
-    
     # Find the questions that have been filled out by the user
     answers <- data.frame(
       "Questions" = questions,
@@ -1339,7 +1352,14 @@ server <- function(input, output, session) {
       temp_report <- file.path(tempdir(), "SISOT-R_Report.pdf")
       file.copy("report_template.rmd", temp_report, overwrite = TRUE)
       # Knit the document, and eval it in the current environment
-      rmarkdown::render(temp_report, output_file = file)
+      rmarkdown::render(
+        temp_report,
+        params = list(
+          results_plot = barPlot(),
+          q_ans = questionnaire_answers()
+        ),
+        output_file = file
+      )
     }
   )
   output$downloadAnswers <- downloadHandler(
