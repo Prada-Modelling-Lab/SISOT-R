@@ -188,7 +188,7 @@ ui <- navbarPage(
         h2("Upload Answers"),
         p("Tortor at auctor urna nunc id cursus metus aliquam. Nisl condimentum id venenatis a condimentum. Pellentesque dignissim enim sit amet venenatis urna. Amet volutpat consequat mauris nunc congue nisi vitae. Vel pretium lectus quam id leo in vitae turpis. Libero nunc consequat interdum varius sit amet mattis vulputate. Ipsum nunc aliquet bibendum enim facilisis gravida. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Elementum nisi quis eleifend quam adipiscing vitae proin. Nam at lectus urna duis."),
         fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
-        tableOutput("uploadedQuestionnaire"),
+        tableOutput("viewUploadedQuestionnaire"),
         
         #### ---- Reviewer Information ----
         h2("1. Reviewer Information"),
@@ -1144,12 +1144,14 @@ server <- function(input, output, session) {
     paste0("Q34", 1:4), paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
   )
   
-  output$uploadedQuestionnaire <- renderTable(
-    {
-      file_location <- input$uploadFile$datapath
-      if(is.null(file_location)){return()}
-      in_file <- read.csv(file_location)
-    },
+  uploadedQuestionnaire <- reactive({
+    file_location <- input$uploadFile$datapath
+    if(is.null(file_location)){return()}
+    in_file <- read.csv(file_location)
+  })
+  
+  output$viewUploadedQuestionnaire <- renderTable(
+    {uploadedQuestionnaire()},
     rownames = TRUE,
     colnames = TRUE,
     striped = TRUE,
