@@ -238,8 +238,15 @@ ui <- navbarPage(
             width = 4,
             checkboxGroupInput(
               inputId = "tool_types",
-              label = "Type(s) of Tool:",
-              choices = c("Prioritization", "Assessment", "Planning", "Implementation", "Evaluation"),
+              label = tags$span(
+                "Type(s) of Tool:", 
+                tags$i(
+                  class = "glyphicon glyphicon-info-sign", 
+                  style = "color: #1a3146;",
+                  title = "Prioritization: The process of deciding the relative importance of preventing, controlling, or eliminating rabies from among a list of zoonotic diseases that are of national concern. The outcomes of prioritization include a list of zoonotic diseases of greatest concern for human, animal and environmental health to be jointly addressed using a multisectoral, One Health approach. This process can be repeated based on agreement by the relevant sectors.\n\nAssessment: The process of determining and addressing needs or 'gaps' between the current and desired situation as it relates to health and health infrastructure.\n\nPlans: Operational or action-oriented descriptions of activities to be undertaken, often based on an overarching strategy. The outcomes of the planning are realistic and actionable plans, protocols and procedures that maximize the rabies elimination efforts.\n\nImplementation: The process of carrying out, executing, or practicing actions defined during the planning stage. To meet the implementation objectives, planned activities will be executed by the participating sectors. Some activities may be the individual action of multiple sectors who are working towards a common goal. Other activities may be joint or multisectoral actions, executed to achieve a common goal.\n\nMonitoring: A continuous function to inform management and the main stakeholders of progress achieved against planned results (outputs, outcome and objectives). Evaluation assesses the efficiency, effectiveness, relevance, impact, and sustainability of a programme. The monitoring and evaluation of the performances of planned activities against a set of indicators (process, output and outcome) allows one to assess whether the activity is achieving its aims and objectives."
+                )
+              ),
+              choices = c("Prioritization", "Assessment", "Planning", "Implementation", "Evaluation", "Education"),
             )
           ),
           column(
@@ -247,7 +254,7 @@ ui <- navbarPage(
             checkboxGroupInput(
               inputId = "tool_objectives",
               label = "Objective(s):",
-              choices = c("Data Collection", "Translation", "Validation", "Analysis", "Reporting"),
+              choices = c("Data Collection", "Translation", "Validation", "Analysis", "Reporting", "Education"),
             )
           ),
         ),
