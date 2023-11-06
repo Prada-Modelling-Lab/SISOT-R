@@ -188,7 +188,6 @@ ui <- navbarPage(
         h2("Upload Answers"),
         p("Tortor at auctor urna nunc id cursus metus aliquam. Nisl condimentum id venenatis a condimentum. Pellentesque dignissim enim sit amet venenatis urna. Amet volutpat consequat mauris nunc congue nisi vitae. Vel pretium lectus quam id leo in vitae turpis. Libero nunc consequat interdum varius sit amet mattis vulputate. Ipsum nunc aliquet bibendum enim facilisis gravida. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Elementum nisi quis eleifend quam adipiscing vitae proin. Nam at lectus urna duis."),
         fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
-        tableOutput("viewUploadedQuestionnaire"),
         
         #### ---- Reviewer Information ----
         h2("1. Reviewer Information"),
@@ -354,13 +353,19 @@ ui <- navbarPage(
               choices = c(
                 "English", "Mandarin Chinese", "Hindi", "Spanish", "French",
                 "Modern Standard Arabic", "Bengali", "Portuguese", "Russian",
-                "Urdu", "Indonesian", "German", "Japanese"
+                "Urdu", "Indonesian", "German", "Japanese", "Nigerial Pidgin",
+                "Egyptian Arabic", "Marathi", "Telugu", "Turkish", "Tamil",
+                "Yue Chinese", "Vietnamese", "Wu Chinese", "Tagalog", "Korean",
+                "Iranian Persian", "Hausa", "Swahili", "Javanese", "Italian",
+                "Western Punjabi", "Gujarati", "Thai", "Kannada", "Amharic",
+                "Bhojpuri", "Eastern Punjabi", "Min Nan Chinese", "Jin Chinese",
+                "Levantine Arabic", "Other"
               ),
               selected = NULL,
               multiple = TRUE,
               options = list(
                 "plugins" = list("remove_button"),
-                "create" = TRUE,
+                "create" = FALSE,
                 "persist" = TRUE
               )
             )
@@ -419,7 +424,7 @@ ui <- navbarPage(
                 "3 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems." = 3,
                 "4 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned." = 2,
                 "5 - No, and it wont be possible." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -527,7 +532,7 @@ ui <- navbarPage(
                 "1 - Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards." = 5,
                 "2 - Yes, limited data is collected for human cases." = 3,
                 "3 - No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -552,7 +557,7 @@ ui <- navbarPage(
                 "3 - Yes, but not all data elements are represented." = 3,
                 "4 - IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible." = 2,
                 "5 - No, this is currently not a feature of the tool." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -573,7 +578,7 @@ ui <- navbarPage(
                 "1 - Yes, various communication channels are available." = 5,
                 "2 - Yes, one communication channel is available." = 3,
                 "3 - No, this is currently not a feature of the tool." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -586,7 +591,7 @@ ui <- navbarPage(
               choices = list(
                 "1 - Yes, the tool allows for program managers to push out messages and allows users to reply." = 5,
                 "2 - No, this is currently not a feature of the tool." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -596,7 +601,7 @@ ui <- navbarPage(
           column(
             width = 4,
             textAreaInput(
-              inputId = "327",
+              inputId = "Q327",
               label = "What type of data does the tool collect?",
               placeholder = "Please describe the types of data the tool collects here.",
               resize = "vertical"
@@ -624,7 +629,7 @@ ui <- navbarPage(
                 "1 - Yes, validation occurs real-time within the same tool without needing internet connection." = 5,
                 "2 - Yes, validation is automated, but occurs post-data collection once an internet connection is available." = 3,
                 "3 - No, validation must occur through a separate process" = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -645,7 +650,7 @@ ui <- navbarPage(
                 "1 - Yes, comprehensive data analysis is incorporated into the tool." = 5,
                 "2 - Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis." = 3,
                 "3 - No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -675,7 +680,7 @@ ui <- navbarPage(
                 "3 - Two of the four data outputs are available." = 3,
                 "4 - One of the four data outputs are available." = 2,
                 "5 - No data outputs are available within the tool (i.e. a third party software is required to visualize data)." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -691,7 +696,7 @@ ui <- navbarPage(
                 "3 - Within 1 week." = 3,
                 "4 - Within 1 month." = 2,
                 "5 - More than 1 month." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -705,7 +710,7 @@ ui <- navbarPage(
                 "1 - Very easy for all readers to understand." = 5,
                 "2 - Some technical language." = 3,
                 "3 - Highly technical language." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -728,7 +733,7 @@ ui <- navbarPage(
                 "1 - Yes, the tool can display aggregate or linked data from multiple sectors." = 5,
                 "2 - Yes, aggregated data can be displayed, but additional steps/user inputs are required." = 3,
                 "3 - No, the tool cannot display aggregate or linked data from multiple sectors." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -761,7 +766,7 @@ ui <- navbarPage(
                 "1 - Data is uploaded automatically once internet connection is available (either during data collection or at a later time point)." = 5,
                 "2 - Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer)." = 3,
                 "3 - Data is manually entered into an electronic database (i.e. data manually entered from paper forms)." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -777,7 +782,7 @@ ui <- navbarPage(
                 "3 - The non-governmental stakeholders own the data. The government can use it without prior consent." = 3,
                 "4 - The non-governmental stakeholders own the data. The government must request permission to use it" = 2,
                 "5 - The government cannot access the collected data" = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -793,7 +798,7 @@ ui <- navbarPage(
                 "1 - Data is fully secured: data collected on password protected devices and stored on secured servers or other secured data repository;" = 5,
                 "2 - Data security features exist, but could be improved." = 3,
                 "3 - Data is not secured: data is collected on easily accessible devices or on paper forms." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -847,7 +852,7 @@ ui <- navbarPage(
                 "1 - No costs or permissions associated with adapting the tool." = 5,
                 "2 - Adaptation requires developer permission, but is generally NOT associated with fees." = 3,
                 "3 - Adaptation requires development fees and permission." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -863,7 +868,7 @@ ui <- navbarPage(
                 "1 - Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used." = 5,
                 "2 - Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO)." = 3,
                 "3 - Unique output file formats are used, making it difficult for data to be easily incorporated into other systems." = 1,
-                "NA - Not applicable." = NA
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -993,7 +998,7 @@ ui <- navbarPage(
                 "1 - Yes, the tool has supported the development of project plans and strategies in multiple countries." = 5,
                 "2 - Yes, the tool has supported the development of project plans and strategies in one country." = 3,
                 "3 - No, the tool has not yet been field tested." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -1007,7 +1012,7 @@ ui <- navbarPage(
                 "1 - Yes, in more than one country." = 5,
                 "2 - Yes, in one country." = 3,
                 "3 - No." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -1023,7 +1028,7 @@ ui <- navbarPage(
                 "1 - Yes, in more than one country." = 5,
                 "2 - Yes, in one country." = 3,
                 "3 - 3 - No, the tool has always required additional external support to be effectively implemented." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -1037,7 +1042,7 @@ ui <- navbarPage(
                 "1 - Yes, in more than one country." = 5,
                 "2 - Yes, in one country." = 3,
                 "3 - No." = 1,
-                "NA - Not applicable" = NA
+                "NA - Not applicable" = 0
               ),
               selected = character(0)
             )
@@ -1136,28 +1141,107 @@ server <- function(input, output, session) {
   # Vector with all question numbers. These need to be hard-coded since if not
   # all categories have been answered, then NULL values will break formatting.
   questions <- c(
-    "Reviewer_Names", "Reviewer_Titles_and_Affiliations", "Reviewer_Familiarity",
-    "Tool_Name", "Tool_Types", "Tool_Objectives", "Tool_Source", "Tool_Version",
-    "Tool_Point_of_Contact", "Tool_Availability", "Tool_Platforms", "Tool_Prerequisites",
-    "Tool_History_of_Use", "Number_of_Countries","Tool_Publishing", "Tool_Languages",
-    "Tool_Description", paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7),
+    "Reviewer Names", "Reviewer Titles and Affiliations", "Reviewer Familiarity",
+    "Tool Name", "Tool_Types", "Tool Objectives", "Tool Source", "Tool Version",
+    "Tool Point of Contact", "Tool Availability", "Tool Platforms", "Tool Prerequisites",
+    "Tool History of Use", "Number of Countries", "Tool Publishing", "Tool Languages",
+    "Tool Description", paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7),
+    paste0("Q34", 1:4), paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
+  )
+  inputIDs_all <- c(
+    "reviewer_names", "reviewer_titles_and_affiliations", "reviewer_familiarity",
+    "tool_name", "tool_types", "tool_objectives", "tool_source", "tool_version",
+    "tool_point_of_contact", "tool_availability", "tool_platforms", "tool_prerequisites",
+    "tool_history_of_use", "number_of_countries", "tool_publishing", "tool_languages",
+    "tool_description", paste0("Q31", 1:6), paste0("Q32", 1:7), paste0("Q33", 1:7),
     paste0("Q34", 1:4), paste0("Q35", 1:4), paste0("Q36", 1:6), paste0("Q37", 1:5)
   )
   
+  # Read in a CSV questionnaire.
   uploadedQuestionnaire <- reactive({
     file_location <- input$uploadFile$datapath
     if(is.null(file_location)){return()}
     in_file <- read.csv(file_location)
+    return(in_file)
   })
   
-  output$viewUploadedQuestionnaire <- renderTable(
-    {uploadedQuestionnaire()},
-    rownames = TRUE,
-    colnames = TRUE,
-    striped = TRUE,
-    hover = TRUE,
-    bordered = TRUE
-  )
+  # Select choices made in the uploaded questionnaire file.
+  observeEvent(input$uploadFile, {
+    req(input$uploadFile)
+    
+    # Answers to textAreaInput inputs that have textual answers e.g. reviewer names
+    uploadedTextAreaInputValues <- c(1:4, 7:10, 12, 15, 17, 30)
+    
+    # Answers to numericInput inputs that have numeric answers e.g. number of countries
+    uploadedNumericInputValues <- c(14)
+    
+    # Answers to checkboxGroupInputValue questions that have multiple selected answers e.g. tool types
+    uploadedCheckboxGroupInputValues <- c(5, 6)
+    
+    # Answers to questions using the selectizeInput inputs, e.g. tool languages.
+    uploadedSelectizeInputValues <- c(16)
+    
+    # Answers to radioButton inputs that have numeric answers e.g. main tool questions.
+    uploadedNumericRadioValues <- c(18:29, 31:56)
+    
+    # Update textAreaInput choices with those from the uploaded file
+    for(i in uploadedTextAreaInputValues){
+      text_to_insert <- uploadedQuestionnaire()$Answers[i]
+      inputID_of_question <- inputIDs_all[i]
+      updateTextAreaInput(
+        session,
+        inputId = inputID_of_question,
+        value = text_to_insert
+      )
+    }
+    
+    # Update numericInput choices with those from the uploaded file
+    for(i in uploadedNumericInputValues){
+      value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
+      inputID_of_question <- inputIDs_all[i]
+      updateNumericInput(
+        session,
+        inputId = inputID_of_question,
+        value = value_to_select
+      )
+    }
+    
+    # Update checkboxGroupInput choices with those from the uploaded file
+    for(i in uploadedCheckboxGroupInputValues){
+      values_to_select <- unlist(strsplit(
+        x = uploadedQuestionnaire()$Answers[i], split = "|", fixed = TRUE
+      ))
+      inputID_of_question <- inputIDs_all[i]
+      updateCheckboxGroupInput(
+        session,
+        inputId = inputID_of_question,
+        selected = values_to_select
+      )
+    }
+    
+    # Update selectizeInput choices with those from the uploaded file
+    for(i in uploadedSelectizeInputValues){
+      values_to_select <- unlist(strsplit(
+        x = uploadedQuestionnaire()$Answers[i], split = "|", fixed = TRUE
+      ))
+      inputID_of_question <- inputIDs_all[i]
+      updateSelectizeInput(
+        session,
+        inputId = inputID_of_question,
+        selected = values_to_select
+      )
+    }    
+    # Update radioButton choices with those from the uploaded file
+    for(i in uploadedNumericRadioValues){
+      value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
+      inputID_of_question <- inputIDs_all[i]
+      updateRadioButtons(
+        session,
+        inputId = inputID_of_question,
+        selected = value_to_select
+      )
+    }
+  })
   
   # First extract the scores of the categories. Since input$<input name> is first
   # initialized as NULL, this will break the structure of vectors, so we should
@@ -1266,7 +1350,7 @@ server <- function(input, output, session) {
         sustainability_points()
       ),
       FUN = function(category){
-        return(sum(!is.na(as.numeric(category))))
+        return(sum(!is.na(as.numeric(category)) & as.numeric(category) > 0))
       }
     ))
     
