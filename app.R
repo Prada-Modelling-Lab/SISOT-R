@@ -1166,7 +1166,8 @@ server <- function(input, output, session) {
   })
   
   # Select choices made in the uploaded questionnaire file.
-  observeEvent(input$uploadFile, {
+  observeEvent(
+    input$uploadFile, {
     req(input$uploadFile)
     
     # Answers to textAreaInput inputs that have textual answers e.g. reviewer names
@@ -1183,6 +1184,9 @@ server <- function(input, output, session) {
     
     # Answers to radioButton inputs that have numeric answers e.g. main tool questions.
     uploadedNumericRadioValues <- c(18:29, 31:56)
+    
+    # Answers to radioButton inputs that have text answers e.g. tool platforms.
+    uploadedTextRadioValues <- c(11, 13)
     
     # Update textAreaInput choices with those from the uploaded file
     for(i in uploadedTextAreaInputValues){
@@ -1230,10 +1234,22 @@ server <- function(input, output, session) {
         inputId = inputID_of_question,
         selected = values_to_select
       )
-    }    
-    # Update radioButton choices with those from the uploaded file
+    }
+    
+    # Update radioButton numeric choices with those from the uploaded file
     for(i in uploadedNumericRadioValues){
       value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
+      inputID_of_question <- inputIDs_all[i]
+      updateRadioButtons(
+        session,
+        inputId = inputID_of_question,
+        selected = value_to_select
+      )
+    }
+    
+    # Update radioButton text choices with those from the uploaded file
+    for(i in uploadedTextRadioValues){
+      value_to_select <- uploadedQuestionnaire()$Answers[i]
       inputID_of_question <- inputIDs_all[i]
       updateRadioButtons(
         session,
