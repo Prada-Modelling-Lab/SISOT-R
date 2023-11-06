@@ -301,8 +301,8 @@ ui <- navbarPage(
             radioButtons(
               inputId = "tool_platforms",
               label = "Platform:",
-              choices = c("Manual", "Electronic", "Manual and Electronic"),
-              selected = NA
+              choices = c("Manual", "Electronic", "Manual and Electronic", "Other"),
+              selected = character(0)
             )
           ),
           column(
@@ -322,7 +322,7 @@ ui <- navbarPage(
               inputId = "tool_history_of_use",
               label = "History of Use:",
               choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used"),
-              selected = NA
+              selected = character(0)
             ),
           ),
           column(
