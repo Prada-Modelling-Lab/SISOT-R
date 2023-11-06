@@ -1165,7 +1165,9 @@ server <- function(input, output, session) {
     return(in_file)
   })
   
-  # Select choices made in the uploaded questionnaire file.
+  # Select choices made in the uploaded questionnaire file. We first define the
+  # rows of the CSV that correspond to each type of question (e.g. textAreaInput)
+  # and then populate the data from the CSV into the data fields.
   observeEvent(
     input$uploadFile, {
     req(input$uploadFile)

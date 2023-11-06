@@ -5,7 +5,7 @@ account: freddietafreeth
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10357041
-bundleId: 7894560
+bundleId: 7894620
 url: https://freddietafreeth.shinyapps.io/United-Against-Rabies-Forum-WG1-Tool-Evaluation/
 version: 1
 asMultiple: FALSE
