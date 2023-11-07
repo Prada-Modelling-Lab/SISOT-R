@@ -391,11 +391,11 @@ ui <- navbarPage(
               inputId = "Q311",
               label = "Is the tool readily available?",
               choices = list(
-                "1 - Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store)." = 5,
-                "2 - Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer)." = 4,
-                "3 - Paper based, free to download/access." = 3,
-                "4 - Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person)." = 2,
-                "5 - Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.)." = 1
+                "Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store). Score: 5." = 5,
+                "Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer). Score: 4." = 4,
+                "Paper based, free to download/access. Score: 3." = 3,
+                "Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person). Score: 2." = 2,
+                "Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.). Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -406,9 +406,9 @@ ui <- navbarPage(
               inputId = "Q312",
               label = "On what platforms can the tool run?",
               choices = list(
-                "1 - ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.)." = 5,
-                "2 - At least one digital platform (e.g. only mobile phones or only computers)." = 3,
-                "3 - Only paper-based." = 1
+                "ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.). Score: 5.Score: 5." = 5,
+                "At least one digital platform (e.g. only mobile phones or only computers). Score: 3." = 3,
+                "Only paper-based. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -419,11 +419,11 @@ ui <- navbarPage(
               inputId = "Q313",
               label = "Can the tool run on multiple computer and/or phone operating systems?",
               choices = list(
-                "1 - Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS)." = 5,
-                "2 - Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows)." = 4,
-                "3 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems." = 3,
-                "4 - No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned." = 2,
-                "5 - No, and it wont be possible." = 1,
+                "Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS). Score: 5." = 5,
+                "Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows). Score: 4." = 4,
+                "No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems. Score: 3." = 3,
+                "No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned. Score: 2." = 2,
+                "No, and it wont be possible. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -444,9 +444,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - No, it's free to access." = 5,
-                "2 - Yes, the tool needs to be purchased at a once-off cost." = 3,
-                "3 - Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription)." = 1
+                "No, it's free to access. Score: 5." = 5,
+                "Yes, the tool needs to be purchased at a once-off cost. Score: 3." = 3,
+                "Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription). Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -457,10 +457,10 @@ ui <- navbarPage(
               inputId = "Q315",
               label = "Does the tool have EQUIPMENT costs for the USER with regards to keeping it in use? E.g., smartphone replacement due to breakage, theft etc.",
               choices = list(
-                "1 - No noteworthy equipment running costs." = 5,
-                "2 - Equipment might need to be replaced sporadically (less than once a year)." = 3,
-                "3 - The developer noted that equipment such as smartphones might need to be replaced often (more than once a year)." = 1,
-                "NA - Not applicable" = 0
+                "No noteworthy equipment running costs. Score: 5." = 5,
+                "Equipment might need to be replaced sporadically (less than once a year). Score: 3." = 3,
+                "The developer noted that equipment such as smartphones might need to be replaced often (more than once a year). Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -478,12 +478,12 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Free comprehensive support" = 5,
-                "2 - Comprehensive support at a cost, limited support for free." = 4,
-                "3 - Free limited support, comprehensive support not available." = 3,
-                "4 - Limited support at a cost." = 2,
-                "5 - No support available." = 1,
-                "NA - Not applicable" = 0
+                "Free comprehensive support. Score: 5." = 5,
+                "Comprehensive support at a cost, limited support for free. Score: 4." = 4,
+                "Free limited support, comprehensive support not available. Score: 3." = 3,
+                "Limited support at a cost. Score: 2." = 2,
+                "No support available. Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -500,11 +500,11 @@ ui <- navbarPage(
               inputId = "Q321",
               label = "What internet capacity is required to use the tool?",
               choices = list(
-                "1 - No internet required." = 5,
-                "2 - Intermittant internet access to standard WIFI/3g." = 4,
-                "3 - Continuous access to standard WIFI/3g" = 3,
-                "4 - Continuous access to LTE/4g." = 2,
-                "5 - Requires continuous stable high speed internet (5g/9Mbps or greater)." = 1
+                "No internet required. Score: 5." = 5,
+                "Intermittant internet access to standard WIFI/3g. Score: 4." = 4,
+                "Continuous access to standard WIFI/3g. Score: 3." = 3,
+                "Continuous access to LTE/4g. Score: 2." = 2,
+                "Requires continuous stable high speed internet (5g/9Mbps or greater). Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -515,9 +515,9 @@ ui <- navbarPage(
               inputId = "Q322",
               label = "If this is a case detection tool: Can animal cases be detected?",
               choices = list(
-                "1 - Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards." = 5,
-                "2 - Yes, limited data is collected for animal cases." = 3,
-                "3 - No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection." = 1,
+                "Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards. Score: 5." = 5,
+                "Yes, limited data is collected for animal cases. Score: 3." = 3,
+                "No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection. Score: 1." = 1,
                 "NA - Not applicable." =  NA
               ),
               selected = character(0)
@@ -529,9 +529,9 @@ ui <- navbarPage(
               inputId = "Q323",
               label = "If this is a case detection tool: Can human cases / bite cases be detected?",
               choices = list(
-                "1 - Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards." = 5,
-                "2 - Yes, limited data is collected for human cases." = 3,
-                "3 - No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection." = 1,
+                "Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards. Score: 5." = 5,
+                "Yes, limited data is collected for human cases. Score: 3." = 3,
+                "No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -552,11 +552,11 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, and data is EASILY LINKED within the tool." = 5,
-                "2- Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, but data is NOT EASILY LINKABLE within the tool." = 4,
-                "3 - Yes, but not all data elements are represented." = 3,
-                "4 - IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible." = 2,
-                "5 - No, this is currently not a feature of the tool." = 1,
+                "Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, and data is EASILY LINKED within the tool. Score: 5." = 5,
+                "Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, but data is NOT EASILY LINKABLE within the tool. Score: 4." = 4,
+                "Yes, but not all data elements are represented. Score: 3." = 3,
+                "IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible. Score: 2." = 2,
+                "No, this is currently not a feature of the tool. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -575,9 +575,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Yes, various communication channels are available." = 5,
-                "2 - Yes, one communication channel is available." = 3,
-                "3 - No, this is currently not a feature of the tool." = 1,
+                "Yes, various communication channels are available. Score: 5." = 5,
+                "Yes, one communication channel is available. Score: 3." = 3,
+                "No, this is currently not a feature of the tool. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -589,8 +589,8 @@ ui <- navbarPage(
               inputId = "Q326",
               label = "Does the tool allow for bi-directional, real-time communication between users and program managers?",
               choices = list(
-                "1 - Yes, the tool allows for program managers to push out messages and allows users to reply." = 5,
-                "2 - No, this is currently not a feature of the tool." = 1,
+                "Yes, the tool allows for program managers to push out messages and allows users to reply. Score: 5." = 5,
+                "No, this is currently not a feature of the tool. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -626,9 +626,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Yes, validation occurs real-time within the same tool without needing internet connection." = 5,
-                "2 - Yes, validation is automated, but occurs post-data collection once an internet connection is available." = 3,
-                "3 - No, validation must occur through a separate process" = 1,
+                "Yes, validation occurs real-time within the same tool without needing internet connection. Score: 5." = 5,
+                "Yes, validation is automated, but occurs post-data collection once an internet connection is available. Score: 3." = 3,
+                "No, validation must occur through a separate process. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -647,9 +647,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Yes, comprehensive data analysis is incorporated into the tool." = 5,
-                "2 - Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis." = 3,
-                "3 - No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis." = 1,
+                "Yes, comprehensive data analysis is incorporated into the tool. Score: 5." = 5,
+                "Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis. Score: 3." = 3,
+                "No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -661,8 +661,8 @@ ui <- navbarPage(
               inputId = "Q333",
               label = "Will the tool generate outputs that can assist with data presentation and/or reporting?",
               choices = list(
-                "1 - Yes." = 5,
-                "2 - No." = 1 # Make it so that suggested answers for questions 38, 39, and 40 are NA later
+                "Yes. Score: 5." = 5,
+                "No. Score: 1." = 1 # Make it so that suggested answers for questions 38, 39, and 40 are NA later
               ),
               selected = character(0)
             )
@@ -675,11 +675,11 @@ ui <- navbarPage(
               inputId = "Q334",
               label = "What type of data outputs does the system provide to visualize collected data? Select how many of the following elements are currently available in the system: 1) Spatio-temporal mapping 2) Graphs 3) Pivot tables 4) Line listed data",
               choices = list(
-                "1 - All four key data outputs are available." = 5,
-                "2 - Three of the four data outputs are available." = 4,
-                "3 - Two of the four data outputs are available." = 3,
-                "4 - One of the four data outputs are available." = 2,
-                "5 - No data outputs are available within the tool (i.e. a third party software is required to visualize data)." = 1,
+                "All four key data outputs are available. Score: 5." = 5,
+                "Three of the four data outputs are available. Score: 4." = 4,
+                "Two of the four data outputs are available. Score: 3." = 3,
+                "One of the four data outputs are available. Score: 2." = 2,
+                "No data outputs are available within the tool (i.e. a third party software is required to visualize data). Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -691,11 +691,11 @@ ui <- navbarPage(
               inputId = "Q335",
               label = "How much time does it take to obtain data outputs once the data has been submitted to the server?",
               choices = list(
-                "1 - Less than 1 hour." = 5,
-                "2 - Within 24 hours." = 4,
-                "3 - Within 1 week." = 3,
-                "4 - Within 1 month." = 2,
-                "5 - More than 1 month." = 1,
+                "Less than 1 hour. Score: 5." = 5,
+                "Within 24 hours. Score: 4." = 4,
+                "Within 1 week. Score: 3." = 3,
+                "Within 1 month. Score: 2." = 2,
+                "More than 1 month. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -707,9 +707,9 @@ ui <- navbarPage(
               inputId = "Q336",
               label = "How easy is it to understand and interpret the outputs?",
               choices = list(
-                "1 - Very easy for all readers to understand." = 5,
-                "2 - Some technical language." = 3,
-                "3 - Highly technical language." = 1,
+                "Very easy for all readers to understand. Score: 5." = 5,
+                "Some technical language. Score: 3." = 3,
+                "Highly technical language. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -730,9 +730,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Yes, the tool can display aggregate or linked data from multiple sectors." = 5,
-                "2 - Yes, aggregated data can be displayed, but additional steps/user inputs are required." = 3,
-                "3 - No, the tool cannot display aggregate or linked data from multiple sectors." = 1,
+                "Yes, the tool can display aggregate or linked data from multiple sectors. Score: 5." = 5,
+                "Yes, aggregated data can be displayed, but additional steps/user inputs are required. Score: 3." = 3,
+                "No, the tool cannot display aggregate or linked data from multiple sectors. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -750,9 +750,9 @@ ui <- navbarPage(
               inputId = "Q341",
               label = "Can you operate the tool independently of the developer? (e.g. server requirements for an app, etc.).",
               choices = list(
-                "1 - Yes, the tool can operate optimally without developer inputs." = 5,
-                "2 - Yes, the tool has basic functionality without developer input." = 3,
-                "3 - No, the tool cannot operate independently of the developer." = 1
+                "Yes, the tool can operate optimally without developer inputs. Score: 5." = 5,
+                "Yes, the tool has basic functionality without developer input. Score: 3." = 3,
+                "No, the tool cannot operate independently of the developer. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -763,9 +763,9 @@ ui <- navbarPage(
               inputId = "Q342",
               label = "How is data loaded onto analytic platforms?.",
               choices = list(
-                "1 - Data is uploaded automatically once internet connection is available (either during data collection or at a later time point)." = 5,
-                "2 - Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer)." = 3,
-                "3 - Data is manually entered into an electronic database (i.e. data manually entered from paper forms)." = 1,
+                "Data is uploaded automatically once internet connection is available (either during data collection or at a later time point). Score: 5." = 5,
+                "Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer). Score: 3." = 3,
+                "Data is manually entered into an electronic database (i.e. data manually entered from paper forms). Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -777,11 +777,11 @@ ui <- navbarPage(
               inputId = "Q343",
               label = "Who owns and can access the data collected by the tool?",
               choices = list(
-                "1 - The government owns the data. Non-governmental stakeholders must request permission to use it." = 5,
-                "2 - The government owns the data. Non-governmental stakeholders can use it without prior consent." = 4,
-                "3 - The non-governmental stakeholders own the data. The government can use it without prior consent." = 3,
-                "4 - The non-governmental stakeholders own the data. The government must request permission to use it" = 2,
-                "5 - The government cannot access the collected data" = 1,
+                "The government owns the data. Non-governmental stakeholders must request permission to use it. Score: 5." = 5,
+                "The government owns the data. Non-governmental stakeholders can use it without prior consent. Score: 4." = 4,
+                "The non-governmental stakeholders own the data. The government can use it without prior consent. Score: 3." = 3,
+                "The non-governmental stakeholders own the data. The government must request permission to use it. Score: 2." = 2,
+                "The government cannot access the collected data. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -795,9 +795,9 @@ ui <- navbarPage(
               inputId = "Q344",
               label = "How secure is data that has been collected using this tool?",
               choices = list(
-                "1 - Data is fully secured: data collected on password protected devices and stored on secured servers or other secured data repository;" = 5,
-                "2 - Data security features exist, but could be improved." = 3,
-                "3 - Data is not secured: data is collected on easily accessible devices or on paper forms." = 1,
+                "Data is fully secured: data collected on password protected devices and stored on secured servers or other secured data repository. Score: 5." = 5,
+                "Data security features exist, but could be improved. Score: 3." = 3,
+                "Data is not secured: data is collected on easily accessible devices or on paper forms. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -815,11 +815,11 @@ ui <- navbarPage(
               inputId = "Q351",
               label = "Can the tool be adapted to work with more than just one specific health event/pathogen?",
               choices = list(
-                "1 - The tool is already a universal tool for multiple health events/pathogens." = 5,
-                "2 - The tool is easily adaptable to 'other use' cases for free or without permission." = 4,
-                "3 - The tool is easily adaptable to 'other use' cases at a cost and/or permission is needed." = 3,
-                "4 - Significant effort would be required to adapt the tool." = 2,
-                "5 - The tool is not adaptable to other health events/pathogens." = 1
+                "The tool is already a universal tool for multiple health events/pathogens. Score: 5." = 5,
+                "The tool is easily adaptable to 'other use' cases for free or without permission. Score: 4." = 4,
+                "The tool is easily adaptable to 'other use' cases at a cost and/or permission is needed. Score: 3." = 3,
+                "Significant effort would be required to adapt the tool. Score: 2." = 2,
+                "The tool is not adaptable to other health events/pathogens. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -830,8 +830,8 @@ ui <- navbarPage(
               inputId = "Q352",
               label = "Is the tool multi-functional? e.g. One tool that can assist with Mass Dog Vaccination tracking and/or post vaccination surveys and/or Integrated Bite Case Management, etc.",
               choices = list(
-                "1 - Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM." = 5,
-                "2 - No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking." = 1
+                "Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM. Score: 5." = 5,
+                "No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -849,9 +849,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - No costs or permissions associated with adapting the tool." = 5,
-                "2 - Adaptation requires developer permission, but is generally NOT associated with fees." = 3,
-                "3 - Adaptation requires development fees and permission." = 1,
+                "No costs or permissions associated with adapting the tool. Score: 5." = 5,
+                "Adaptation requires developer permission, but is generally NOT associated with fees. Score: 3." = 3,
+                "Adaptation requires development fees and permission. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -865,9 +865,9 @@ ui <- navbarPage(
               inputId = "Q354",
               label = "Does the tool have the ability to interoperate, work with, and integrate with other surveillance/data systems? (provides framework for data sharing)",
               choices = list(
-                "1 - Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used." = 5,
-                "2 - Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO)." = 3,
-                "3 - Unique output file formats are used, making it difficult for data to be easily incorporated into other systems." = 1,
+                "Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used. Score: 5." = 5,
+                "Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO). Score: 3." = 3,
+                "Unique output file formats are used, making it difficult for data to be easily incorporated into other systems. Score: 1." = 1,
                 "NA - Not applicable." = 0
               ),
               selected = character(0)
@@ -885,8 +885,8 @@ ui <- navbarPage(
               inputId = "Q361",
               label = "Is data collection reliant on language?",
               choices = list(
-                "1 - No, the data collection is primarily based on universal language (e.g. numbers or pictures)." = 5,
-                "2 - Yes, the user must be able to read the relevant language to collect data" = 1
+                "No, the data collection is primarily based on universal language (e.g. numbers or pictures). Score: 5." = 5,
+                "Yes, the user must be able to read the relevant language to collect data. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -897,9 +897,9 @@ ui <- navbarPage(
               inputId = "Q362",
               label = "What are the training requirements to use the tool?",
               choices = list(
-                "1 - End user can implement without external assistance (e.g. user manuals)." = 5,
-                "2 - External training is possible but requires remote learning (e.g. shared screen/webinars)." = 3,
-                "3 - Face-to-face training of in-country facilitators is required." = 1
+                "End user can implement without external assistance (e.g. user manuals). Score: 5." = 5,
+                "External training is possible but requires remote learning (e.g. shared screen/webinars). Score: 3." = 3,
+                "Face-to-face training of in-country facilitators is required. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -910,11 +910,11 @@ ui <- navbarPage(
               inputId = "Q363",
               label = "Have training materials been developed?",
               choices = list(
-                "1 - Yes, written instructions and training videos are available." = 5,
-                "2 - Yes, but only training videos." = 4,
-                "3 - Yes, but only written instructions." = 3,
-                "4 - No, but materials are being developed." = 2,
-                "5 - No." = 1
+                "Yes, written instructions and training videos are available. Score: 5." = 5,
+                "Yes, but only training videos. Score: 4." = 4,
+                "Yes, but only written instructions. Score: 3." = 3,
+                "No, but materials are being developed. Score: 2." = 2,
+                "No. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -927,10 +927,10 @@ ui <- navbarPage(
               inputId = "Q364",
               label = "How easy is it to understand and interpret the manuals/instructions?",
               choices = list(
-                "1 - Very easy for all readers to understand." = 5,
-                "2 - Some technical language." = 3,
-                "3 - Highly technical language." = 1,
-                "NA - Not applicable" = 0
+                "Very easy for all readers to understand. Score: 5." = 5,
+                "Some technical language. Score: 3." = 3,
+                "Highly technical language. Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -948,9 +948,9 @@ ui <- navbarPage(
                 )
               ),
               choices = list(
-                "1 - Days (up to a week)." = 5,
-                "2 - Weeks (up to one month)." = 3,
-                "3 - One month or more." = 1
+                "Days (up to a week). Score: 5." = 5,
+                "Weeks (up to one month). Score: 3." = 3,
+                "One month or more. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -961,9 +961,9 @@ ui <- navbarPage(
               inputId = "Q366",
               label = "Based on user experience, is a dedicated data capturer (in addition to the person undertaking the task; e.g. vaccination) required when using the tool in field conditions?",
               choices = list(
-                "1 - No, the tool can be used by the implementer of the action without interfering with or hindering the activity (i.e. the vaccinator also collects the data using the tool)." = 5,
-                "2 - No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended)." = 3,
-                "3 - Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency." = 1
+                "No, the tool can be used by the implementer of the action without interfering with or hindering the activity (i.e. the vaccinator also collects the data using the tool). Score: 5." = 5,
+                "No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended). Score: 3." = 3,
+                "Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -980,11 +980,11 @@ ui <- navbarPage(
               inputId = "Q371",
               label = "Has the tool been proven effective and sustainable for implementation?",
               choices = list(
-                "1 - Yes, the tool has been implemented in multi-year projects in multiple countries." = 5,
-                "2 - Yes, the tool has been implmented in a multi-year project in one country." = 4,
-                "3 - No, the tool has just been launched (less than 1 year) in multiple countries." = 3,
-                "4 - No, the tool has just been launched (less than 1 year) in one country." = 2,
-                "5 - No, the tool has not yet been field tested." = 1
+                "Yes, the tool has been implemented in multi-year projects in multiple countries. Score: 5." = 5,
+                "Yes, the tool has been implmented in a multi-year project in one country. Score: 4." = 4,
+                "No, the tool has just been launched (less than 1 year) in multiple countries. Score: 3." = 3,
+                "No, the tool has just been launched (less than 1 year) in one country. Score: 2." = 2,
+                "No, the tool has not yet been field tested. Score: 1." = 1
               ),
               selected = character(0)
             )
@@ -995,10 +995,10 @@ ui <- navbarPage(
               inputId = "Q372",
               label = "Does the tool support development of project plans and strategies for rabies control activities?",
               choices = list(
-                "1 - Yes, the tool has supported the development of project plans and strategies in multiple countries." = 5,
-                "2 - Yes, the tool has supported the development of project plans and strategies in one country." = 3,
-                "3 - No, the tool has not yet been field tested." = 1,
-                "NA - Not applicable" = 0
+                "Yes, the tool has supported the development of project plans and strategies in multiple countries. Score: 5." = 5,
+                "Yes, the tool has supported the development of project plans and strategies in one country. Score: 3." = 3,
+                "No, the tool has not yet been field tested. Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -1009,10 +1009,10 @@ ui <- navbarPage(
               inputId = "Q373",
               label = "Has the tool been implemented with only remote assistance (e.g. sharing instruction materials and online trainings)?",
               choices = list(
-                "1 - Yes, in more than one country." = 5,
-                "2 - Yes, in one country." = 3,
-                "3 - No." = 1,
-                "NA - Not applicable" = 0
+                "Yes, in more than one country. Score: 5." = 5,
+                "Yes, in one country. Score: 3." = 3,
+                "No. Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -1025,10 +1025,10 @@ ui <- navbarPage(
               inputId = "Q374",
               label = "Has continued use of the tool been observed in project sites AFTER THE EXTERNAL SOURCE (e.g. developer) STOPPED PROVIDING programmatic or financial SUPPORT?",
               choices = list(
-                "1 - Yes, in more than one country." = 5,
-                "2 - Yes, in one country." = 3,
-                "3 - 3 - No, the tool has always required additional external support to be effectively implemented." = 1,
-                "NA - Not applicable" = 0
+                "Yes, in more than one country. Score: 5." = 5,
+                "Yes, in one country. Score: 3." = 3,
+                "No, the tool has always required additional external support to be effectively implemented. Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
@@ -1039,10 +1039,10 @@ ui <- navbarPage(
               inputId = "Q375",
               label = "Has the tool been implemented without any financial support from any external sources? e.g. The government purchases the tool and implements it without any financial support from an external source.",
               choices = list(
-                "1 - Yes, in more than one country." = 5,
-                "2 - Yes, in one country." = 3,
-                "3 - No." = 1,
-                "NA - Not applicable" = 0
+                "Yes, in more than one country. Score: 5." = 5,
+                "Yes, in one country. Score: 3." = 3,
+                "No. Score: 1." = 1,
+                "NA - Not applicable." = 0
               ),
               selected = character(0)
             )
