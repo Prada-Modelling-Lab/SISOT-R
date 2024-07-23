@@ -185,9 +185,9 @@ ui <- navbarPage(
         width = 8,
         h1("Tool Evaluator"),
         p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel fringilla est ullamcorper eget nulla facilisi etiam. Massa tempor nec feugiat nisl. Magna eget est lorem ipsum dolor sit amet. Consectetur a erat nam at. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vitae congue eu consequat ac felis donec et odio. Varius quam quisque id diam vel quam elementum pulvinar. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. Erat pellentesque adipiscing commodo elit. Consequat interdum varius sit amet mattis vulputate enim nulla. In pellentesque massa placerat duis ultricies lacus sed. Risus sed vulputate odio ut. Faucibus in ornare quam viverra orci sagittis eu volutpat. Urna id volutpat lacus laoreet. Morbi tristique senectus et netus et malesuada fames. Ut tortor pretium viverra suspendisse. Pharetra diam sit amet nisl suscipit adipiscing bibendum."),
-        h2("Upload Answers"),
-        p("Tortor at auctor urna nunc id cursus metus aliquam. Nisl condimentum id venenatis a condimentum. Pellentesque dignissim enim sit amet venenatis urna. Amet volutpat consequat mauris nunc congue nisi vitae. Vel pretium lectus quam id leo in vitae turpis. Libero nunc consequat interdum varius sit amet mattis vulputate. Ipsum nunc aliquet bibendum enim facilisis gravida. Vulputate odio ut enim blandit volutpat maecenas volutpat blandit. Elementum nisi quis eleifend quam adipiscing vitae proin. Nam at lectus urna duis."),
-        fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
+        
+        # h2("Upload Answers"),
+        # fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
         
         #### ---- Reviewer Information ----
         h2("1. Reviewer Information"),
@@ -1063,7 +1063,6 @@ ui <- navbarPage(
           column(
             width = 12,
             downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save"), style = "margin-top: 10px"),
-            downloadButton(outputId = "downloadReport",  label = "Download Report",  icon = icon("save"), style = "margin-top: 10px"),
             downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"), style = "margin-top: 10px")
           )
         )
@@ -1170,96 +1169,97 @@ server <- function(input, output, session) {
   # and then populate the data from the CSV into the data fields.
   observeEvent(
     input$uploadFile, {
-    req(input$uploadFile)
-    
-    # Answers to textAreaInput inputs that have textual answers e.g. reviewer names
-    uploadedTextAreaInputValues <- c(1:4, 7:10, 12, 15, 17, 30)
-    
-    # Answers to numericInput inputs that have numeric answers e.g. number of countries
-    uploadedNumericInputValues <- c(14)
-    
-    # Answers to checkboxGroupInputValue questions that have multiple selected answers e.g. tool types
-    uploadedCheckboxGroupInputValues <- c(5, 6)
-    
-    # Answers to questions using the selectizeInput inputs, e.g. tool languages.
-    uploadedSelectizeInputValues <- c(16)
-    
-    # Answers to radioButton inputs that have numeric answers e.g. main tool questions.
-    uploadedNumericRadioValues <- c(18:29, 31:56)
-    
-    # Answers to radioButton inputs that have text answers e.g. tool platforms.
-    uploadedTextRadioValues <- c(11, 13)
-    
-    # Update textAreaInput choices with those from the uploaded file
-    for(i in uploadedTextAreaInputValues){
-      text_to_insert <- uploadedQuestionnaire()$Answers[i]
-      inputID_of_question <- inputIDs_all[i]
-      updateTextAreaInput(
-        session,
-        inputId = inputID_of_question,
-        value = text_to_insert
-      )
+      req(input$uploadFile)
+      
+      # Answers to textAreaInput inputs that have textual answers e.g. reviewer names
+      uploadedTextAreaInputValues <- c(1:4, 7:10, 12, 15, 17, 30)
+      
+      # Answers to numericInput inputs that have numeric answers e.g. number of countries
+      uploadedNumericInputValues <- c(14)
+      
+      # Answers to checkboxGroupInputValue questions that have multiple selected answers e.g. tool types
+      uploadedCheckboxGroupInputValues <- c(5, 6)
+      
+      # Answers to questions using the selectizeInput inputs, e.g. tool languages.
+      uploadedSelectizeInputValues <- c(16)
+      
+      # Answers to radioButton inputs that have numeric answers e.g. main tool questions.
+      uploadedNumericRadioValues <- c(18:29, 31:56)
+      
+      # Answers to radioButton inputs that have text answers e.g. tool platforms.
+      uploadedTextRadioValues <- c(11, 13)
+      
+      # Update textAreaInput choices with those from the uploaded file
+      for(i in uploadedTextAreaInputValues){
+        text_to_insert <- uploadedQuestionnaire()$Answers[i]
+        inputID_of_question <- inputIDs_all[i]
+        updateTextAreaInput(
+          session,
+          inputId = inputID_of_question,
+          value = text_to_insert
+        )
+      }
+      
+      # Update numericInput choices with those from the uploaded file
+      for(i in uploadedNumericInputValues){
+        value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
+        inputID_of_question <- inputIDs_all[i]
+        updateNumericInput(
+          session,
+          inputId = inputID_of_question,
+          value = value_to_select
+        )
+      }
+      
+      # Update checkboxGroupInput choices with those from the uploaded file
+      for(i in uploadedCheckboxGroupInputValues){
+        values_to_select <- unlist(strsplit(
+          x = uploadedQuestionnaire()$Answers[i], split = "|", fixed = TRUE
+        ))
+        inputID_of_question <- inputIDs_all[i]
+        updateCheckboxGroupInput(
+          session,
+          inputId = inputID_of_question,
+          selected = values_to_select
+        )
+      }
+      
+      # Update selectizeInput choices with those from the uploaded file
+      for(i in uploadedSelectizeInputValues){
+        values_to_select <- unlist(strsplit(
+          x = uploadedQuestionnaire()$Answers[i], split = "|", fixed = TRUE
+        ))
+        inputID_of_question <- inputIDs_all[i]
+        updateSelectizeInput(
+          session,
+          inputId = inputID_of_question,
+          selected = values_to_select
+        )
+      }
+      
+      # Update radioButton numeric choices with those from the uploaded file
+      for(i in uploadedNumericRadioValues){
+        value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
+        inputID_of_question <- inputIDs_all[i]
+        updateRadioButtons(
+          session,
+          inputId = inputID_of_question,
+          selected = value_to_select
+        )
+      }
+      
+      # Update radioButton text choices with those from the uploaded file
+      for(i in uploadedTextRadioValues){
+        value_to_select <- uploadedQuestionnaire()$Answers[i]
+        inputID_of_question <- inputIDs_all[i]
+        updateRadioButtons(
+          session,
+          inputId = inputID_of_question,
+          selected = value_to_select
+        )
+      }
     }
-    
-    # Update numericInput choices with those from the uploaded file
-    for(i in uploadedNumericInputValues){
-      value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
-      inputID_of_question <- inputIDs_all[i]
-      updateNumericInput(
-        session,
-        inputId = inputID_of_question,
-        value = value_to_select
-      )
-    }
-    
-    # Update checkboxGroupInput choices with those from the uploaded file
-    for(i in uploadedCheckboxGroupInputValues){
-      values_to_select <- unlist(strsplit(
-        x = uploadedQuestionnaire()$Answers[i], split = "|", fixed = TRUE
-      ))
-      inputID_of_question <- inputIDs_all[i]
-      updateCheckboxGroupInput(
-        session,
-        inputId = inputID_of_question,
-        selected = values_to_select
-      )
-    }
-    
-    # Update selectizeInput choices with those from the uploaded file
-    for(i in uploadedSelectizeInputValues){
-      values_to_select <- unlist(strsplit(
-        x = uploadedQuestionnaire()$Answers[i], split = "|", fixed = TRUE
-      ))
-      inputID_of_question <- inputIDs_all[i]
-      updateSelectizeInput(
-        session,
-        inputId = inputID_of_question,
-        selected = values_to_select
-      )
-    }
-    
-    # Update radioButton numeric choices with those from the uploaded file
-    for(i in uploadedNumericRadioValues){
-      value_to_select <- as.numeric(uploadedQuestionnaire()$Answers[i])
-      inputID_of_question <- inputIDs_all[i]
-      updateRadioButtons(
-        session,
-        inputId = inputID_of_question,
-        selected = value_to_select
-      )
-    }
-    
-    # Update radioButton text choices with those from the uploaded file
-    for(i in uploadedTextRadioValues){
-      value_to_select <- uploadedQuestionnaire()$Answers[i]
-      inputID_of_question <- inputIDs_all[i]
-      updateRadioButtons(
-        session,
-        inputId = inputID_of_question,
-        selected = value_to_select
-      )
-    }
-  })
+  )
   
   # First extract the scores of the categories. Since input$<input name> is first
   # initialized as NULL, this will break the structure of vectors, so we should
@@ -1407,8 +1407,8 @@ server <- function(input, output, session) {
   
   # Results figure logic
   barPlot <- reactive({
-    par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE)
     plot.new()
+    par(mar = c(5, 8, 1, 1), las = 1, xpd = TRUE, bg = "transparent")
     barplot(
       height = rev(scores()),
       names.arg = rev(c(
@@ -1420,7 +1420,7 @@ server <- function(input, output, session) {
       col = rev(c(
         UARF_BLUE1, UARF_RED, UARF_BLUE2, UARF_BLUE3, UARF_GREEN, UARF_YELLOW,
         UARF_GREEN2
-      )),
+      ))
     )
     mtext(
       substitute(paste(bold("Weighted score (out of ten)"))), side = 1, line = 3,
@@ -1434,17 +1434,17 @@ server <- function(input, output, session) {
   })
   
   # This actually plots it to the Shiny App window
-  output$show_barPlot <- renderPlot({barPlot()})
+  output$show_barPlot <- renderPlot({barPlot()}, bg = "transparent")
   
   # This prints the overall score text
   output$overall_score <- renderText({
     overall_score_value <- 10*round(mean(scores()), 2)
     paste0(
-      "Total Score: <b>",
+      "Total Score: ",
       ifelse(
         test = is.nan(overall_score_value),
-        yes = "TBD</b>",
-        no = paste0(overall_score_value, "%</b>") 
+        yes = "<b>TBD</b>",
+        no = paste0("<b>", overall_score_value, "%</b>") 
       )
     )
   })
@@ -1458,24 +1458,7 @@ server <- function(input, output, session) {
       dev.off()
     }
   )
-  output$downloadReport <- downloadHandler(
-    filename = "SISOT-R_Report.pdf",
-    content = function(file){
-      # Copy the report file to a temporary directory before processing it, in
-      # case we don't have write permissions to the current working directory.
-      temp_report <- file.path(tempdir(), "SISOT-R_Report.pdf")
-      file.copy("report_template.rmd", temp_report, overwrite = TRUE)
-      # Knit the document, and eval it in the current environment
-      rmarkdown::render(
-        temp_report,
-        params = list(
-          results_plot = barPlot(),
-          q_ans = questionnaire_answers()
-        ),
-        output_file = file
-      )
-    }
-  )
+  
   output$downloadAnswers <- downloadHandler(
     filename =  function(){"Answers.csv"},
     content = function(file) {
