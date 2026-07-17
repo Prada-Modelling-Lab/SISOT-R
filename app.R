@@ -171,6 +171,21 @@ ui <- tagList(
       }
     ")
   ),
+  tags$script(HTML("
+    function resizeTextarea(el) {
+      el.style.height = 'auto';
+      el.style.height = el.scrollHeight + 'px';
+    }
+  
+    function resizeAllTextareas() {
+      document.querySelectorAll('textarea').forEach(resizeTextarea);
+    }
+    document.addEventListener('DOMContentLoaded', function() {resizeAllTextareas();});
+    document.addEventListener('input', function(e) {
+      if (e.target.matches('textarea')) {resizeTextarea(e.target);}
+    });
+    $(document).on('shiny:value', function() {resizeAllTextareas();});
+  ")),
   div(
     class = "app-shell",
     navbarPage(
@@ -220,7 +235,8 @@ ui <- tagList(
                       inputId = "reviewer_names",
                       label = "Reviewer Name(s)",
                       placeholder = "Please insert your name(s) here.",
-                      resize = "vertical"
+                      resize = "vertical",
+                      rows = 8
                     )
                   ),
                   column(
@@ -229,7 +245,8 @@ ui <- tagList(
                       inputId = "reviewer_titles_and_affiliations",
                       label = "Reviewer Titles and Affiliations:",
                       placeholder = "Please insert your titles and affiliations here.",
-                      resize = "vertical"
+                      resize = "vertical",
+                      rows = 8
                     )
                   ),
                   column(
@@ -238,7 +255,8 @@ ui <- tagList(
                       inputId = "reviewer_familiarity",
                       label = "Please describe your tool familiarity:",
                       placeholder = "Please describe your familiarity here.",
-                      resize = "vertical"
+                      resize = "vertical",
+                      rows = 8
                     )
                   )
                 ) 
