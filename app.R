@@ -1,1152 +1,1179 @@
 #!/usr/bin/env Rscript
 # ============================================================================ #
-# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     31/10/2023 |
+# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     17/07/2026 |
 # ============================================================================ #
 
 # ---- Packages ----
 library(shiny)
 
-#' Documentation:
-#' --------------
-#' 
-#' 
-
-
 # ---- UI ----
-ui <- navbarPage(
+ui <- tagList(
   ## ---- CSS Styling ----
-  tags$style(
-    type = "text/css", "
-    /* Use Work Sans as the main font for the app. */
-    @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
-    * {font-family: Work Sans, sans-serif;}
-    
-    /* When narrow-device mode starts*/
-    @media only screen and (max-width: 768px) {
-      body {
-        padding-top: 220px !important;
+  header = tags$head(
+    tags$style(
+      type = "text/css", "
+      /* Use Work Sans as the main font for the app. */
+      @import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+      * {font-family: Work Sans, sans-serif;}
+      
+      /* When narrow-device mode starts*/
+      @media only screen and (max-width: 768px) {
+        .results-pane {
+          position: static !important;
+        }
       }
-      .results-pane{
-        position: unset !important; /* Allow pane to float under questionnaire */
+
+      p {
+        text-align: justify;
+        color: #575756;
       }
-    }
-    
-    body {
-      padding-top: 70px;
-      font-size: 1.5rem;
-      font-weight: 400;
-      line-height: 1.4;
-      color: #212529;
-      text-align: left;
-      background-color: #ededed !important;
-    }
-    
-    p {
-      text-align: justify;
-      color: #575756;
-    }
-    
-    /* Change the headings to have UARF branding */
-    h1 {color: #1a3146;}
-    h2, h3, h4 {color: #ff6960}
-    
-    /* Navbar Styling */
-    .navbar, .navbar a, .navbar-brand {
-      background-color: #1a3146 !important;
-      border-color: #1a3146 !important;
-      border: 1px solid;
-      color: #fff !important;
-      text-align: center;
-      padding: 5px 5px;
-    }
-    .navbar a:hover{
-      background-color: #6e818f !important;
-      border-color: #ff6960 !important;
-      border: 1px solid;
-    }
-    .navbar a:focus {
-      border-color: #ff6960 !important;
-      border: 1px solid;
-    }
-    .navbar-brand a:hover{
-      /* This stops hover-effects from appearing over the UAR navbar logo. */
-      background-color: #1a3146 !important;
-      border-color: #1a3146 !important;
-      border: 1px solid;
-    }
-    
-    /* Remove 300px max width of tool input fields */
-    .shiny-input-container:not(.shiny-input-container-inline) {
-      width: auto !important;
-    }
-    
-    /* Restrict width text-based pages*/
-    .info-and-legal {
-      max-width: 600px !important;
-      margin: 0px auto;
-      min-height: 100%;
-    }
-    
-    /* File Uploader Styling */
-    .progress-bar{background-color: #1a3146;}
-    
-    /* Fix Results Pane To Side of Screen */
-    .results-pane {
-      position: fixed;
-      right: 0;
-    }
-    
-    /* Download Button Styling */
-    .btn-default {
-      color: #fff;
-      background-color: #1a3146;
-      border-color: #1a3146;
-    }
-    .btn-default:hover {
-      color: #fff;
-      background-color: #6e818f;
-      border-color: #1a3146;
-    }
-    
-    /* Footer Styling */
-    .footer-top {
-      display: block !important;
-      padding-right: 50px;
-      padding-left: 50px;
-      padding-top: 25px;
-      padding-bottom: 25px;
-      margin-right: auto;
-      margin-left: auto;
-      box-sizing: border-box;
-      background-color: #6e818f;
-      color: #fff;
-    }
-    .footer-bottom{
-      display: block !important;
-      padding-right: 50px;
-      padding-left: 50px;
-      padding-top: 25px;
-      padding-bottom: 25px;
-      margin-right: auto;
-      margin-left: auto;
-      box-sizing: border-box;
-      background-color: #1a3146;
-      color: #fff !important;
-    }
-    .footer-button-blue {
-      color: #fff !important;
-      padding-right: 10px;
-    }
-    .footer-button-blue:hover {
-      color: #1f9eff !important;
-      text-decoration: none;
-      text-align: center;
-    }
-    
-    /* Footer icon styling */
-    .fab {
-      color: #fff !important;
-      font-size: 30px;
-      text-align: center;
-      padding: 5px 5px;
-    }
-    .fab:hover{text-decoration: none;}
-  "),
+      
+      /* Change the headings to have UARF branding */
+      h1 {color: #1a3146;}
+      h2, h3, h4 {color: #ff6960}
+      
+      /* Navbar Styling */
+      .navbar, .navbar a, .navbar-brand {
+        display: flex !important;
+        align-items: center;
+        background-color: #1a3146 !important;
+        border-color: #1a3146 !important;
+        border: 2px solid;
+        color: #fff !important;
+        text-align: center;
+        padding: 5px 5px;
+      }
+
+      .navbar-nav > .active {
+        background-color: #ff6960 !important;
+      }
+      
+      .navbar-nav > .active > a {
+        background-color: #ff6960 !important;
+        color: #ffffff !important;
+      }
+
+      .navbar a:hover{
+        background-color: #6e818f !important;
+        border-color: #ff6960 !important;
+        border: 2px solid;
+      }
+      .navbar a:focus {
+        border-color: #ff6960 !important;
+        border: 2px solid;
+      }
+      .navbar-brand a:hover{
+        /* This stops hover-effects from appearing over the UAR navbar logo. */
+        background-color: #1a3146 !important;
+        border-color: #1a3146 !important;
+        border: 2px solid;
+      }
+      .navbar-brand span {
+        margin-left: 8px;
+      }
+      
+      /* Remove 300px max width of tool input fields */
+      .shiny-input-container:not(.shiny-input-container-inline) {
+        width: auto !important;
+      }
+      
+      /* Restrict width text-based pages*/
+      .info-and-legal {
+        max-width: 600px !important;
+        margin: 0px auto;
+      }
+
+      /* File Uploader Styling */
+      .progress-bar{background-color: #1a3146;}
+      
+      /* Fix Results Pane To Side of Screen */
+      .results-pane {
+        position: sticky;
+        top: 80px;
+        align-self: flex-start;
+      }
   
-  ## ---- Navbar Contents ----
-  windowTitle = "SISOT-R Application",
-  position = "fixed-top",
-  title = HTML('<a href="https://www.unitedagainstrabies.org/"><img src="uarf_logo_web.svg", style="width:70px;"></a>', "SISOT-R"),
-  
-  ## ---- Information Page ----
-  tabPanel(
-    title = "Information",
-    class = "info-and-legal",
-    h1("About This App"),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    h2("How-to Guide"),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    h2("Authorship Statement"),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      /* Download Button Styling */
+      .btn-default {
+        color: #fff;
+        background-color: #1a3146;
+        border-color: #1a3146;
+      }
+      .btn-default:hover {
+        color: #fff;
+        background-color: #6e818f;
+        border-color: #1a3146;
+      }
+      
+      /* Footer Styling */
+      .footer-top {
+        display: block !important;
+        padding-right: 50px;
+        padding-left: 50px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        margin-right: auto;
+        margin-left: auto;
+        box-sizing: border-box;
+        background-color: #6e818f;
+        color: #fff;
+      }
+      .footer-bottom{
+        display: block !important;
+        padding-right: 50px;
+        padding-left: 50px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        margin-right: auto;
+        margin-left: auto;
+        box-sizing: border-box;
+        background-color: #1a3146;
+        color: #fff !important;
+      }
+      .footer-button-blue {
+        color: #fff !important;
+        padding-right: 10px;
+      }
+      .footer-button-blue:hover {
+        color: #1f9eff !important;
+        text-decoration: none;
+        text-align: center;
+      }
+      
+      /* Footer icon styling */
+      .fab {
+        color: #fff !important;
+        font-size: 30px;
+        text-align: center;
+        padding: 5px 5px;
+      }
+      .fab:hover{text-decoration: none;}
+
+      /* Keep footer at the bottom on short pages */
+      .app-shell {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .app-shell > .container-fluid {
+        flex: 1 0 auto;
+      }
+      
+      .app-footer {
+        width: 100%;
+        margin-top: auto;
+      }
+      
+      .app-footer .row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    ")
   ),
-  
-  ## ---- Tool Evaluator Page -----
-  tabPanel(
-    title = "Tool Evaluator",
-    fluidRow(
-      ### ---- Tool UI Contents ----
-      column(
-        width = 8,
-        h1("Tool Evaluator"),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel fringilla est ullamcorper eget nulla facilisi etiam. Massa tempor nec feugiat nisl. Magna eget est lorem ipsum dolor sit amet. Consectetur a erat nam at. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Vitae congue eu consequat ac felis donec et odio. Varius quam quisque id diam vel quam elementum pulvinar. Fusce id velit ut tortor pretium viverra suspendisse potenti nullam. Erat pellentesque adipiscing commodo elit. Consequat interdum varius sit amet mattis vulputate enim nulla. In pellentesque massa placerat duis ultricies lacus sed. Risus sed vulputate odio ut. Faucibus in ornare quam viverra orci sagittis eu volutpat. Urna id volutpat lacus laoreet. Morbi tristique senectus et netus et malesuada fames. Ut tortor pretium viverra suspendisse. Pharetra diam sit amet nisl suscipit adipiscing bibendum."),
-        
-        # h2("Upload Answers"),
-        # fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
-        tabsetPanel(
-          #### ---- Reviewer Information ----
-          tabPanel(
-            "Reviewer Information",
-            h2("1. Reviewer Information"),
-            fluidRow(
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "reviewer_names",
-                  label = "Reviewer Name(s)",
-                  placeholder = "Please insert your name(s) here.",
-                  resize = "vertical"
-                )
-              ),
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "reviewer_titles_and_affiliations",
-                  label = "Reviewer Titles and Affiliations:",
-                  placeholder = "Please insert your titles and affiliations here.",
-                  resize = "vertical"
-                )
-              ),
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "reviewer_familiarity",
-                  label = "Please describe your tool familiarity:",
-                  placeholder = "Please describe your familiarity here.",
-                  resize = "vertical"
-                )
-              )
-            ) 
-          ),
-          #### ---- Tool Information ----
-          tabPanel(
-            "Tool Information",
-            h2("2. Tool Information"),
-            fluidRow(
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_name",
-                  label = "Name of Tool:",
-                  placeholder = "Please insert the name of the tool.",
-                  resize = "vertical"
-                )
-              ),
-              column(
-                width = 4,
-                checkboxGroupInput(
-                  inputId = "tool_types",
-                  label = tags$span(
-                    "Type(s) of Tool:", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Prioritization: The process of deciding the relative importance of preventing, controlling, or eliminating rabies from among a list of zoonotic diseases that are of national concern. The outcomes of prioritization include a list of zoonotic diseases of greatest concern for human, animal and environmental health to be jointly addressed using a multisectoral, One Health approach. This process can be repeated based on agreement by the relevant sectors.\n\nAssessment: The process of determining and addressing needs or 'gaps' between the current and desired situation as it relates to health and health infrastructure.\n\nPlans: Operational or action-oriented descriptions of activities to be undertaken, often based on an overarching strategy. The outcomes of the planning are realistic and actionable plans, protocols and procedures that maximize the rabies elimination efforts.\n\nImplementation: The process of carrying out, executing, or practicing actions defined during the planning stage. To meet the implementation objectives, planned activities will be executed by the participating sectors. Some activities may be the individual action of multiple sectors who are working towards a common goal. Other activities may be joint or multisectoral actions, executed to achieve a common goal.\n\nMonitoring: A continuous function to inform management and the main stakeholders of progress achieved against planned results (outputs, outcome and objectives). Evaluation assesses the efficiency, effectiveness, relevance, impact, and sustainability of a programme. The monitoring and evaluation of the performances of planned activities against a set of indicators (process, output and outcome) allows one to assess whether the activity is achieving its aims and objectives."
+  div(
+    class = "app-shell",
+    navbarPage(
+      ## ---- Navbar Contents ----
+      windowTitle = "SISOT-R Application",
+      position = "static-top",
+      title = tags$a(
+        href = "https://www.unitedagainstrabies.org/",
+        tags$img(src = "uarf_logo_web.svg", style = "width:70px;"),
+        tags$span("SISOT-R")
+      ),
+      
+      ## ---- Information Page ----
+      tabPanel(
+        title = "Information",
+        class = "info-and-legal",
+        h1("About This App"),
+        p("The SISOT-R Tool Evaluator supports the standardised assessment of tools used in rabies surveillance, control, and elimination efforts. The app is a digital implementation of the United Against Rabies (UAR) Evaluation Matrix, a rabies-specific assessment framework adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool (SISOT)."),
+        p("Complete the evaluation questions for each category and review the automatically generated scores and visual summary. Results are intended to support decision-making and identify fit-for-purpose tools rather than rank them against one another."),
+        p("Evaluations completed within the app are stored locally for your own use and are not automatically shared with the United Against Rabies Forum. Users wishing to contribute an evaluation to the UAR Toolbox may download their results and submit them to the Global Rabies Coordinator at ", HTML('<a href="mailto:globalrabiescoordinator@woah.org">globalrabiescoordinator@woah.org</a>'), " for consideration."),
+      ),
+      
+      ## ---- Tool Evaluator Page -----
+      tabPanel(
+        title = "Tool Evaluator",
+        fluidRow(
+          ### ---- Tool UI Contents ----
+          column(
+            width = 8,
+            h1("Tool Evaluator"),
+            p("This app evaluates tools that support rabies control or elimination efforts. This tool evaluator will guide you through a series of questions to assess the tool across seven categories, listed on the right."),
+            p("As you complete the questions, the app calculates category scores and updates the evaluation chart. Evaluation scores are intended to highlight the tool’s strengths and limitations within each category and help users judge whether it is suitable for their specific needs. They are not intended to rank tools against one another."),
+            p("You will also be asked to provide basic information about yourself, your familiarity with the tool, and the tool’s purpose and functionality."),
+            p("Evaluations are stored locally for your own use and are not automatically shared with the United Against Rabies Forum. If you wish to submit an evaluation for consideration in the UAR Toolbox, please download the results and figure and send them to the Global Rabies Coordinator at ", HTML('<a href="mailto:globalrabiescoordinator@woah.org">globalrabiescoordinator@woah.org</a>.')),
+            
+            # h2("Upload Answers"),
+            # fileInput("uploadFile", label = "Upload Answers (CSV only):", accept = c("text/csv", "text/comma-separated-values", ".csv")),
+            tabsetPanel(
+              #### ---- Reviewer Information ----
+              tabPanel(
+                "Reviewer Information",
+                h2("1. Reviewer Information"),
+                fluidRow(
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "reviewer_names",
+                      label = "Reviewer Name(s)",
+                      placeholder = "Please insert your name(s) here.",
+                      resize = "vertical"
                     )
                   ),
-                  choices = c("Prioritization", "Assessment", "Planning", "Implementation", "Evaluation", "Education"),
-                )
-              ),
-              column(
-                width = 4,
-                checkboxGroupInput(
-                  inputId = "tool_objectives",
-                  label = "Objective(s):",
-                  choices = c("Data Collection", "Translation", "Validation", "Analysis", "Reporting", "Education"),
-                )
-              ),
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_source",
-                  label = "Tool Source:",
-                  placeholder = "Please insert the source of the tool.",
-                  resize = "vertical"
-                )
-              ),
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_version",
-                  label = "Version Number of the Tool:",
-                  placeholder = "Please insert the version number of the tool.",
-                  resize = "vertical"
-                )
-              ),
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_point_of_contact",
-                  label = "Point of Contact:",
-                  placeholder = "Please insert the tool's contact information.",
-                  resize = "vertical"
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_availability",
-                  label = "Availability:",
-                  placeholder = "Please describe the availability of the tool.",
-                  resize = "vertical"
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "tool_platforms",
-                  label = "Platform:",
-                  choices = c("Manual", "Electronic", "Manual and Electronic", "Other"),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                textAreaInput( # Future task: be able to import all recognized languages
-                  inputId = "tool_prerequisites",
-                  label = "Tool Prerequisites:",
-                  placeholder = "Please describe the tool prerequisites.",
-                  resize = "vertical"
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "tool_history_of_use",
-                  label = "History of Use:",
-                  choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used"),
-                  selected = character(0)
-                ),
-              ),
-              column(
-                width = 4,
-                numericInput(
-                  inputId = "number_of_countries",
-                  label = "Number of Countries, if known:",
-                  min = 0, # Minimum amount of countries cannot be negative.
-                  value = NA # This is the default value unless otherwise changed.
-                )
-              ),
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_publishing",
-                  label = "Publishing:",
-                  placeholder = "Please describe how the tool is published.",
-                  resize = "vertical"
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                selectizeInput( # Future task: be able to import all recognized languages
-                  inputId = "tool_languages",
-                  label = "Tool Language(s) - List all availiable:",
-                  choices = c(
-                    "English", "Mandarin Chinese", "Hindi", "Spanish", "French",
-                    "Modern Standard Arabic", "Bengali", "Portuguese", "Russian",
-                    "Urdu", "Indonesian", "German", "Japanese", "Nigerial Pidgin",
-                    "Egyptian Arabic", "Marathi", "Telugu", "Turkish", "Tamil",
-                    "Yue Chinese", "Vietnamese", "Wu Chinese", "Tagalog", "Korean",
-                    "Iranian Persian", "Hausa", "Swahili", "Javanese", "Italian",
-                    "Western Punjabi", "Gujarati", "Thai", "Kannada", "Amharic",
-                    "Bhojpuri", "Eastern Punjabi", "Min Nan Chinese", "Jin Chinese",
-                    "Levantine Arabic", "Other"
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "reviewer_titles_and_affiliations",
+                      label = "Reviewer Titles and Affiliations:",
+                      placeholder = "Please insert your titles and affiliations here.",
+                      resize = "vertical"
+                    )
                   ),
-                  selected = NULL,
-                  multiple = TRUE,
-                  options = list(
-                    "plugins" = list("remove_button"),
-                    "create" = FALSE,
-                    "persist" = TRUE
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "reviewer_familiarity",
+                      label = "Please describe your tool familiarity:",
+                      placeholder = "Please describe your familiarity here.",
+                      resize = "vertical"
+                    )
+                  )
+                ) 
+              ),
+              #### ---- Tool Information ----
+              tabPanel(
+                "Tool Information",
+                h2("2. Tool Information"),
+                fluidRow(
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_name",
+                      label = "Name of Tool:",
+                      placeholder = "Please insert the name of the tool.",
+                      resize = "vertical"
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    checkboxGroupInput(
+                      inputId = "tool_types",
+                      label = tags$span(
+                        "Type(s) of Tool:", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Prioritization: The process of deciding the relative importance of preventing, controlling, or eliminating rabies from among a list of zoonotic diseases that are of national concern. The outcomes of prioritization include a list of zoonotic diseases of greatest concern for human, animal and environmental health to be jointly addressed using a multisectoral, One Health approach. This process can be repeated based on agreement by the relevant sectors.\n\nAssessment: The process of determining and addressing needs or 'gaps' between the current and desired situation as it relates to health and health infrastructure.\n\nPlans: Operational or action-oriented descriptions of activities to be undertaken, often based on an overarching strategy. The outcomes of the planning are realistic and actionable plans, protocols and procedures that maximize the rabies elimination efforts.\n\nImplementation: The process of carrying out, executing, or practicing actions defined during the planning stage. To meet the implementation objectives, planned activities will be executed by the participating sectors. Some activities may be the individual action of multiple sectors who are working towards a common goal. Other activities may be joint or multisectoral actions, executed to achieve a common goal.\n\nMonitoring: A continuous function to inform management and the main stakeholders of progress achieved against planned results (outputs, outcome and objectives). Evaluation assesses the efficiency, effectiveness, relevance, impact, and sustainability of a programme. The monitoring and evaluation of the performances of planned activities against a set of indicators (process, output and outcome) allows one to assess whether the activity is achieving its aims and objectives."
+                        )
+                      ),
+                      choices = c("Prioritization", "Assessment", "Planning", "Implementation", "Evaluation", "Education"),
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    checkboxGroupInput(
+                      inputId = "tool_objectives",
+                      label = "Objective(s):",
+                      choices = c("Data Collection", "Translation", "Validation", "Analysis", "Reporting", "Education"),
+                    )
+                  ),
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_source",
+                      label = "Tool Source:",
+                      placeholder = "Please insert the source of the tool.",
+                      resize = "vertical"
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_version",
+                      label = "Version Number of the Tool:",
+                      placeholder = "Please insert the version number of the tool.",
+                      resize = "vertical"
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_point_of_contact",
+                      label = "Point of Contact:",
+                      placeholder = "Please insert the tool's contact information.",
+                      resize = "vertical"
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_availability",
+                      label = "Availability:",
+                      placeholder = "Please describe the availability of the tool.",
+                      resize = "vertical"
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "tool_platforms",
+                      label = "Platform:",
+                      choices = c("Manual", "Electronic", "Manual and Electronic", "Other"),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textAreaInput( # Future task: be able to import all recognized languages
+                      inputId = "tool_prerequisites",
+                      label = "Tool Prerequisites:",
+                      placeholder = "Please describe the tool prerequisites.",
+                      resize = "vertical"
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "tool_history_of_use",
+                      label = "History of Use:",
+                      choices = c("Developed, no pilot test", "Pilot tested", "Pilot tested, limited use", "Frequently used"),
+                      selected = character(0)
+                    ),
+                  ),
+                  column(
+                    width = 4,
+                    numericInput(
+                      inputId = "number_of_countries",
+                      label = "Number of Countries, if known:",
+                      min = 0, # Minimum amount of countries cannot be negative.
+                      value = NA # This is the default value unless otherwise changed.
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_publishing",
+                      label = "Publishing:",
+                      placeholder = "Please describe how the tool is published.",
+                      resize = "vertical"
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    selectizeInput( # Future task: be able to import all recognized languages
+                      inputId = "tool_languages",
+                      label = "Tool Language(s) - List all availiable:",
+                      choices = c(
+                        "English", "Mandarin Chinese", "Hindi", "Spanish", "French",
+                        "Modern Standard Arabic", "Bengali", "Portuguese", "Russian",
+                        "Urdu", "Indonesian", "German", "Japanese", "Nigerial Pidgin",
+                        "Egyptian Arabic", "Marathi", "Telugu", "Turkish", "Tamil",
+                        "Yue Chinese", "Vietnamese", "Wu Chinese", "Tagalog", "Korean",
+                        "Iranian Persian", "Hausa", "Swahili", "Javanese", "Italian",
+                        "Western Punjabi", "Gujarati", "Thai", "Kannada", "Amharic",
+                        "Bhojpuri", "Eastern Punjabi", "Min Nan Chinese", "Jin Chinese",
+                        "Levantine Arabic", "Other"
+                      ),
+                      selected = NULL,
+                      multiple = TRUE,
+                      options = list(
+                        "plugins" = list("remove_button"),
+                        "create" = FALSE,
+                        "persist" = TRUE
+                      )
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "tool_description",
+                      label = "Brief Tool Description",
+                      placeholder = "Please describe the tool here.",
+                      resize = "vertical"
+                    )
                   )
                 )
               ),
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "tool_description",
-                  label = "Brief Tool Description",
-                  placeholder = "Please describe the tool here.",
-                  resize = "vertical"
+              #### ---- Accessibility ----
+              tabPanel(
+                "Accessibility",
+                h2("3. Inclusion Criteria"),
+                h3("3.1. Accessibility"),
+                p("Focuses on i) logistics for accessing and using the tool, ii) the platforms on which the tool runs (if applicable), iii) relevant costs, and iv) the level of user support that is provided by the developer/manufacturer."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q311",
+                      label = "Is the tool readily available?",
+                      choices = list(
+                        "Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store). Score: 5." = 5,
+                        "Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer). Score: 4." = 4,
+                        "Paper based, free to download/access. Score: 3." = 3,
+                        "Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person). Score: 2." = 2,
+                        "Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.). Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q312",
+                      label = "On what platforms can the tool run?",
+                      choices = list(
+                        "ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.). Score: 5.Score: 5." = 5,
+                        "At least one digital platform (e.g. only mobile phones or only computers). Score: 3." = 3,
+                        "Only paper-based. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q313",
+                      label = "Can the tool run on multiple computer and/or phone operating systems?",
+                      choices = list(
+                        "Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS). Score: 5." = 5,
+                        "Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows). Score: 4." = 4,
+                        "No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems. Score: 3." = 3,
+                        "No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned. Score: 2." = 2,
+                        "No, and it wont be possible. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q314",
+                      label = tags$span(
+                        "Does the tool need to be purchased (e.g. purchasing an app or tool-specific equipment)?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "This does NOT include the purchase of a mobile phone in the case of using a mobile phone app."
+                        )
+                      ),
+                      choices = list(
+                        "No, it's free to access. Score: 5." = 5,
+                        "Yes, the tool needs to be purchased at a once-off cost. Score: 3." = 3,
+                        "Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription). Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q315",
+                      label = "Does the tool have EQUIPMENT costs for the USER with regards to keeping it in use? E.g., smartphone replacement due to breakage, theft etc.",
+                      choices = list(
+                        "No noteworthy equipment running costs. Score: 5." = 5,
+                        "Equipment might need to be replaced sporadically (less than once a year). Score: 3." = 3,
+                        "The developer noted that equipment such as smartphones might need to be replaced often (more than once a year). Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q316",
+                      label = tags$span(
+                        "Can the developer offer support?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Support: Technical assistance or guidance."
+                        )
+                      ),
+                      choices = list(
+                        "Free comprehensive support. Score: 5." = 5,
+                        "Comprehensive support at a cost, limited support for free. Score: 4." = 4,
+                        "Free limited support, comprehensive support not available. Score: 3." = 3,
+                        "Limited support at a cost. Score: 2." = 2,
+                        "No support available. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                )
+              ),
+              #### ---- Data Collection and Needs ----
+              tabPanel(
+                "Data Collection",
+                h2("3. Inclusion Criteria"),
+                h3("3.2. Data Collection and Needs"),
+                p("Focuses on the type of data that is captured by the tool."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q321",
+                      label = "What internet capacity is required to use the tool?",
+                      choices = list(
+                        "No internet required. Score: 5." = 5,
+                        "Intermittant internet access to standard WIFI/3g. Score: 4." = 4,
+                        "Continuous access to standard WIFI/3g. Score: 3." = 3,
+                        "Continuous access to LTE/4g. Score: 2." = 2,
+                        "Requires continuous stable high speed internet (5g/9Mbps or greater). Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q322",
+                      label = "If this is a case detection tool: Can animal cases be detected?",
+                      choices = list(
+                        "Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards. Score: 5." = 5,
+                        "Yes, limited data is collected for animal cases. Score: 3." = 3,
+                        "No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection. Score: 1." = 1,
+                        "NA - Not applicable." =  NA
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q323",
+                      label = "If this is a case detection tool: Can human cases / bite cases be detected?",
+                      choices = list(
+                        "Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards. Score: 5." = 5,
+                        "Yes, limited data is collected for human cases. Score: 3." = 3,
+                        "No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons( # Future task: Make the label points on new lines
+                      inputId = "Q324",
+                      label = tags$span(
+                        "If this is a case detection tool: does it have an IBCM component based on active rabies surveillance LINKING data together about the:\n1) Suspect animal,\n2) Exposed human\n3) Laboratory results,\n4) Quarantine data.", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "IBCM: Integrated Bite Case Management."
+                        )
+                      ),
+                      choices = list(
+                        "Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, and data is EASILY LINKED within the tool. Score: 5." = 5,
+                        "Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, but data is NOT EASILY LINKABLE within the tool. Score: 4." = 4,
+                        "Yes, but not all data elements are represented. Score: 3." = 3,
+                        "IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible. Score: 2." = 2,
+                        "No, this is currently not a feature of the tool. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q325",
+                      label = tags$span(
+                        "Does the tool send notifications to the user?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Notifications: Include Emails, Text messages (SMS) and in-app alerts. A forum does not constitute notifications unless push alerts are sent through to the user."
+                        )
+                      ),
+                      choices = list(
+                        "Yes, various communication channels are available. Score: 5." = 5,
+                        "Yes, one communication channel is available. Score: 3." = 3,
+                        "No, this is currently not a feature of the tool. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q326",
+                      label = "Does the tool allow for bi-directional, real-time communication between users and program managers?",
+                      choices = list(
+                        "Yes, the tool allows for program managers to push out messages and allows users to reply. Score: 5." = 5,
+                        "No, this is currently not a feature of the tool. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    textAreaInput(
+                      inputId = "Q327",
+                      label = "What type of data does the tool collect?",
+                      placeholder = "Please describe the types of data the tool collects here.",
+                      resize = "vertical"
+                    )
+                  )
+                )
+              ),
+              #### ---- Data Management and Utility ----
+              tabPanel(
+                "Data Management",
+                h2("3. Inclusion Criteria"),
+                h3("3.3. Data Management and Utility"),
+                p("Focuses on the data analysis and outputs provided by the tool."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q331",
+                      label = tags$span(
+                        "Does this tool have the capacity to automatically detect anomalies in the data and notify the user? (If this requires human validation/review [manual] then it is not relevant to the tool)", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Detecting anomalies: the process whereby the system verifies data are both correct and interpretable."
+                        )
+                      ),
+                      choices = list(
+                        "Yes, validation occurs real-time within the same tool without needing internet connection. Score: 5." = 5,
+                        "Yes, validation is automated, but occurs post-data collection once an internet connection is available. Score: 3." = 3,
+                        "No, validation must occur through a separate process. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q332",
+                      label = tags$span(
+                        "Does the tool have the capacity to analyze data?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Data Analysis: The process of systematically applying statistical and/or logical techniques to describe and illustrate, condense and recap, and evaluate data."
+                        )
+                      ),
+                      choices = list(
+                        "Yes, comprehensive data analysis is incorporated into the tool. Score: 5." = 5,
+                        "Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis. Score: 3." = 3,
+                        "No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q333",
+                      label = "Will the tool generate outputs that can assist with data presentation and/or reporting?",
+                      choices = list(
+                        "Yes. Score: 5." = 5,
+                        "No. Score: 1." = 1 # Make it so that suggested answers for questions 38, 39, and 40 are NA later
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q334",
+                      label = "What type of data outputs does the system provide to visualize collected data? Select how many of the following elements are currently available in the system: 1) Spatio-temporal mapping 2) Graphs 3) Pivot tables 4) Line listed data",
+                      choices = list(
+                        "All four key data outputs are available. Score: 5." = 5,
+                        "Three of the four data outputs are available. Score: 4." = 4,
+                        "Two of the four data outputs are available. Score: 3." = 3,
+                        "One of the four data outputs are available. Score: 2." = 2,
+                        "No data outputs are available within the tool (i.e. a third party software is required to visualize data). Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q335",
+                      label = "How much time does it take to obtain data outputs once the data has been submitted to the server?",
+                      choices = list(
+                        "Less than 1 hour. Score: 5." = 5,
+                        "Within 24 hours. Score: 4." = 4,
+                        "Within 1 week. Score: 3." = 3,
+                        "Within 1 month. Score: 2." = 2,
+                        "More than 1 month. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q336",
+                      label = "How easy is it to understand and interpret the outputs?",
+                      choices = list(
+                        "Very easy for all readers to understand. Score: 5." = 5,
+                        "Some technical language. Score: 3." = 3,
+                        "Highly technical language. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q337",
+                      label = tags$span(
+                        "Do the outputs of the tool inform all relevant One Health sectors (human, animal, environment health)?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "One Health recognizes that the health of people is connected to the health of animals and the environment. It is a collaborative, multisectoral, and transdisciplinary approach — working at the local, regional, national, and global levels — with the goal of achieving optimal health outcomes recognizing the interconnection between people, animals, plants, and their shared environment."
+                        )
+                      ),
+                      choices = list(
+                        "Yes, the tool can display aggregate or linked data from multiple sectors. Score: 5." = 5,
+                        "Yes, aggregated data can be displayed, but additional steps/user inputs are required. Score: 3." = 3,
+                        "No, the tool cannot display aggregate or linked data from multiple sectors. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                )
+              ),
+              #### ---- Data Storage and Protection ----
+              tabPanel(
+                "Data Storage",
+                h2("3. Inclusion Criteria"),
+                h3("3.4. Data Storage and Protection"),
+                p("Focuses on data ownership, protection and storage."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q341",
+                      label = "Can you operate the tool independently of the developer? (e.g. server requirements for an app, etc.).",
+                      choices = list(
+                        "Yes, the tool can operate optimally without developer inputs. Score: 5." = 5,
+                        "Yes, the tool has basic functionality without developer input. Score: 3." = 3,
+                        "No, the tool cannot operate independently of the developer. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q342",
+                      label = "How is data loaded onto analytic platforms?.",
+                      choices = list(
+                        "Data is uploaded automatically once internet connection is available (either during data collection or at a later time point). Score: 5." = 5,
+                        "Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer). Score: 3." = 3,
+                        "Data is manually entered into an electronic database (i.e. data manually entered from paper forms). Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q343",
+                      label = "Who owns and can access the data collected by the tool?",
+                      choices = list(
+                        "The government owns the data. Non-governmental stakeholders must request permission to use it. Score: 5." = 5,
+                        "The government owns the data. Non-governmental stakeholders can use it without prior consent. Score: 4." = 4,
+                        "The non-governmental stakeholders own the data. The government can use it without prior consent. Score: 3." = 3,
+                        "The non-governmental stakeholders own the data. The government must request permission to use it. Score: 2." = 2,
+                        "The government cannot access the collected data. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q344",
+                      label = "How secure is data that has been collected using this tool?",
+                      choices = list(
+                        "Data is fully secured: data collected on password protected devices and stored on secured servers or other secured data repository. Score: 5." = 5,
+                        "Data security features exist, but could be improved. Score: 3." = 3,
+                        "Data is not secured: data is collected on easily accessible devices or on paper forms. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                )
+              ),
+              #### ---- Tool Flexibility ----
+              tabPanel(
+                "Tool Flexibility",
+                h2("3. Inclusion Criteria"),
+                h3("3.5. Tool Flexibility"),
+                p("Focuses on the interoperability of the tool and its adaptability for use in different contexts or scenarios."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q351",
+                      label = "Can the tool be adapted to work with more than just one specific health event/pathogen?",
+                      choices = list(
+                        "The tool is already a universal tool for multiple health events/pathogens. Score: 5." = 5,
+                        "The tool is easily adaptable to 'other use' cases for free or without permission. Score: 4." = 4,
+                        "The tool is easily adaptable to 'other use' cases at a cost and/or permission is needed. Score: 3." = 3,
+                        "Significant effort would be required to adapt the tool. Score: 2." = 2,
+                        "The tool is not adaptable to other health events/pathogens. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q352",
+                      label = "Is the tool multi-functional? e.g. One tool that can assist with Mass Dog Vaccination tracking and/or post vaccination surveys and/or Integrated Bite Case Management, etc.",
+                      choices = list(
+                        "Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM. Score: 5." = 5,
+                        "No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q353",
+                      label = tags$span(
+                        "What is required to adapt the tool?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Adapt: To make any changes to the tool, including customizing the tool for use in a specific country."
+                        )
+                      ),
+                      choices = list(
+                        "No costs or permissions associated with adapting the tool. Score: 5." = 5,
+                        "Adaptation requires developer permission, but is generally NOT associated with fees. Score: 3." = 3,
+                        "Adaptation requires development fees and permission. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q354",
+                      label = "Does the tool have the ability to interoperate, work with, and integrate with other surveillance/data systems? (provides framework for data sharing)",
+                      choices = list(
+                        "Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used. Score: 5." = 5,
+                        "Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO). Score: 3." = 3,
+                        "Unique output file formats are used, making it difficult for data to be easily incorporated into other systems. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                )
+              ),
+              #### ---- Ease of Use and Training Needs ----
+              tabPanel(
+                "Ease of Use",
+                h2("3. Inclusion Criteria"),
+                h3("3.6. Ease of Use and Training Needs"),
+                p("Focuses on the training requirements, including the level of complexity and difficulty to navigate and understand the tool as well as the technical or operational skillsets that are required to use the tool."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q361",
+                      label = "Is data collection reliant on language?",
+                      choices = list(
+                        "No, the data collection is primarily based on universal language (e.g. numbers or pictures). Score: 5." = 5,
+                        "Yes, the user must be able to read the relevant language to collect data. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q362",
+                      label = "What are the training requirements to use the tool?",
+                      choices = list(
+                        "End user can implement without external assistance (e.g. user manuals). Score: 5." = 5,
+                        "External training is possible but requires remote learning (e.g. shared screen/webinars). Score: 3." = 3,
+                        "Face-to-face training of in-country facilitators is required. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q363",
+                      label = "Have training materials been developed?",
+                      choices = list(
+                        "Yes, written instructions and training videos are available. Score: 5." = 5,
+                        "Yes, but only training videos. Score: 4." = 4,
+                        "Yes, but only written instructions. Score: 3." = 3,
+                        "No, but materials are being developed. Score: 2." = 2,
+                        "No. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q364",
+                      label = "How easy is it to understand and interpret the manuals/instructions?",
+                      choices = list(
+                        "Very easy for all readers to understand. Score: 5." = 5,
+                        "Some technical language. Score: 3." = 3,
+                        "Highly technical language. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q365",
+                      label = tags$span(
+                        "How much time does it take to become proficient with the tool?", 
+                        tags$i(
+                          class = "glyphicon glyphicon-info-sign", 
+                          style = "color: #1a3146;",
+                          title = "Proficient: Users are skilled and competent in the use of the tool."
+                        )
+                      ),
+                      choices = list(
+                        "Days (up to a week). Score: 5." = 5,
+                        "Weeks (up to one month). Score: 3." = 3,
+                        "One month or more. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q366",
+                      label = "Based on user experience, is a dedicated data capturer (in addition to the person undertaking the task; e.g. vaccination) required when using the tool in field conditions?",
+                      choices = list(
+                        "No, the tool can be used by the implementer of the action without interfering with or hindering the activity (i.e. the vaccinator also collects the data using the tool). Score: 5." = 5,
+                        "No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended). Score: 3." = 3,
+                        "Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                )
+              ),
+              #### ---- Sustainability ----
+              tabPanel(
+                "Sustainability",
+                h2("3. Inclusion Criteria"),
+                h3("3.7. Sustainability"),
+                p("Focuses on the different scenarios that indicate how sustainable the tool has been and whether it has been thoroughly field-tested for implementation."),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q371",
+                      label = "Has the tool been proven effective and sustainable for implementation?",
+                      choices = list(
+                        "Yes, the tool has been implemented in multi-year projects in multiple countries. Score: 5." = 5,
+                        "Yes, the tool has been implmented in a multi-year project in one country. Score: 4." = 4,
+                        "No, the tool has just been launched (less than 1 year) in multiple countries. Score: 3." = 3,
+                        "No, the tool has just been launched (less than 1 year) in one country. Score: 2." = 2,
+                        "No, the tool has not yet been field tested. Score: 1." = 1
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q372",
+                      label = "Does the tool support development of project plans and strategies for rabies control activities?",
+                      choices = list(
+                        "Yes, the tool has supported the development of project plans and strategies in multiple countries. Score: 5." = 5,
+                        "Yes, the tool has supported the development of project plans and strategies in one country. Score: 3." = 3,
+                        "No, the tool has not yet been field tested. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q373",
+                      label = "Has the tool been implemented with only remote assistance (e.g. sharing instruction materials and online trainings)?",
+                      choices = list(
+                        "Yes, in more than one country. Score: 5." = 5,
+                        "Yes, in one country. Score: 3." = 3,
+                        "No. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
+                ),
+                fluidRow(
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q374",
+                      label = "Has continued use of the tool been observed in project sites AFTER THE EXTERNAL SOURCE (e.g. developer) STOPPED PROVIDING programmatic or financial SUPPORT?",
+                      choices = list(
+                        "Yes, in more than one country. Score: 5." = 5,
+                        "Yes, in one country. Score: 3." = 3,
+                        "No, the tool has always required additional external support to be effectively implemented. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  ),
+                  column(
+                    width = 4,
+                    radioButtons(
+                      inputId = "Q375",
+                      label = "Has the tool been implemented without any financial support from any external sources? e.g. The government purchases the tool and implements it without any financial support from an external source.",
+                      choices = list(
+                        "Yes, in more than one country. Score: 5." = 5,
+                        "Yes, in one country. Score: 3." = 3,
+                        "No. Score: 1." = 1,
+                        "NA - Not applicable." = 0
+                      ),
+                      selected = character(0)
+                    )
+                  )
                 )
               )
             )
           ),
-          #### ---- Accessibility ----
-          tabPanel(
-            "Accessibility",
-            h2("3. Inclusion Criteria"),
-            h3("3.1. Accessibility"),
-            p("Focuses on i) logistics for accessing and using the tool, ii) the platforms on which the tool runs (if applicable), iii) relevant costs, and iv) the level of user support that is provided by the developer/manufacturer."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q311",
-                  label = "Is the tool readily available?",
-                  choices = list(
-                    "Online, open access (e.g. mobile apps that are freely available on the Google play store, iOS App Store). Score: 5." = 5,
-                    "Online, limited access (e.g. mobile apps that can be freely downloaded, but access is granted by the developer). Score: 4." = 4,
-                    "Paper based, free to download/access. Score: 3." = 3,
-                    "Paper-based, with controlled distribution (e.g. developer directly shares the tool via email/or in person). Score: 2." = 2,
-                    "Unique device needed (requires that users obtain a device not commonly avaialable, or only available through the tool developer. Eg. GARC Data Logger, POI (USDA), etc.). Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q312",
-                  label = "On what platforms can the tool run?",
-                  choices = list(
-                    "ALL DIGITAL PLATFORMS (computers, tablets, smart phones and feature phones etc.). Score: 5.Score: 5." = 5,
-                    "At least one digital platform (e.g. only mobile phones or only computers). Score: 3." = 3,
-                    "Only paper-based. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q313",
-                  label = "Can the tool run on multiple computer and/or phone operating systems?",
-                  choices = list(
-                    "Yes, the tool can run on any computer or phone operating system (i.e. Android, iOS, Windows, Mac OS). Score: 5." = 5,
-                    "Yes, it is compatible with one type of operating system for both computers and phones (e.g. Android AND Windows). Score: 4." = 4,
-                    "No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], but development is underway for other operating systems. Score: 3." = 3,
-                    "No. It is only operable on one type of operating system (e.g. Windows only [no mobile OS], with no additional development planned. Score: 2." = 2,
-                    "No, and it wont be possible. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q314",
-                  label = tags$span(
-                    "Does the tool need to be purchased (e.g. purchasing an app or tool-specific equipment)?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "This does NOT include the purchase of a mobile phone in the case of using a mobile phone app."
-                    )
-                  ),
-                  choices = list(
-                    "No, it's free to access. Score: 5." = 5,
-                    "Yes, the tool needs to be purchased at a once-off cost. Score: 3." = 3,
-                    "Yes, the tool needs to be purchased but at a recurring cost (e.g. monthly subscription). Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q315",
-                  label = "Does the tool have EQUIPMENT costs for the USER with regards to keeping it in use? E.g., smartphone replacement due to breakage, theft etc.",
-                  choices = list(
-                    "No noteworthy equipment running costs. Score: 5." = 5,
-                    "Equipment might need to be replaced sporadically (less than once a year). Score: 3." = 3,
-                    "The developer noted that equipment such as smartphones might need to be replaced often (more than once a year). Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q316",
-                  label = tags$span(
-                    "Can the developer offer support?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Support: Technical assistance or guidance."
-                    )
-                  ),
-                  choices = list(
-                    "Free comprehensive support. Score: 5." = 5,
-                    "Comprehensive support at a cost, limited support for free. Score: 4." = 4,
-                    "Free limited support, comprehensive support not available. Score: 3." = 3,
-                    "Limited support at a cost. Score: 2." = 2,
-                    "No support available. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            )
-          ),
-          #### ---- Data Collection and Needs ----
-          tabPanel(
-            "Data Collection",
-            h2("3. Inclusion Criteria"),
-            h3("3.2. Data Collection and Needs"),
-            p("Focuses on the type of data that is captured by the tool."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q321",
-                  label = "What internet capacity is required to use the tool?",
-                  choices = list(
-                    "No internet required. Score: 5." = 5,
-                    "Intermittant internet access to standard WIFI/3g. Score: 4." = 4,
-                    "Continuous access to standard WIFI/3g. Score: 3." = 3,
-                    "Continuous access to LTE/4g. Score: 2." = 2,
-                    "Requires continuous stable high speed internet (5g/9Mbps or greater). Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q322",
-                  label = "If this is a case detection tool: Can animal cases be detected?",
-                  choices = list(
-                    "Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards. Score: 5." = 5,
-                    "Yes, limited data is collected for animal cases. Score: 3." = 3,
-                    "No animal module exists and it is not possible (or extremely difficult) to add questions related to animal case detection. Score: 1." = 1,
-                    "NA - Not applicable." =  NA
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q323",
-                  label = "If this is a case detection tool: Can human cases / bite cases be detected?",
-                  choices = list(
-                    "Yes, extensive case-based data is currently collected in accordance with WHO and OIE recommended standards. Score: 5." = 5,
-                    "Yes, limited data is collected for human cases. Score: 3." = 3,
-                    "No human module exists and it is not possible (or extremely difficult) to add questions related to human case detection. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons( # Future task: Make the label points on new lines
-                  inputId = "Q324",
-                  label = tags$span(
-                    "If this is a case detection tool: does it have an IBCM component based on active rabies surveillance LINKING data together about the:\n1) Suspect animal,\n2) Exposed human\n3) Laboratory results,\n4) Quarantine data.", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "IBCM: Integrated Bite Case Management."
-                    )
-                  ),
-                  choices = list(
-                    "Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, and data is EASILY LINKED within the tool. Score: 5." = 5,
-                    "Yes, extensive details on cases, exposures, quarantine and laboratory results are collected, but data is NOT EASILY LINKABLE within the tool. Score: 4." = 4,
-                    "Yes, but not all data elements are represented. Score: 3." = 3,
-                    "IBCM data elements are collected, but in aggregate form. Relational and line-list data are not possible. Score: 2." = 2,
-                    "No, this is currently not a feature of the tool. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q325",
-                  label = tags$span(
-                    "Does the tool send notifications to the user?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Notifications: Include Emails, Text messages (SMS) and in-app alerts. A forum does not constitute notifications unless push alerts are sent through to the user."
-                    )
-                  ),
-                  choices = list(
-                    "Yes, various communication channels are available. Score: 5." = 5,
-                    "Yes, one communication channel is available. Score: 3." = 3,
-                    "No, this is currently not a feature of the tool. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q326",
-                  label = "Does the tool allow for bi-directional, real-time communication between users and program managers?",
-                  choices = list(
-                    "Yes, the tool allows for program managers to push out messages and allows users to reply. Score: 5." = 5,
-                    "No, this is currently not a feature of the tool. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                textAreaInput(
-                  inputId = "Q327",
-                  label = "What type of data does the tool collect?",
-                  placeholder = "Please describe the types of data the tool collects here.",
-                  resize = "vertical"
-                )
-              )
-            )
-          ),
-          #### ---- Data Management and Utility ----
-          tabPanel(
-            "Data Management",
-            h2("3. Inclusion Criteria"),
-            h3("3.3. Data Management and Utility"),
-            p("Focuses on the data analysis and outputs provided by the tool."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q331",
-                  label = tags$span(
-                    "Does this tool have the capacity to automatically detect anomalies in the data and notify the user? (If this requires human validation/review [manual] then it is not relevant to the tool)", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Detecting anomalies: the process whereby the system verifies data are both correct and interpretable."
-                    )
-                  ),
-                  choices = list(
-                    "Yes, validation occurs real-time within the same tool without needing internet connection. Score: 5." = 5,
-                    "Yes, validation is automated, but occurs post-data collection once an internet connection is available. Score: 3." = 3,
-                    "No, validation must occur through a separate process. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q332",
-                  label = tags$span(
-                    "Does the tool have the capacity to analyze data?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Data Analysis: The process of systematically applying statistical and/or logical techniques to describe and illustrate, condense and recap, and evaluate data."
-                    )
-                  ),
-                  choices = list(
-                    "Yes, comprehensive data analysis is incorporated into the tool. Score: 5." = 5,
-                    "Yes, but additional tools, software, or minimal technical expertise or funding, are required for comprehensive data analysis. Score: 3." = 3,
-                    "No. Additional tools, software, or significant technical expertise or funding, are required for comprehensive data analysis. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q333",
-                  label = "Will the tool generate outputs that can assist with data presentation and/or reporting?",
-                  choices = list(
-                    "Yes. Score: 5." = 5,
-                    "No. Score: 1." = 1 # Make it so that suggested answers for questions 38, 39, and 40 are NA later
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q334",
-                  label = "What type of data outputs does the system provide to visualize collected data? Select how many of the following elements are currently available in the system: 1) Spatio-temporal mapping 2) Graphs 3) Pivot tables 4) Line listed data",
-                  choices = list(
-                    "All four key data outputs are available. Score: 5." = 5,
-                    "Three of the four data outputs are available. Score: 4." = 4,
-                    "Two of the four data outputs are available. Score: 3." = 3,
-                    "One of the four data outputs are available. Score: 2." = 2,
-                    "No data outputs are available within the tool (i.e. a third party software is required to visualize data). Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q335",
-                  label = "How much time does it take to obtain data outputs once the data has been submitted to the server?",
-                  choices = list(
-                    "Less than 1 hour. Score: 5." = 5,
-                    "Within 24 hours. Score: 4." = 4,
-                    "Within 1 week. Score: 3." = 3,
-                    "Within 1 month. Score: 2." = 2,
-                    "More than 1 month. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q336",
-                  label = "How easy is it to understand and interpret the outputs?",
-                  choices = list(
-                    "Very easy for all readers to understand. Score: 5." = 5,
-                    "Some technical language. Score: 3." = 3,
-                    "Highly technical language. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q337",
-                  label = tags$span(
-                    "Do the outputs of the tool inform all relevant One Health sectors (human, animal, environment health)?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "One Health recognizes that the health of people is connected to the health of animals and the environment. It is a collaborative, multisectoral, and transdisciplinary approach — working at the local, regional, national, and global levels — with the goal of achieving optimal health outcomes recognizing the interconnection between people, animals, plants, and their shared environment."
-                    )
-                  ),
-                  choices = list(
-                    "Yes, the tool can display aggregate or linked data from multiple sectors. Score: 5." = 5,
-                    "Yes, aggregated data can be displayed, but additional steps/user inputs are required. Score: 3." = 3,
-                    "No, the tool cannot display aggregate or linked data from multiple sectors. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            )
-          ),
-          #### ---- Data Storage and Protection ----
-          tabPanel(
-            "Data Storage",
-            h2("3. Inclusion Criteria"),
-            h3("3.4. Data Storage and Protection"),
-            p("Focuses on data ownership, protection and storage."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q341",
-                  label = "Can you operate the tool independently of the developer? (e.g. server requirements for an app, etc.).",
-                  choices = list(
-                    "Yes, the tool can operate optimally without developer inputs. Score: 5." = 5,
-                    "Yes, the tool has basic functionality without developer input. Score: 3." = 3,
-                    "No, the tool cannot operate independently of the developer. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q342",
-                  label = "How is data loaded onto analytic platforms?.",
-                  choices = list(
-                    "Data is uploaded automatically once internet connection is available (either during data collection or at a later time point). Score: 5." = 5,
-                    "Data is uploaded into a data repository through physical connection with a third-party device (i.e. cord to a computer). Score: 3." = 3,
-                    "Data is manually entered into an electronic database (i.e. data manually entered from paper forms). Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q343",
-                  label = "Who owns and can access the data collected by the tool?",
-                  choices = list(
-                    "The government owns the data. Non-governmental stakeholders must request permission to use it. Score: 5." = 5,
-                    "The government owns the data. Non-governmental stakeholders can use it without prior consent. Score: 4." = 4,
-                    "The non-governmental stakeholders own the data. The government can use it without prior consent. Score: 3." = 3,
-                    "The non-governmental stakeholders own the data. The government must request permission to use it. Score: 2." = 2,
-                    "The government cannot access the collected data. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q344",
-                  label = "How secure is data that has been collected using this tool?",
-                  choices = list(
-                    "Data is fully secured: data collected on password protected devices and stored on secured servers or other secured data repository. Score: 5." = 5,
-                    "Data security features exist, but could be improved. Score: 3." = 3,
-                    "Data is not secured: data is collected on easily accessible devices or on paper forms. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            )
-          ),
-          #### ---- Tool Flexibility ----
-          tabPanel(
-            "Tool Flexibility",
-            h2("3. Inclusion Criteria"),
-            h3("3.5. Tool Flexibility"),
-            p("Focuses on the interoperability of the tool and its adaptability for use in different contexts or scenarios."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q351",
-                  label = "Can the tool be adapted to work with more than just one specific health event/pathogen?",
-                  choices = list(
-                    "The tool is already a universal tool for multiple health events/pathogens. Score: 5." = 5,
-                    "The tool is easily adaptable to 'other use' cases for free or without permission. Score: 4." = 4,
-                    "The tool is easily adaptable to 'other use' cases at a cost and/or permission is needed. Score: 3." = 3,
-                    "Significant effort would be required to adapt the tool. Score: 2." = 2,
-                    "The tool is not adaptable to other health events/pathogens. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q352",
-                  label = "Is the tool multi-functional? e.g. One tool that can assist with Mass Dog Vaccination tracking and/or post vaccination surveys and/or Integrated Bite Case Management, etc.",
-                  choices = list(
-                    "Yes, the tool has multiple functionalities e.g. Mass dog vaccination tracking and IBCM. Score: 5." = 5,
-                    "No, the tool is single-purpose use e.g. ONLY for mass dog vaccination tracking. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q353",
-                  label = tags$span(
-                    "What is required to adapt the tool?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Adapt: To make any changes to the tool, including customizing the tool for use in a specific country."
-                    )
-                  ),
-                  choices = list(
-                    "No costs or permissions associated with adapting the tool. Score: 5." = 5,
-                    "Adaptation requires developer permission, but is generally NOT associated with fees. Score: 3." = 3,
-                    "Adaptation requires development fees and permission. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q354",
-                  label = "Does the tool have the ability to interoperate, work with, and integrate with other surveillance/data systems? (provides framework for data sharing)",
-                  choices = list(
-                    "Yes, the format of the outputs/data are widely used formats (e.g. CSV) and universal indicators in-line with global organisations (WHO, OIE) are used. Score: 5." = 5,
-                    "Some alterations in the format of the data are required, but the indicators are universally accepted (OIE, WHO). Score: 3." = 3,
-                    "Unique output file formats are used, making it difficult for data to be easily incorporated into other systems. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            )
-          ),
-          #### ---- Ease of Use and Training Needs ----
-          tabPanel(
-            "Ease of Use",
-            h2("3. Inclusion Criteria"),
-            h3("3.6. Ease of Use and Training Needs"),
-            p("Focuses on the training requirements, including the level of complexity and difficulty to navigate and understand the tool as well as the technical or operational skillsets that are required to use the tool."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q361",
-                  label = "Is data collection reliant on language?",
-                  choices = list(
-                    "No, the data collection is primarily based on universal language (e.g. numbers or pictures). Score: 5." = 5,
-                    "Yes, the user must be able to read the relevant language to collect data. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q362",
-                  label = "What are the training requirements to use the tool?",
-                  choices = list(
-                    "End user can implement without external assistance (e.g. user manuals). Score: 5." = 5,
-                    "External training is possible but requires remote learning (e.g. shared screen/webinars). Score: 3." = 3,
-                    "Face-to-face training of in-country facilitators is required. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q363",
-                  label = "Have training materials been developed?",
-                  choices = list(
-                    "Yes, written instructions and training videos are available. Score: 5." = 5,
-                    "Yes, but only training videos. Score: 4." = 4,
-                    "Yes, but only written instructions. Score: 3." = 3,
-                    "No, but materials are being developed. Score: 2." = 2,
-                    "No. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q364",
-                  label = "How easy is it to understand and interpret the manuals/instructions?",
-                  choices = list(
-                    "Very easy for all readers to understand. Score: 5." = 5,
-                    "Some technical language. Score: 3." = 3,
-                    "Highly technical language. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q365",
-                  label = tags$span(
-                    "How much time does it take to become proficient with the tool?", 
-                    tags$i(
-                      class = "glyphicon glyphicon-info-sign", 
-                      style = "color: #1a3146;",
-                      title = "Proficient: Users are skilled and competent in the use of the tool."
-                    )
-                  ),
-                  choices = list(
-                    "Days (up to a week). Score: 5." = 5,
-                    "Weeks (up to one month). Score: 3." = 3,
-                    "One month or more. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q366",
-                  label = "Based on user experience, is a dedicated data capturer (in addition to the person undertaking the task; e.g. vaccination) required when using the tool in field conditions?",
-                  choices = list(
-                    "No, the tool can be used by the implementer of the action without interfering with or hindering the activity (i.e. the vaccinator also collects the data using the tool). Score: 5." = 5,
-                    "No, the tool can be used by the implementer of the action but it hinders the speed and efficiency of the implementer in their task (A dedicated data capturer is recommended). Score: 3." = 3,
-                    "Yes, a dedicated data capturer is required to use this tool as it would overtly affect the users efficiency. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              )
-            )
-          ),
-          #### ---- Sustainability ----
-          tabPanel(
-            "Sustainability",
-            h2("3. Inclusion Criteria"),
-            h3("3.7. Sustainability"),
-            p("Focuses on the different scenarios that indicate how sustainable the tool has been and whether it has been thoroughly field-tested for implementation."),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q371",
-                  label = "Has the tool been proven effective and sustainable for implementation?",
-                  choices = list(
-                    "Yes, the tool has been implemented in multi-year projects in multiple countries. Score: 5." = 5,
-                    "Yes, the tool has been implmented in a multi-year project in one country. Score: 4." = 4,
-                    "No, the tool has just been launched (less than 1 year) in multiple countries. Score: 3." = 3,
-                    "No, the tool has just been launched (less than 1 year) in one country. Score: 2." = 2,
-                    "No, the tool has not yet been field tested. Score: 1." = 1
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q372",
-                  label = "Does the tool support development of project plans and strategies for rabies control activities?",
-                  choices = list(
-                    "Yes, the tool has supported the development of project plans and strategies in multiple countries. Score: 5." = 5,
-                    "Yes, the tool has supported the development of project plans and strategies in one country. Score: 3." = 3,
-                    "No, the tool has not yet been field tested. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q373",
-                  label = "Has the tool been implemented with only remote assistance (e.g. sharing instruction materials and online trainings)?",
-                  choices = list(
-                    "Yes, in more than one country. Score: 5." = 5,
-                    "Yes, in one country. Score: 3." = 3,
-                    "No. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q374",
-                  label = "Has continued use of the tool been observed in project sites AFTER THE EXTERNAL SOURCE (e.g. developer) STOPPED PROVIDING programmatic or financial SUPPORT?",
-                  choices = list(
-                    "Yes, in more than one country. Score: 5." = 5,
-                    "Yes, in one country. Score: 3." = 3,
-                    "No, the tool has always required additional external support to be effectively implemented. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              ),
-              column(
-                width = 4,
-                radioButtons(
-                  inputId = "Q375",
-                  label = "Has the tool been implemented without any financial support from any external sources? e.g. The government purchases the tool and implements it without any financial support from an external source.",
-                  choices = list(
-                    "Yes, in more than one country. Score: 5." = 5,
-                    "Yes, in one country. Score: 3." = 3,
-                    "No. Score: 1." = 1,
-                    "NA - Not applicable." = 0
-                  ),
-                  selected = character(0)
-                )
-              )
-            )
-          )
-        )
-      ),
-      ### ---- Results Pane UI Contents ----
-      column(
-        width = 4,
-        class = "results-pane",
-        h1("UAR Evaluation Matrix"),
-        p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-        plotOutput("show_barPlot"),
-        h3(htmlOutput(outputId = "overall_score")),
-        p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument."),
-        fluidRow(
+          ### ---- Results Pane UI Contents ----
           column(
-            width = 12,
-            downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save"), style = "margin-top: 10px"),
-            downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"), style = "margin-top: 10px")
+            width = 4,
+            class = "results-pane",
+            h1("UAR Evaluation Matrix"),
+            plotOutput("show_barPlot"),
+            h3(htmlOutput(outputId = "overall_score")),
+            p("Evaluations are performed using the ‘UAR Evaluation Matrix’, a rabies-specific tool evaluation instrument adapted from the FAO-WOAH-WHO Tripartite Surveillance and Information Sharing Operational Tool evaluation process and instrument."),
+            fluidRow(
+              column(
+                width = 12,
+                downloadButton(outputId = "downloadFigure",  label = "Download Figure",  icon = icon("save"), style = "margin-top: 10px"),
+                downloadButton(outputId = "downloadAnswers", label = "Download Answers", icon = icon("save"), style = "margin-top: 10px")
+              )
+            )
           )
-        )
+        ),
+        br()
+      ),
+      
+      ## ---- Legal and Data Management ----
+      tabPanel(
+        title = "Legal and Data Management",
+        class = "info-and-legal",
+        h1("Legal and Data Management"),
+        h2("Legal"),
+        p("This application is provided for informational and decision-support purposes only. Evaluation results are intended to support users in identifying the strengths and limitations of tools relevant to rabies control and elimination activities. Evaluation outcomes do not constitute endorsement, certification, or recommendation by the United Against Rabies (UAR) Forum or its partners."),
+        p("Evaluations completed within the application are for the user's own use and are not automatically submitted to, reviewed by, or stored by the UAR Forum. Users who wish to contribute an evaluation to the UAR Toolbox may voluntarily submit their downloaded results to the Global Rabies Coordinator for consideration and review."),
+        h2("Data Management"),
+        p("The application stores only the information required to generate the evaluation results selected by the user during the assessment process."),
+        p("Evaluation data generated within the application remain under the control of the user and are not automatically transmitted to, collected by, or retained by the United Against Rabies Forum or its partners. Evaluation results are shared with the UAR Forum only if a user chooses to download and voluntarily submit their evaluation materials for consideration in the UAR Toolbox."),
+        p("Where evaluations are voluntarily submitted, any personal information provided by the submitter will be processed solely for the purposes of reviewing, validating, and managing submissions to the UAR Toolbox in accordance with applicable data protection legislation and UAR privacy policies."),
+        h2("Privacy Disclaimer"),
+        p("This application has been designed to minimise the collection and processing of personal information. Evaluations are completed for the user's own reference and are not automatically shared with the United Against Rabies Forum or any third party."),
+        p("If you choose to submit an evaluation to the UAR Forum, any personal information included within the submitted materials (such as reviewer names, affiliations, or contact details) will be processed only for the purposes of managing the submission and maintaining the UAR Toolbox."),
+        p("For information regarding how the United Against Rabies Forum processes personal data associated with voluntary submissions, please refer to the UAR Privacy Statement or contact the Global Rabies Coordinator at ", HTML('<a href="mailto:globalrabiescoordinator@woah.org">globalrabiescoordinator@woah.org</a>.')),
       )
     ),
-    br()
-  ),
-  
-  ## ---- Legal and Data Management ----
-  tabPanel(
-    title = "Legal and Data Management",
-    class = "info-and-legal",
-    h1("Legal and Data Management"),
-    h2("Legal"),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    h2("Data Management"),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-    h2("Privacy Disclaimer"),
-    p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-  ),
   
   ## ---- Footer UI Contents ----
-  footer = tagList(
-    fluidRow(
-      class = "footer-top",
-      column(
-        width = 4,
-        align = "center",
-        HTML('<img src="uarf_footer_logo.svg", style="width:90px;">')
+    tags$footer(
+      class = "app-footer",
+      fluidRow(
+        class = "footer-top",
+        column(
+          width = 4,
+          align = "center",
+          tags$img(src = "uarf_footer_logo.svg", style = "width:90px;")
+        ),
+        column(
+          width = 4,
+          align = "center",
+          tags$a(class = "footer-button-blue", href = "https://www.unitedagainstrabies.org/contact/", "Contact Us"),
+        ),
+        column(
+          width = 4,
+          align = "center",
+          tags$a(style = "color: #B5BBBf !important;", "© United Against Rabies Forum 2023")
+        )
       ),
-      column(
-        width = 4,
-        align = "center",
-        tags$a(class = "footer-button-blue", href = "https://www.unitedagainstrabies.org/contact/", "Contact Us"),
-      ),
-      column(
-        width = 4,
-        align = "center",
-        tags$a(style = "color: #B5BBBf !important;", "© United Against Rabies Forum 2023")
+      fluidRow(
+        class = "footer-bottom",
+        column(width = 4),
+        column(
+          width = 4,
+          align = "center",
+          "Follow us", tags$br(),
+          tags$a(href = "https://twitter.com/UARForum", icon("twitter")),
+          tags$a(href = "https://www.linkedin.com/company/united-against-rabies/", icon("linkedin")),
+          tags$a(href = "https://www.facebook.com/UnitedAgainstRabies/", icon("facebook")),
+          tags$a(href = "https://www.instagram.com/unitedagainstrabies_/", icon("instagram")),
+          tags$a(href = "https://www.youtube.com/channel/UCQpfAFLhSib0k5aBiwRB-zw", icon("youtube"))
+        ),
+        column(width = 4)
       )
-    ),
-    fluidRow(
-      class = "footer-bottom",
-      column(width = 4),
-      column(
-        width = 4,
-        align = "center",
-        "Follow us",
-        tags$a(href = "https://twitter.com/UARForum", icon("twitter")),
-        tags$a(href = "https://www.linkedin.com/company/united-against-rabies/", icon("linkedin")),
-        tags$a(href = "https://www.facebook.com/UnitedAgainstRabies/", icon("facebook")),
-        tags$a(href = "https://www.instagram.com/unitedagainstrabies_/", icon("instagram")),
-        tags$a(href = "https://www.youtube.com/channel/UCQpfAFLhSib0k5aBiwRB-zw", icon("youtube"))
-      ),
-      column(width = 4)
     )
+    ## ----
   )
-  ## ----
 )
 
 # ---- Server ----
