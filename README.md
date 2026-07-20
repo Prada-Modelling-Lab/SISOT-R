@@ -2,7 +2,7 @@
   <img src="https://github.com/FreddieTAFreeth/United-Against-Rabies-Forum-WG1-Tool/assets/114069006/6870f11c-f05a-4a26-b948-ed0d4991bfd4" height="200" alt="UARF Web_Logo Logo">
 </p>
 
-# United Against Rabies Forum WG1 Tool Evaluation
+# SISOR-R: United Against Rabies Forum WG1 Tool Evaluation
 Link to the web version of the tool: [https://freddietafreeth.shinyapps.io/United-Against-Rabies-Forum-WG1-Tool-Evaluation/](https://freddietafreeth.shinyapps.io/United-Against-Rabies-Forum-WG1-Tool-Evaluation/).
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitasse platea dictumst quisque sagittis purus. Enim praesent elementum facilisis leo vel fringilla est ullamcorper eget. Id diam maecenas ultricies mi eget mauris pharetra et ultrices. Sollicitudin nibh sit amet commodo nulla facilisi nullam. Iaculis eu non diam phasellus. Venenatis tellus in metus vulputate eu scelerisque felis. Ac tortor vitae purus faucibus. Turpis cursus in hac habitasse platea dictumst quisque sagittis. Tincidunt eget nullam non nisi est sit amet facilisis. In pellentesque massa placerat duis ultricies lacus sed. Suspendisse interdum consectetur libero id. Volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris. Vel quam elementum pulvinar etiam non quam lacus. Eros donec ac odio tempor orci dapibus ultrices in. Tristique senectus et netus et malesuada fames ac turpis. Interdum velit euismod in pellentesque massa placerat duis. Sed id semper risus in hendrerit gravida rutrum quisque non. Fermentum iaculis eu non diam phasellus vestibulum lorem sed. Quam viverra orci sagittis eu volutpat.
