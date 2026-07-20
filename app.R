@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # ============================================================================ #
-# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     17/07/2026 |
+# United Against Rabies Forum WG1 Tool - Frederick T. A. Freeth     20/07/2026 |
 # ============================================================================ #
 
 # ---- Packages ----
@@ -171,21 +171,6 @@ ui <- tagList(
       }
     ")
   ),
-  tags$script(HTML("
-    function resizeTextarea(el) {
-      el.style.height = 'auto';
-      el.style.height = el.scrollHeight + 'px';
-    }
-  
-    function resizeAllTextareas() {
-      document.querySelectorAll('textarea').forEach(resizeTextarea);
-    }
-    document.addEventListener('DOMContentLoaded', function() {resizeAllTextareas();});
-    document.addEventListener('input', function(e) {
-      if (e.target.matches('textarea')) {resizeTextarea(e.target);}
-    });
-    $(document).on('shiny:value', function() {resizeAllTextareas();});
-  ")),
   div(
     class = "app-shell",
     navbarPage(
